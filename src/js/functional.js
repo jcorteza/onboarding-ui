@@ -6,10 +6,44 @@ document.addEventListener("DOMContentLoaded", () => {
         let pargraph = document.createElement("p").appendChild(textNode);
         container.append(pargraph);
     }
+    /*const getFormattedDate = (dateOjbect) => {
+        const monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const month = dateOjbect.getMonth();
+        const day = dateOjbect.getDate();
+        const year = dateOjbect.getFullYear();
+        return `${monthsArray[month]} ${day}, ${year}`;
+    }*/
     
     request.addEventListener("load", function() {
-        let textNode = document.createTextNode(this.responseText);
-        appendParagraph(textNode, apiDataContainer);
+
+        const statusArray = JSON.parse(this.response);
+
+        for(i = 0; i < statusArray.length; i++) {
+
+            const newMessageNode = document.createTextNode(statusArray[i].message);
+            const dateOjbect = new Date(statusArray[i].createdAt);
+            const dateString = dateOjbect.toUTCString();
+            const newDateNode = document.createTextNode(dateString);
+            const newImage = document.createElement("img");
+            const newPargraph = document.createElement("p");
+            const newSpan = document.createElement("span");
+            const newDiv = document.createElement("div");
+            const anchor = document.createElement("a");
+            
+            newImage.src = statusArray[i].user.profileImageUrl;
+            newPargraph.appendChild(newMessageNode);
+            newSpan.appendChild(newDateNode)
+            newSpan.style.display = "block";    
+            newDiv.append(newImage, newSpan, newPargraph);
+            anchor.href = statusArray[i].postUrl;
+            anchor.target = "_blank";
+            anchor.append(newDiv);
+                
+            if(i % 2 == 0) {
+                newDiv.style.backgroundColor = "#F5F5F5";    
+            }
+            apiDataContainer.appendChild(anchor);
+        }
     });
 
     request.addEventListener("error", () => {
@@ -18,9 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btn.addEventListener("click", (e) => {
-        
-        e.preventDefault();
 
+        e.preventDefault();
         apiDataContainer.innerHTML = "";
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
