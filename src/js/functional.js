@@ -1,4 +1,4 @@
-document.on("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const btn = document.getElementById("apiButton");
     
