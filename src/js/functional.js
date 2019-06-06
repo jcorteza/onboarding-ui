@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
         let pargraph = document.createElement("p").appendChild(textNode);
         container.append(pargraph);
     }
+    const sendTimelineRequest = () => {
+        request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
+        request.send();
+    }
     /*const getFormattedDate = (dateOjbect) => {
         const monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const month = dateOjbect.getMonth();
@@ -57,12 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
         appendParagraph(textNode, apiDataContainer);
     });
 
+    sendTimelineRequest();
+
     btn.addEventListener("click", (e) => {
 
         e.preventDefault();
         apiDataContainer.innerHTML = "";
-        request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
-        request.send();
-        
+        sendTimelineRequest();
+    
     });
 });
