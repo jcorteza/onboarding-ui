@@ -37,3 +37,7 @@ span {
     width: 85%;
     float: right;
 }
+
+.tweetContainer {
+    padding: 5px 10px;
+}
