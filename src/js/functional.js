@@ -46,12 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
             newSpan.appendChild(newDateNode)
             newSpan.style.display = "block";    
             newDiv.append(newImage, newSpan, newPargraph);
+            newDiv.className = "tweetContainer";
             anchor.target = "_blank";
             anchor.append(newDiv);
-                
-            if(i % 2 == 0) {
-                newDiv.style.backgroundColor = "#F5F5F5";    
-            }
             apiDataContainer.appendChild(anchor);
         }
     });
