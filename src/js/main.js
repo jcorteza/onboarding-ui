@@ -14,6 +14,7 @@ const handleRequest = (request, response) => {
     const contentTypes = {
         ".html": "text/html",
         ".js": "text/javascript",
+        ".css": "text/css"
     };
     
     if(extname in contentTypes) {
