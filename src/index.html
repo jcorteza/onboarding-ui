@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+    <script type="application/javascript" src="./js/functional.js"></script>
     <title>Onboarding Web Page</title>
 </head>
 <body>
@@ -12,59 +13,5 @@
     </div>
     <button id="apiButton" type="button" >Get Twitter Timeline</button>
     <div id="apiDataContainer"></div>
-
-    <script type="application/javascript">
-            
-        let request = new XMLHttpRequest();
-        const btn = document.getElementById("apiButton");
-        const getFormattedDate = (dateOjbect) => {
-            const monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            const month = dateOjbect.getMonth();
-            const day = dateOjbect.getDate();
-            const year = dateOjbect.getFullYear();
-            return `${monthsArray[month]} ${day}, ${year}`;
-        }
-        
-        btn.addEventListener("click", (e) => {
-            
-            const apiDataContainer = document.getElementById("apiDataContainer");
-
-            e.preventDefault();
-            request.addEventListener("load", function() {
-
-                const statusArray = JSON.parse(this.response);
-
-                for(i = 0; i < statusArray.length; i++) {
-
-                    const newMessageNode = document.createTextNode(statusArray[i].message);
-                    const dateOjbect = new Date(statusArray[i].createdAt);
-                    const dateString = dateOjbect.toUTCString();
-                    const newDateNode = document.createTextNode(dateString);
-                    const newImage = document.createElement("img");
-                    const newPargraph = document.createElement("p");
-                    const newSpan = document.createElement("span");
-                    const newDiv = document.createElement("div");
-                    const anchor = document.createElement("a");
-                    
-                    newImage.src = statusArray[i].user.profileImageUrl;
-                    newPargraph.appendChild(newMessageNode);
-                    newSpan.appendChild(newDateNode)
-                    newSpan.style.display = "block";    
-                    newDiv.append(newImage, newSpan, newPargraph);
-                    anchor.href = statusArray[i].postUrl;
-                    anchor.target = "_blank";
-                    anchor.append(newDiv);
-                        
-                    if(i % 2 == 0) {
-                        newDiv.style.backgroundColor = "#F5F5F5";    
-                    }
-                    apiDataContainer.appendChild(anchor);
-                }
-            });
-            request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
-            request.send();
-            
-        });
-    </script>
 </body>
 </html>
