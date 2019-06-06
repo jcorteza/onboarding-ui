@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
             newImage.alt = "User profile image.";
             newPargraph.appendChild(newMessageNode);
             newSpan.appendChild(newDateNode)
-            newSpan.style.display = "block";    
             newDiv.append(newImage, newSpan, newPargraph);
             newDiv.className = "tweetContainer";
             anchor.target = "_blank";
