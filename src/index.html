@@ -14,6 +14,13 @@
             
         let request = new XMLHttpRequest();
         const btn = document.getElementById("apiButton");
+        const getFormattedDate = (dateOjbect) => {
+            const monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const month = dateOjbect.getMonth();
+            const day = dateOjbect.getDate();
+            const year = dateOjbect.getFullYear();
+            return `${monthsArray[month]} ${day}, ${year}`;
+        }
         
         btn.addEventListener("click", (e) => {
             
@@ -26,13 +33,15 @@
 
                 for(i = 0; i < statusArray.length; i++) {
 
-                    let newMessageNode = document.createTextNode(statusArray[i].message);
-                    let newDateNode = document.createTextNode(statusArray[i].createdAt.toString());
-                    let newImage = document.createElement("img");
-                    let newPargraph = document.createElement("p");
-                    let newSpan = document.createElement("span");
-                    let newDiv = document.createElement("div");
-                    let anchor = document.createElement("a");
+                    const newMessageNode = document.createTextNode(statusArray[i].message);
+                    const dateOjbect = new Date(statusArray[i].createdAt);
+                    const dateString = dateOjbect.toUTCString();
+                    const newDateNode = document.createTextNode(dateString);
+                    const newImage = document.createElement("img");
+                    const newPargraph = document.createElement("p");
+                    const newSpan = document.createElement("span");
+                    const newDiv = document.createElement("div");
+                    const anchor = document.createElement("a");
                     
                     newImage.src = statusArray[i].user.profileImageUrl;
                     newPargraph.appendChild(newMessageNode);
