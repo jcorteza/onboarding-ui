@@ -30,12 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const newDiv = document.createElement("div");
             const anchor = document.createElement("a");
             
-            newImage.src = statusArray[i].user.profileImageUrl;
+            if(statusArray[i].user) {
+                newImage.src = statusArray[i].user.profileImageUrl;
+                anchor.href = statusArray[i].postUrl;
+            } else {
+                newImage.src = "./img/twitter-logo.png";
+                anchor.href = "";
+            }
+            newImage.alt = "User profile image.";
             newPargraph.appendChild(newMessageNode);
             newSpan.appendChild(newDateNode)
             newSpan.style.display = "block";    
             newDiv.append(newImage, newSpan, newPargraph);
-            anchor.href = statusArray[i].postUrl;
             anchor.target = "_blank";
             anchor.append(newDiv);
                 
