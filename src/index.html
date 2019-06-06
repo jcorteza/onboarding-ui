@@ -39,7 +39,8 @@
                     newSpan.appendChild(newDateNode)
                     newSpan.style.display = "block";    
                     newDiv.append(newImage, newSpan, newPargraph);
-                    anchor.href = "#";
+                    anchor.href = statusArray[i].postUrl;
+                    anchor.target = "_blank";
                     anchor.append(newDiv);
                         
                     if(i % 2 == 0) {
