@@ -2,10 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const btn = document.getElementById("apiButton");
     const apiDataContainer = document.getElementById("apiDataContainer");
-    const appendParagraph = (textNode, container) => {
-        let pargraph = document.createElement("p").appendChild(textNode);
-        container.append(pargraph);
-    }
+    const fillerTextPTag = document.getElementById("fillerText");
+    const fillerTextPTagValue = fillerTextPTag.outerHTML;
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
@@ -21,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     request.addEventListener("load", function() {
 
         const statusArray = JSON.parse(this.response);
-
+        
+        apiDataContainer.innerHTML = "";
         for(i = 0; i < statusArray.length; i++) {
 
             const newMessageNode = document.createTextNode(statusArray[i].message);
@@ -69,8 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     request.addEventListener("error", () => {
-        let textNode = document.createTextNode("This content is not currently available. Please try again later.");
-        appendParagraph(textNode, apiDataContainer);
+        fillerTextPTag.innerText = "This content is not currently available. Please try again later.";
     });
 
     sendTimelineRequest();
@@ -79,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         e.preventDefault();
         apiDataContainer.innerHTML = "";
+        apiDataContainer.innerHTML = fillerTextPTagValue;
         sendTimelineRequest();
     
     });
