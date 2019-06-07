@@ -43,27 +43,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 anchor.href = statusArray[i].postUrl;
                 nameText.textContent = user.name;
                 handleText.textContent = user.twHandle;
+                handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
                 newImage.src = "./img/twitter-logo.png";
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
-            nameText.className = "name";
-            handleText.className = "handle";
-            userDiv.prepend(nameText);
-            userDiv.prepend(newImage)
-            userDiv.className = "userDiv";
-            newImage.alt = "User profile image.";
-            newPargraph.appendChild(newMessageNode);
-            newSpan.appendChild(newDateNode)
-            textDiv.append(newSpan, newPargraph);
-            textDiv.className = "textDiv";
-            tweetContainer.append(userDiv, textDiv);
-            tweetContainer.className = "tweetContainer";
             anchor.target = "_blank";
-            anchor.append(tweetContainer);
-            apiDataContainer.appendChild(anchor);
+            newImage.alt = "User profile image.";
+            nameText.className = "name";
+            userDiv.className = "userDiv";
+            textDiv.className = "textDiv";
+            tweetContainer.className = "tweetContainer";
+            userDiv.prepend(nameText);
+            userDiv.prepend(newImage);
+            newPargraph.appendChild(newMessageNode);
+            newSpan.appendChild(newDateNode);
+            anchor.append(newPargraph);
+            textDiv.append(newSpan, anchor);
+            tweetContainer.append(userDiv, textDiv);
+            apiDataContainer.appendChild(tweetContainer);
         }
     });
 
