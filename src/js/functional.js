@@ -31,23 +31,36 @@ document.addEventListener("DOMContentLoaded", () => {
             const newImage = document.createElement("img");
             const newPargraph = document.createElement("p");
             const newSpan = document.createElement("span");
-            const newDiv = document.createElement("div");
+            const nameText = document.createElement("p");
+            const handleText = document.createElement("p");
+            const userDiv = document.createElement("div");
+            const statusDiv = document.createElement("div");
             const anchor = document.createElement("a");
+            const user = statusArray[i].user;
             
-            if(statusArray[i].user) {
+            if(user) {
                 newImage.src = statusArray[i].user.profileImageUrl;
                 anchor.href = statusArray[i].postUrl;
+                nameText.textContent = user.name;
+                handleText.textContent = user.twHandle;
+                userDiv.append(handleText);
             } else {
                 newImage.src = "./img/twitter-logo.png";
                 anchor.href = "";
+                nameText.textContent = "Unknown User";
             }
+            nameText.className = "name";
+            handleText.className = "handle";
+            userDiv.prepend(nameText);
+            userDiv.prepend(newImage)
+            userDiv.className = "userDiv";
             newImage.alt = "User profile image.";
             newPargraph.appendChild(newMessageNode);
             newSpan.appendChild(newDateNode)
-            newDiv.append(newImage, newSpan, newPargraph);
-            newDiv.className = "tweetContainer";
+            statusDiv.append(userDiv, newSpan, newPargraph);
+            statusDiv.className = "tweetContainer";
             anchor.target = "_blank";
-            anchor.append(newDiv);
+            anchor.append(statusDiv);
             apiDataContainer.appendChild(anchor);
         }
     });

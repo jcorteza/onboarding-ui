@@ -18,7 +18,7 @@ body {
 }
 
 #apiDataContainer {
-    border: 1px solid black;
+    border: 2px solid black;
     font-size: 12pt;
 }
 
@@ -35,24 +35,43 @@ body {
     text-decoration: none;
 }
 
-.tweetContainer img {
+.userDiv {
     float: left;
-    padding: 0px 20px;
-    max-width: 100px;
+    text-align: center;
+    min-width: 150px;
+    padding: 0px 30px;
+}
+
+.userDiv p {
+    margin-bottom: 3px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.handle {
+    font-size: 8pt;
+}
+
+.tweetContainer img {
+    max-width: 75px;
     height: auto;
+    margin: 10px 0px;
 }
 
 .tweetContainer span {
     display: block;
     font-size: 8pt;
-    margin: 30px 0 5px;
+    margin: 50px 0 5px;
+    font-style: italic;
 }
 
 .tweetContainer {
-    padding: 20px 10px;
+    padding: 10px 0px;
     overflow: auto;
 }
 
 #apiDataContainer a:not(:last-of-type) > div {
-    border-bottom: 1px solid #d1d2d2;
+    border-bottom: 2px solid #d1d2d2;
 }
