@@ -76,7 +76,6 @@ button {
 
 .tweetContainer {
     padding: 10px 20px;
-    overflow: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -91,4 +90,10 @@ button {
 
 #apiDataContainer a:not(:last-of-type) > div {
     border-bottom: 1px solid #d1d2d2;
+}
+
+@media screen and (max-width: 520px) {
+    .tweetContainer {
+        flex-direction: column;
+    }
 }
