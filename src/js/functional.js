@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
     }
-    /*const getFormattedDate = (dateOjbect) => {
+    const getFormattedDate = (dateOjbect) => {
         const monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const month = dateOjbect.getMonth();
         const day = dateOjbect.getDate();
         const year = dateOjbect.getFullYear();
-        return `${monthsArray[month]} ${day}, ${year}`;
-    }*/
+        return `${monthsArray[month]} ${day}`;
+    }
     
     request.addEventListener("load", function() {
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const newMessageNode = document.createTextNode(statusArray[i].message);
             const dateOjbect = new Date(statusArray[i].createdAt);
-            const dateString = dateOjbect.toUTCString();
+            const dateString = getFormattedDate(dateOjbect);
             const newDateNode = document.createTextNode(dateString);
             const newImage = document.createElement("img");
             const newPargraph = document.createElement("p");
@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const nameText = document.createElement("p");
             const handleText = document.createElement("p");
             const userDiv = document.createElement("div");
-            const statusDiv = document.createElement("div");
+            const tweetContainer = document.createElement("div");
+            const textDiv = document.createElement("div");
             const anchor = document.createElement("a");
             const user = statusArray[i].user;
             
@@ -57,10 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
             newImage.alt = "User profile image.";
             newPargraph.appendChild(newMessageNode);
             newSpan.appendChild(newDateNode)
-            statusDiv.append(userDiv, newSpan, newPargraph);
-            statusDiv.className = "tweetContainer";
+            textDiv.append(newSpan, newPargraph);
+            textDiv.className = "textDiv";
+            tweetContainer.append(userDiv, textDiv);
+            tweetContainer.className = "tweetContainer";
             anchor.target = "_blank";
-            anchor.append(statusDiv);
+            anchor.append(tweetContainer);
             apiDataContainer.appendChild(anchor);
         }
     });
