@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
     mode: "production",
-    entry: "./src/main.js",
+    entry: "./src/js/functional.js",
     // devtool: "cheap-module-source-map",
     module: {
         rules: [
@@ -21,13 +21,15 @@ module.exports = {
             }
         ]
     },
+    watch: true,
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         port: 9000
     },
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/assets/",
+        filename: "bundle.js"
     }
 };
