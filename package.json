@@ -1,0 +1,23 @@
+{
+  "name": "onboarding-ui",
+  "version": "1.0.0",
+  "description": "This simple web page runs on its own server created using Node. [Download Node](https://nodejs.org/en/) if you don't already have it. I recommend the LTS version, which is more stable and widely supported.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcorteza/onboarding-ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcorteza/onboarding-ui/issues"
+  },
+  "homepage": "https://github.com/jcorteza/onboarding-ui#readme",
+  "devDependencies": {
+    "webpack": "^4.33.0"
+  }
+}
