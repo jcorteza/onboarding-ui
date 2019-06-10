@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = "./img/twitter-logo.png";
+                newImage.src = "./assets/img/twitter-logo.png";
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
