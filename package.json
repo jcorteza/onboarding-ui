@@ -2,11 +2,12 @@
   "name": "onboarding-ui",
   "version": "1.0.0",
   "description": "This simple web page runs on its own server created using Node. [Download Node](https://nodejs.org/en/) if you don't already have it. I recommend the LTS version, which is more stable and widely supported.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
+    "hello": "console.log('Hello World!');",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open",
     "build": "webpack"
   },
   "repository": {

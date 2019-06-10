@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
     mode: "production",
     entry: "./src/main.js",
-    devtool: "cheap-module-source-map",
+    // devtool: "cheap-module-source-map",
     module: {
         rules: [
             {
