@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const btn = document.getElementById("apiButton");
     const apiDataContainer = document.getElementById("apiDataContainer");
-    // const fillerTextPTag = document.getElementById("fillerText");
-    // const fillerTextPTagValue = fillerTextPTag.outerHTML;
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
@@ -77,8 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         e.preventDefault();
         apiDataContainer.innerHTML = "<p>Loading your Twitter timeline...</p>"
-        // fillerTextPTag.innerText = "";
-        //apiDataContainer.innerHTML = fillerTextPTagValue;
         sendTimelineRequest();
     
     });
