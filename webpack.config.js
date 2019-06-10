@@ -4,10 +4,6 @@ module.exports = {
     mode: "production",
     entry: "./src/main.js",
     devtool: "cheap-module-source-map",
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist")
-    },
     module: {
         rules: [
             {
@@ -29,5 +25,9 @@ module.exports = {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         port: 9000
+    },
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist")
     }
 };
