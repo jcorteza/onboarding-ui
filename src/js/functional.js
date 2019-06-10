@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const btn = document.getElementById("apiButton");
     const apiDataContainer = document.getElementById("apiDataContainer");
-    const fillerTextPTag = document.getElementById("fillerText");
-    const fillerTextPTagValue = fillerTextPTag.outerHTML;
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
@@ -46,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = "./img/twitter-logo.png";
+                newImage.src = "./assets/img/twitter-logo.png";
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
@@ -68,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     request.addEventListener("error", () => {
-        fillerTextPTag.innerText = "This content is not currently available. Please try again later.";
+        apiDataContainer.innerHTML = "<p>This content is not currently available. Please try again later.</p>";
     });
 
     sendTimelineRequest();
@@ -76,8 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", (e) => {
 
         e.preventDefault();
-        apiDataContainer.innerHTML = "";
-        apiDataContainer.innerHTML = fillerTextPTagValue;
+        apiDataContainer.innerHTML = "<p>Loading your Twitter timeline...</p>"
         sendTimelineRequest();
     
     });
