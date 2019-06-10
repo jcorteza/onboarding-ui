@@ -1,3 +1,5 @@
+@import "./_mixin.scss";
+
 * {
     padding: 0;
     margin: 0;
@@ -12,8 +14,9 @@ body {
         text-align: center;
 
         h1 {
-            font-weight: bold;
-            font-size: 40pt;
+            @include styled-font($weight: bold, $size: 40pt);
+            // font-weight: bold;
+            // font-size: 40pt;
         }
 
     }
@@ -25,18 +28,26 @@ body {
 
     #apiDataContainer {
         border: 2px solid black;
-        font-size: 12pt;
+        @include styled-font();
+        //font-size: 12pt;
 
         > p {
             padding: 10px;
         }
 
-        > .tweetContainer:nth-of-type(odd) {
-            background-color: #e8f5fd;
-        }
+        > .tweetContainer {
 
-        > .tweetContainer:nth-of-type(even) {
-            background-color: #e9e9e9;
+            &:nth-of-type(odd) {
+                background-color: #e8f5fd;
+            }
+
+            &:nth-of-type(even) {
+                background-color: #e9e9e9;
+            }
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid #d1d2d2;
+            }
         }
 
         .tweetContainer {
@@ -44,10 +55,6 @@ body {
             display: flex;
             flex-direction: row;
             align-items: center;
-
-            :not(:last-of-type) {
-                border-bottom: 1px solid #d1d2d2;
-            }
 
             .userDiv {
                 text-align: center;
@@ -67,19 +74,22 @@ body {
                 }
     
                 .name {
-                    font-weight: bold;
+                    @include styled-font($weight: bold);
+                    //font-weight: bold;
                 }
     
                 .handle {
-                    font-size: 8pt;
+                    @include styled-font($size: 8pt);
+                    // font-size: 8pt;
                 }
             }
 
             span {
                 display: block;
-                font-size: 8pt;
+                //font-size: 8pt;
                 margin-bottom: 5px;
-                font-style: italic;
+                @include styled-font($style: italic, $size: 8pt)
+                //font-style: italic;
             }
 
             a, a:visited {
