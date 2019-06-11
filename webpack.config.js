@@ -25,7 +25,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     query: {
-                        presets: ['@babel/preset-react']
+                        presets: ['@babel/preset-react', '@babel/preset-es2017']
                     }
                 }
             }
