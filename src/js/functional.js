@@ -1,5 +1,8 @@
+import "../css/main.css";
+
 document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
+    const twLogo = require("../img/twitter-logo.png");
     const btn = document.getElementById("apiButton");
     const apiDataContainer = document.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
@@ -19,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const statusArray = JSON.parse(this.response);
         
         apiDataContainer.innerHTML = "";
-        for(i = 0; i < statusArray.length; i++) {
+        for(let i = 0; i < statusArray.length; i++) {
 
             const newMessageNode = document.createTextNode(statusArray[i].message);
             const dateOjbect = new Date(statusArray[i].createdAt);
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = "./assets/img/twitter-logo.png";
+                newImage.src = twLogo;
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
