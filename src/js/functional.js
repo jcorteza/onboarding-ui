@@ -1,9 +1,11 @@
 import "../css/main.css";
+import HelloReact from "../components/HelloReact.jsx";
 
 document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const twLogo = require("../img/twitter-logo.png");
     const btn = document.getElementById("apiButton");
+    const reactContainer = document.getElementById("reactContainer");
     const apiDataContainer = document.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
@@ -81,4 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sendTimelineRequest();
     
     });
+
+    ReactDOM.render(<HelloReact />, reactContainer);
 });
