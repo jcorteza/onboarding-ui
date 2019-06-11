@@ -8,6 +8,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
+                exclude: /node_modules/,
                 use: [
                     "style-loader",
                     "css-loader"
@@ -15,6 +16,7 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
+                exclude: /node_modules/,
                 use: [
                     "file-loader"
                 ]
@@ -25,7 +27,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     query: {
-                        presets: ['@babel/preset-react']
+                        presets: ['@babel/preset-react', '@babel/preset-env']
                     }
                 }
             }

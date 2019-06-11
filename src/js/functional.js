@@ -1,12 +1,11 @@
 import "../css/main.css";
 import HelloReact from "../components/HelloReact.jsx";
 
-document.addEventListener("DOMContentLoaded", () => {
-    let request = new XMLHttpRequest();
-    const twLogo = require("../img/twitter-logo.png");
-    const btn = document.getElementById("apiButton");
-    const reactContainer = document.getElementById("reactContainer");
-    const apiDataContainer = document.getElementById("apiDataContainer");
+document.addEventListener("DOMContentLoaded", function() {
+    const request = new XMLHttpRequest();
+    const btn = this.getElementById("apiButton");
+    const reactContainer = this.getElementById("reactContainer");
+    const apiDataContainer = this.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
@@ -19,37 +18,35 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${monthsArray[month]} ${day}`;
     }
     
-    request.addEventListener("load", function() {
-
-        const statusArray = JSON.parse(this.response);
+    request.addEventListener("load", () => {
         
         apiDataContainer.innerHTML = "";
-        for(let i = 0; i < statusArray.length; i++) {
+        for(let status of JSON.parse(request.response)) {
 
-            const newMessageNode = document.createTextNode(statusArray[i].message);
-            const dateOjbect = new Date(statusArray[i].createdAt);
+            const newMessageNode = this.createTextNode(status.message);
+            const dateOjbect = new Date(status.createdAt);
             const dateString = getFormattedDate(dateOjbect);
-            const newDateNode = document.createTextNode(dateString);
-            const newImage = document.createElement("img");
-            const newPargraph = document.createElement("p");
-            const newSpan = document.createElement("span");
-            const nameText = document.createElement("p");
-            const handleText = document.createElement("p");
-            const userDiv = document.createElement("div");
-            const tweetContainer = document.createElement("div");
-            const textDiv = document.createElement("div");
-            const anchor = document.createElement("a");
-            const user = statusArray[i].user;
+            const newDateNode = this.createTextNode(dateString);
+            const newImage = this.createElement("img");
+            const newPargraph = this.createElement("p");
+            const newSpan = this.createElement("span");
+            const nameText = this.createElement("p");
+            const handleText = this.createElement("p");
+            const userDiv = this.createElement("div");
+            const tweetContainer = this.createElement("div");
+            const textDiv = this.createElement("div");
+            const anchor = this.createElement("a");
+            const user = status.user;
             
             if(user) {
-                newImage.src = statusArray[i].user.profileImageUrl;
-                anchor.href = statusArray[i].postUrl;
+                newImage.src = status.user.profileImageUrl;
+                anchor.href = status.postUrl;
                 nameText.textContent = user.name;
                 handleText.textContent = user.twHandle;
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = twLogo;
+                newImage.src = require("../img/twitter-logo.png");
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
