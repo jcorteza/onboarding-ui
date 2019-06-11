@@ -1,9 +1,8 @@
 import "../css/main.css";
 import HelloReact from "../components/HelloReact.jsx";
 
-document.addEventListener("DOMContentLoaded", () => {
-    let request = new XMLHttpRequest();
-    const twLogo = require("../img/twitter-logo.png");
+document.addEventListener("DOMContentLoaded", function() {
+    const request = new XMLHttpRequest();
     const btn = this.getElementById("apiButton");
     const reactContainer = this.getElementById("reactContainer");
     const apiDataContainer = this.getElementById("apiDataContainer");
@@ -20,14 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     request.addEventListener("load", () => {
-
-        const statusArray = JSON.parse(this.response);
         
         apiDataContainer.innerHTML = "";
-        for(let i = 0; i < statusArray.length; i++) {
+        for(let status of JSON.parse(request.response)) {
 
-            const newMessageNode = this.createTextNode(statusArray[i].message);
-            const dateOjbect = new Date(statusArray[i].createdAt);
+            const newMessageNode = this.createTextNode(status.message);
+            const dateOjbect = new Date(status.createdAt);
             const dateString = getFormattedDate(dateOjbect);
             const newDateNode = this.createTextNode(dateString);
             const newImage = this.createElement("img");
@@ -39,17 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const tweetContainer = this.createElement("div");
             const textDiv = this.createElement("div");
             const anchor = this.createElement("a");
-            const user = statusArray[i].user;
+            const user = status.user;
             
             if(user) {
-                newImage.src = statusArray[i].user.profileImageUrl;
-                anchor.href = statusArray[i].postUrl;
+                newImage.src = status.user.profileImageUrl;
+                anchor.href = status.postUrl;
                 nameText.textContent = user.name;
                 handleText.textContent = user.twHandle;
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = twLogo;
+                newImage.src = require("../img/twitter-logo.png");
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
