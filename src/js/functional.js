@@ -4,9 +4,9 @@ import HelloReact from "../components/HelloReact.jsx";
 document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
     const twLogo = require("../img/twitter-logo.png");
-    const btn = document.getElementById("apiButton");
-    const reactContainer = document.getElementById("reactContainer");
-    const apiDataContainer = document.getElementById("apiDataContainer");
+    const btn = this.getElementById("apiButton");
+    const reactContainer = this.getElementById("reactContainer");
+    const apiDataContainer = this.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
@@ -19,26 +19,26 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${monthsArray[month]} ${day}`;
     }
     
-    request.addEventListener("load", function() {
+    request.addEventListener("load", () => {
 
         const statusArray = JSON.parse(this.response);
         
         apiDataContainer.innerHTML = "";
         for(let i = 0; i < statusArray.length; i++) {
 
-            const newMessageNode = document.createTextNode(statusArray[i].message);
+            const newMessageNode = this.createTextNode(statusArray[i].message);
             const dateOjbect = new Date(statusArray[i].createdAt);
             const dateString = getFormattedDate(dateOjbect);
-            const newDateNode = document.createTextNode(dateString);
-            const newImage = document.createElement("img");
-            const newPargraph = document.createElement("p");
-            const newSpan = document.createElement("span");
-            const nameText = document.createElement("p");
-            const handleText = document.createElement("p");
-            const userDiv = document.createElement("div");
-            const tweetContainer = document.createElement("div");
-            const textDiv = document.createElement("div");
-            const anchor = document.createElement("a");
+            const newDateNode = this.createTextNode(dateString);
+            const newImage = this.createElement("img");
+            const newPargraph = this.createElement("p");
+            const newSpan = this.createElement("span");
+            const nameText = this.createElement("p");
+            const handleText = this.createElement("p");
+            const userDiv = this.createElement("div");
+            const tweetContainer = this.createElement("div");
+            const textDiv = this.createElement("div");
+            const anchor = this.createElement("a");
             const user = statusArray[i].user;
             
             if(user) {
