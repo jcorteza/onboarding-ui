@@ -18,6 +18,16 @@ module.exports = {
                 use: [
                     "file-loader"
                 ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    query: {
+                        presets: ['@babel/preset-react']
+                    }
+                }
             }
         ]
     },
@@ -28,7 +38,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "dist"),
-        publicPath: "/assets/",
+        publicPath: "/",
         filename: "bundle.js"
     }
 };

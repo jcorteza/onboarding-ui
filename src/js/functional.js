@@ -1,6 +1,11 @@
+import "../css/main.css";
+import HelloReact from "../components/HelloReact.jsx";
+
 document.addEventListener("DOMContentLoaded", () => {
     let request = new XMLHttpRequest();
+    const twLogo = require("../img/twitter-logo.png");
     const btn = document.getElementById("apiButton");
+    const reactContainer = document.getElementById("reactContainer");
     const apiDataContainer = document.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
@@ -19,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const statusArray = JSON.parse(this.response);
         
         apiDataContainer.innerHTML = "";
-        for(i = 0; i < statusArray.length; i++) {
+        for(let i = 0; i < statusArray.length; i++) {
 
             const newMessageNode = document.createTextNode(statusArray[i].message);
             const dateOjbect = new Date(statusArray[i].createdAt);
@@ -44,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleText.className = "handle";
                 userDiv.append(handleText);
             } else {
-                newImage.src = "./assets/img/twitter-logo.png";
+                newImage.src = twLogo;
                 anchor.href = "";
                 nameText.textContent = "Unknown User";
             }
@@ -78,4 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sendTimelineRequest();
     
     });
+
+    ReactDOM.render(<HelloReact />, reactContainer);
 });
