@@ -7,6 +7,8 @@
 ## Setting up the project
 * Initialize the npm project by running `npm init -y` in your terminal, while in the root of your project directory.
 * Then download all the necessary node modules with `npm install`
+* Create a `css` directory in your `dist/assets/` directory if it doesn't already exist by running the following command in your terminal while in the root of your project `mkdir ./dist/assets/css`
+* Generate your css with SASS by running `sass ./src/sass/main.scss ./dist/assets/css/main.css` in your terminal
 
 ## Run the project
 * Enter `npm run dev` to start your project server and follow the [link](http://localhost:9000/) to view it in a browser.
