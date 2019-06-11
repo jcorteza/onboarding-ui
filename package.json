@@ -6,7 +6,8 @@
     "hello": "echo \"Hello World!\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "dev": "webpack-dev-server --config './webpack.config.js'",
+    "update-styles": "sass ./src/sass/main.scss ./dist/assets/css/main.css",
+    "dev": "npm run update-styles && npm run build && webpack-dev-server --config './webpack.config.js'",
     "build": "webpack"
   },
   "repository": {
@@ -23,6 +24,7 @@
   "devDependencies": {
     "css-loader": "^2.1.1",
     "file-loader": "^4.0.0",
+    "sass": "^1.21.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.33.0",
     "webpack-cli": "^3.3.3",

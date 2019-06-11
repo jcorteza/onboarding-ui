@@ -1,0 +1,6 @@
+@mixin styled-font($style: normal, $variant: normal, $weight: normal, $size: 12pt) {
+    font-style: $style;
+    font-variant: $variant;
+    font-weight: $weight;
+    font-size: $size;
+}
