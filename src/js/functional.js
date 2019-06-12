@@ -1,6 +1,5 @@
 import "../css/main.css";
-import Header from "./Header.jsx";
-import TimelineContainer from "./TimelineContainer.jsx";
+import APIContainer from "./APIContainer.jsx";
 
 document.addEventListener("DOMContentLoaded", function() {
     const request = new XMLHttpRequest();
@@ -83,5 +82,5 @@ document.addEventListener("DOMContentLoaded", function() {
     
     });
 
-    ReactDOM.render(<TimelineContainer />, rootContainer);
+    ReactDOM.render(<APIContainer />, rootContainer);
 });
