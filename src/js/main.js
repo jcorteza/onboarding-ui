@@ -1,4 +1,5 @@
 import "../css/main.css";
-import APIContainer from "./APIContainer.jsx";
+import APIContainer from "../components/APIContainer.jsx";
+document.getElementById
 
-ReactDOM.render(<APIContainer />, rootContainer);
+ReactDOM.render(<APIContainer />, document.getElementById("root"));

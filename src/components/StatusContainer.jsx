@@ -7,7 +7,7 @@ class StatusContainer extends React.Component {
 
     render() {
         return(
-            <div class="textDiv">
+            <div className="textDiv">
                 <p>{getFormattedDate(this.props.date)}</p>
                 <a href={this.props.postUrl} target="_blank">
                     <p>{this.props.message}</p>

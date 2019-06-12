@@ -5,7 +5,7 @@ class APIContainer extends React.Component {
     constructor() {
         super();
         this.state = {
-            request = new XMLHttpRequest()
+            request: new XMLHttpRequest()
         }
     }
 
@@ -15,7 +15,7 @@ class APIContainer extends React.Component {
 
     render() {
         return( 
-            <div>
+            <div id="apiContainer">
                 <GetTimelineButton request={this.state.request}/>
                 <TimelineContainer request={this.state.request}/>
             </div>
