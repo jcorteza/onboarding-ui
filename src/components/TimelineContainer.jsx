@@ -4,47 +4,32 @@ import TweetContainer from "./TweetContainer.jsx";
 class TimelineContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            ajaxResponse: [],
-            error: false
-        }
     }
 
-    componentDidMount() {
-        this.props.request.addEventListener("load", () => {
-            this.setState({
-                ajaxResponse: JSON.parse(this.props.request.response),
-                error: false
-            });
-        });
-    
-        this.props.request.addEventListener("error", () => {
-            this.setState({
-                ajaxResponse: [],
-                error: true
-            });
-        });
-
+    componentWillMount() {
         sendRequest(this.props.request);
     }
 
     render() {
-        if (this.props.request.readyState <= 1) {
+        if (this.props.finished === false) {
+            console.log("Loading your timeline");
             return(
                 <div id="timelineContainer">
                     <p>Loading your Twitter timeline...</p>
                 </div> 
             ); 
-        } else if(this.props.request.readyState >= 2 && this.state.error === true) {
+        } else if(this.props.finished === true && this.props.error === true) {
+            console.log("state is === 4 error is true");
             return(
                 <div id="timelineContainer">
                     <p>This content is not currently available. Please try again later.</p>
                 </div>
             );
-        } else if(this.props.request.readyState >= 2 && this.state.error === false) {
+        } else if(this.props.finished == true && this.props.error === false) {
+            console.log("state is === 4 error is false");
             return(
                 <div id="timelineContainer">
-                    {this.state.ajaxResponse.map(status => 
+                    {this.props.response.map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                     )}
                 </div> 
