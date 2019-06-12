@@ -9,12 +9,12 @@ class TweetContainer extends React.Component {
     render() {
 
         let userDiv = (this.props.user)? 
-            <UserContainer userName={this.props.user.name} userHanlde={this.props.user.twHandle} profileImgUrl={this.props.user.profileImageUrl}/> :
+            <UserContainer userName={this.props.user.name} userHandle={this.props.user.twHandle} profileImgUrl={this.props.user.profileImageUrl}/> :
             <UserContainer />;
 
         return( 
             <div className="tweetContainer">
-                userDiv
+                {userDiv}
                 <StatusContainer postUrl={this.props.postUrl} message={this.props.message} date={new Date(this.props.createdAt)}/>
             </div>
         );

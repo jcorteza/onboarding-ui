@@ -5,35 +5,51 @@ class TimelineContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ajaxResponse: []
+            ajaxResponse: [],
+            error: false
         }
     }
 
     componentDidMount() {
         this.props.request.addEventListener("load", () => {
-        
-            document.getElementById("timelineContainer").innerHTML = "";
-            this.setState({ajaxResponse: JSON.parse(this.props.request.response)});
+            this.setState({
+                ajaxResponse: JSON.parse(this.props.request.response),
+                error: false
+            });
         });
     
         this.props.request.addEventListener("error", () => {
-            document.getElementById("timelineContainer").innerHTML = "<p>This content is not currently available. Please try again later.</p>";
-            this.setState({ajaxResponse: []});
+            this.setState({
+                ajaxResponse: [],
+                error: true
+            });
         });
 
         sendRequest(this.props.request);
     }
 
     render() {
-        return (this.state.ajaxResponse.length > 0)?
-            <div id="timelineContainer">
-                {this.state.ajaxResponse.map(status => 
-                    <TweetContainer user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
-                )}
-            </div> :
-            <div id="timelineContainer">
-                <p>Loading your Twitter timeline...</p>
-            </div>;
+        if (this.props.request.readyState <= 1) {
+            return(
+                <div id="timelineContainer">
+                    <p>Loading your Twitter timeline...</p>
+                </div> 
+            ); 
+        } else if(this.props.request.readyState >= 2 && this.state.error === true) {
+            return(
+                <div id="timelineContainer">
+                    <p>This content is not currently available. Please try again later.</p>
+                </div>
+            );
+        } else if(this.props.request.readyState >= 2 && this.state.error === false) {
+            return(
+                <div id="timelineContainer">
+                    {this.state.ajaxResponse.map(status => 
+                        <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
+                    )}
+                </div> 
+            );
+        }
     }
 }
 

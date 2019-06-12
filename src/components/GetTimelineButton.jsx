@@ -11,11 +11,9 @@ class GetTimelineButton extends React.Component {
                 (e) => {
                     e.preventDefault();
                     document.getElementById("timelineContainer").innerHTML = "<p>Loading your Twitter timeline...</p>";
-                    sendRequest(props.request)
+                    sendRequest(this.props.request)
                 }
-            }>
-                Get Twitter Timeline
-            </button>
+            }>Get Twitter Timeline</button>
         );
     }
 }
