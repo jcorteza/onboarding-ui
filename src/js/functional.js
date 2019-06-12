@@ -1,9 +1,11 @@
 import "../css/main.css";
-import HelloReact from "../components/HelloReact.jsx";
+import Header from "./Header.jsx";
+import TimelineContainer from "./TimelineContainer.jsx";
 
 document.addEventListener("DOMContentLoaded", function() {
     const request = new XMLHttpRequest();
     const btn = this.getElementById("apiButton");
+    const rootContainer = this.getElementById("root");
     const reactContainer = this.getElementById("reactContainer");
     const apiDataContainer = this.getElementById("apiDataContainer");
     const sendTimelineRequest = () => {
@@ -81,5 +83,5 @@ document.addEventListener("DOMContentLoaded", function() {
     
     });
 
-    ReactDOM.render(<HelloReact />, reactContainer);
+    ReactDOM.render(<TimelineContainer />, rootContainer);
 });
