@@ -12,11 +12,12 @@ class TweetContainer extends React.Component {
             <UserContainer userName={this.props.user.name} userHanlde={this.props.user.twHandle} profileImgUrl={this.props.user.profileImageUrl}/> :
             <UserContainer />;
 
-        return 
+        return( 
             <div class="tweetContainer">
                 userDiv
                 <StatusContainer postUrl={this.props.postUrl} message={this.props.message} date={new Date(this.props.createdAt)}/>
-            </div>;
+            </div>
+        );
     }
 }
 

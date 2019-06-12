@@ -5,29 +5,21 @@ class APIContainer extends React.Component {
     constructor() {
         super();
         this.state = {
-            request = new XMLHttpRequest(),
-            ajaxResponse: []
+            request = new XMLHttpRequest()
         }
     }
 
     componentDidMount() {
-        request.addEventListener("load", () => {
         
-            apiDataContainer.innerHTML = "";
-            this.setState({ajaxResponse: JSON.parse(request.response)});
-        });
-    
-        request.addEventListener("error", () => {
-            apiDataContainer.innerHTML = "<p>This content is not currently available. Please try again later.</p>";
-        });
     }
 
     render() {
-        return 
+        return( 
             <div>
                 <GetTimelineButton request={this.state.request}/>
-                <TimelineContainer request={this.state.request} response={this.state.ajaxResponse}/>
-            </div>;
+                <TimelineContainer request={this.state.request}/>
+            </div>
+        );
     }
 }
 

@@ -6,7 +6,17 @@ class GetTimelineButton extends React.Component {
     }
 
     render() {
-        return <button id="apiButton" type="button" onClick={() => sendRequest(props.request)}>Get Twitter Timeline</button>;
+        return( 
+            <button id="apiButton" type="button" onClick={
+                (e) => {
+                    e.preventDefault();
+                    document.getElementById("apiDataContainer").innerHTML = "<p>Loading your Twitter timeline...</p>";
+                    sendRequest(props.request)
+                }
+            }>
+                Get Twitter Timeline
+            </button>
+        );
     }
 }
 
