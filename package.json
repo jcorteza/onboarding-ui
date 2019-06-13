@@ -4,7 +4,7 @@
   "description": "This simple web page runs on its own server created using Node. [Download Node](https://nodejs.org/en/) if you don't already have it. I recommend the LTS version, which is more stable and widely supported.",
   "scripts": {
     "hello": "echo \"Hello World!\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "watch": "webpack --watch",
     "update-styles": "sass ./src/sass/main.scss ./src/css/main.css",
     "dev": "npm run update-styles && npm run build && webpack-dev-server --config './webpack.config.js'",
