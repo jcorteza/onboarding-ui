@@ -28,6 +28,7 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
     "file-loader": "^4.0.0",
+    "jest": "^24.8.0",
     "sass": "^1.21.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.33.0",
