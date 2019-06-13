@@ -1,0 +1,1 @@
+import getFormattedDate from "../src/js/getFormattedDate.js";
