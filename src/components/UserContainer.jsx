@@ -11,7 +11,7 @@ class UserContainer extends React.Component {
                 <p className="handle">{this.props.userHandle}</p>
             </div> :
             <div className="userDiv">
-                <img src={require("../img/twitter-logo.png")} alt="twitter logo image" />
+                <img src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
                 <p className="name">Unknown User</p>
             </div>;
     }
