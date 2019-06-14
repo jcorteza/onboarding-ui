@@ -4,38 +4,26 @@ import TweetContainer from "./TweetContainer.jsx";
 class TimelineContainer extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            response: props.request.response
-        }
     }
 
-    componentDidMount() {
-
-    }
-
-    shouldComponentUpdate() {
-
-    }
-
-    componentDidUpdate() {
-
+    componentWillMount() {
+        requestHandler.sendRequest(this.props.request);
     }
 
     render() {
-        if (this.state.response === [] || this.state.response == null) {
+        if (this.props.finished === false) {
             return(
                 <div id="timelineContainer">
                     <p>Loading your Twitter timeline...</p>
                 </div> 
             ); 
-        } else if(this.props.request.readyState === 4 && this.props.request.state !== 200) {
+        } else if(this.props.finished === true && this.props.error === true) {
             return(
                 <div id="timelineContainer">
                     <p>This content is not currently available. Please try again later.</p>
                 </div>
             );
-        } else if(this.props.readyState === 4 && this.props.request.state === 200) {
+        } else if(this.props.finished == true && this.props.error === false) {
             return(
                 <div id="timelineContainer">
                     {this.props.response.map(status => 
