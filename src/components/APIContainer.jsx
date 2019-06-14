@@ -1,5 +1,6 @@
 import GetTimelineButton from "./GetTimelineButton.jsx";
 import TimelineContainer from "./TimelineContainer.jsx";
+import requestHandler from "../js/requestHandler.js";
 
 class APIContainer extends React.Component {
     constructor() {
@@ -13,27 +14,7 @@ class APIContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.state.request.addEventListener("load", () => {
-            this.setState({
-                ajaxResponse: JSON.parse(this.state.request.response),
-                errorOccured: false
-            });
-        });
-    
-        this.state.request.addEventListener("error", () => {
-            this.setState({
-                ajaxResponse: [],
-                errorOccured: true
-            });
-        });
-
-        this.state.request.addEventListener("readystatechange", () => {
-            if(this.state.request.readyState <= 1) {
-                this.setState({processFinished: false})
-            } else if (this.state.request.readyState === 4) {
-                this.setState({processFinished : true});
-            }
-        });
+        requestHandler.initRequest(this.state.request);
     }
 
     render() {
