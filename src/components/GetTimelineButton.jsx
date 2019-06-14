@@ -1,4 +1,4 @@
-import sendRequest from "../js/sendRequest.js";
+import requestHandler from "../js/requestHandler.js";
 
 class GetTimelineButton extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class GetTimelineButton extends React.Component {
             <button id="apiButton" type="button" onClick={
                 (e) => {
                     e.preventDefault();
-                    sendRequest(this.props.request)
+                    requestHandler.sendRequest(this.props.request)
                 }
             }>Get Twitter Timeline</button>
         );

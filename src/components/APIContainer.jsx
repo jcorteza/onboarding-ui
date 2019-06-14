@@ -17,9 +17,7 @@ class APIContainer extends React.Component {
         requestHandler.initRequest(this.state.request);
     }
 
-    render() {
-        const request = new XMLHttpRequest();
-        
+    render() {        
         return( 
             <div id="apiContainer">
                 <GetTimelineButton request={this.state.request}/>

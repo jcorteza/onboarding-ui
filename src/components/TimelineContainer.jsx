@@ -1,4 +1,4 @@
-import sendRequest from "../js/sendRequest.js";
+import requestHandler from "../js/requestHandler.js";
 import TweetContainer from "./TweetContainer.jsx";
 
 class TimelineContainer extends React.Component {
@@ -7,7 +7,7 @@ class TimelineContainer extends React.Component {
     }
 
     componentWillMount() {
-        sendRequest(this.props.request);
+        requestHandler.sendRequest(this.props.request);
     }
 
     render() {
