@@ -14,7 +14,7 @@ class APIContainer extends React.Component {
     }
 
     componentDidMount() {
-        requestHandler.initRequest(this.state.request);
+        requestHandler.initRequest(this.state.request, this);
     }
 
     render() {        
