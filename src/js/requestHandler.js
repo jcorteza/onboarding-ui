@@ -1,30 +1,30 @@
 const requestHandler = {
     
-    initRequest(request, component) {
+    initRequest: (request) => {
 
-        request.addEventListener("load", () => {
-            return component.setState({
+        request.addEventListener("load", function() {
+            return this.setState({
                 ajaxResponse: JSON.parse(request.response),
                 errorOccured: false
             });
         });
 
-        request.addEventListener("error", () => {
-            return component.setState({
+        request.addEventListener("error", function() {
+            return this.setState({
                 ajaxResponse: [],
                 errorOccured: true
             });
         });
 
-        request.addEventListener("readystatechange", () => {
+        request.addEventListener("readystatechange", function() {
             if(request.readyState <= 1) {
-                return component.setState({processFinished: false})
+                return this.setState({processFinished: false})
             } else if (request.readyState === 4) {
-                return component.setState({processFinished : true});
+                return this.setState({processFinished : true});
             }
         });
     },
-    sendRequest(request) {
+    sendRequest: (request) => {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
     }
