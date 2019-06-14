@@ -1,6 +1,6 @@
 const requestHandler = {
     
-    initRequest(request, component){
+    initRequest(request, component) {
 
         request.addEventListener("load", () => {
             return component.setState({
@@ -24,7 +24,7 @@ const requestHandler = {
             }
         });
     },
-    sendRequest(request){
+    sendRequest(request) {
         request.open("GET", "http://localhost:8080/api/1.0/twitter/timeline");
         request.send();
     }
