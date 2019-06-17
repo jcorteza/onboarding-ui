@@ -10,16 +10,16 @@ class TimelineContainer extends React.Component {
             errorOccurred: false
         }
 
-        this.updateStatus = (responseStatus, responseData) => {
-            if(responseStatus === 200) {
-                this.setState({
-                    data: JSON.parse(responseData),
-                    errorOccurred: false
-                });
-            } else if (responseStatus !== 200) {
+        this.updateStatus = (responseData) => {
+            if(responseData === "") {
                 this.setState({
                     data: [],
                     errorOccurred: true
+                });
+            } else {
+                this.setState({
+                    data: JSON.parse(responseData),
+                    errorOccurred: false
                 });
             }
         }
