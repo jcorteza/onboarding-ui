@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import requestHandler from "../js/requestHandler.js";
 import TweetContainer from "./TweetContainer.jsx";
 

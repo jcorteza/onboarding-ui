@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import UserContainer from "./UserContainer.jsx";
 import StatusContainer from "./StatusContainer.jsx";
 

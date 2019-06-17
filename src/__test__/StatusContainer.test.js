@@ -1,6 +1,5 @@
-import {React} from "react";
+import React from "react";
 import {shallow} from "enzyme";
-import "jest-enzyme";
 import StatusContainer from "../components/StatusContainer";
 
 test("statusContainer renders with data from props", () => {
