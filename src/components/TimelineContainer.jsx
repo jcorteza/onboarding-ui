@@ -11,30 +11,30 @@ class TimelineContainer extends React.Component {
     }
 
     componentDidMount() {
-        requestHandler.initRequest(() => {
+        requestHandler.initRequest(requestHandler.request, () => {
             this.setState({readyState: requestHandler.request.readyState});
         });
-        requestHandler.sendRequest();
+        requestHandler.sendRequest(requestHandler.request);
     }
 
     render() {
         let timelineContainer = <div id="timelineContainer"></div>;
-        if (requestHandler.request.readyState < 4) {
+        if (this.state.readyState < 4) {
             timelineContainer = (
                 <div id="timelineContainer">
                     <p>Loading your Twitter timeline...</p>
                 </div> 
             ); 
-        } else if(requestHandler.request.readyState  === 4 && requestHandler.request.status !== 200) {
+        } else if(this.state.readyState  === 4 && requestHandler.request.status !== 200) {
             timelineContainer = (
                 <div id="timelineContainer">
                     <p>This content is not currently available. Please try again later.</p>
                 </div>
             );
-        } else if(requestHandler.request.readyState  === 4 && requestHandler.request.status === 200) {
+        } else if(this.state.readyState  === 4 && requestHandler.request.status === 200) {
             timelineContainer = (
                 <div id="timelineContainer">
-                    {requestHandler.request.response.map(status => 
+                    {JSON.parse(requestHandler.request.response).map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                     )}
                 </div> 
@@ -46,7 +46,7 @@ class TimelineContainer extends React.Component {
                 <button id="apiButton" type="button" onClick={
                     (e) => {
                         e.preventDefault();
-                        requestHandler.sendRequest();
+                        requestHandler.sendRequest(requestHandler.request);
                     }
                 }>Get Twitter Timeline</button>
                 {timelineContainer}
