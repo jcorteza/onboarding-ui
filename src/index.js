@@ -1,5 +1,5 @@
 import "./style/css/main.css";
-import APIContainer from "./components/APIContainer.jsx";
+import TimelineContainer from "./components/TimelineContainer.jsx";
 document.getElementById("root");
 
-ReactDOM.render(<APIContainer />, document.getElementById("root"));
+ReactDOM.render(<TimelineContainer />, document.getElementById("root"));

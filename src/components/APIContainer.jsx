@@ -7,21 +7,32 @@ class APIContainer extends React.Component {
         super();
         this.state = {
             request: new XMLHttpRequest(),
-            ajaxResponse: [],
-            processFinished: false,
-            errorOccured: false
+            status: 0,
+            ajaxResponse: []
         }
     }
 
     componentDidMount() {
-        requestHandler.initRequest(this.state.request, this);
+        requestHandler.initRequest(this.state.request, () => {
+            if(this.state.request.status === 200) {
+                this.setState({
+                    ajaxResponse: JSON.parse(this.state.request.response),
+                    status: this.state.request.status
+                });
+            } else {
+                this.setState({
+                    ajaxResponse: [],
+                    status: this.state.request.status
+                });
+            }
+        });
     }
 
     render() {        
         return( 
             <div id="apiContainer">
                 <GetTimelineButton request={this.state.request}/>
-                <TimelineContainer request={this.state.request} response={this.state.ajaxResponse} error={this.state.errorOccured} finished={this.state.processFinished}/>
+                <TimelineContainer request={this.state.request} response={this.state.ajaxResponse} status={this.state.status}/>
             </div>
         );
     }
