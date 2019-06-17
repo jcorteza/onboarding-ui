@@ -1,7 +1,8 @@
+import React, {Component} from "react";
 import requestHandler from "../js/requestHandler.js";
 import TweetContainer from "./TweetContainer.jsx";
 
-class TimelineContainer extends React.Component {
+class TimelineContainer extends Component {
     constructor(props) {
         super(props);
 

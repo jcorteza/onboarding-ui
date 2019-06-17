@@ -2,8 +2,7 @@ const path = require("path");
 
 module.exports = {
     mode: "production",
-    entry: "./src/index.js",
-    // devtool: "cheap-module-source-map",
+    entry: "./src/js/index.js",
     module: {
         rules: [
             {
@@ -32,6 +31,10 @@ module.exports = {
                 }
             }
         ]
+    },
+    resolve: {
+        modules: ["node_modules"],
+        extensions: [".js", ".jsx"]
     },
     devServer: {
         contentBase: path.join(__dirname, "dist"),

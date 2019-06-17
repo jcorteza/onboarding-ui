@@ -1,5 +1,7 @@
+import {React} from "react";
 import {shallow} from "enzyme";
-import StatusContainer from "../components/StatusContainer.jsx";
+import "jest-enzyme";
+import StatusContainer from "../components/StatusContainer";
 
 test("statusContainer renders with data from props", () => {
     const mockGetFormattedDate = jest.fn(() => "June 13"); 

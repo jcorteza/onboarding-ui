@@ -1,4 +1,5 @@
-class UserContainer extends React.Component {
+import React, {Component} from "react";
+class UserContainer extends Component {
     constructor(props) {
         super(props);
     }

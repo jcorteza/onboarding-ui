@@ -1,4 +1,6 @@
+import {React} from "react";
 import {shallow} from "enzyme";
+import "jest-enzyme";
 import TweetContainer from "../components/TweetContainer.jsx";
 
 test("tweetContainer renders with data from props", () => {

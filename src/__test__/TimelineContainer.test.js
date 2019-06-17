@@ -1,4 +1,6 @@
+import {React} from "react";
 import {shallow} from "enzyme";
+import "jest-enzyme";
 import TimelineContainer from "../components/TimelineContainer.jsx";
 import requestHandler from "../js/requestHandler.js";
 
