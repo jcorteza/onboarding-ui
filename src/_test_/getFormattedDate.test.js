@@ -5,5 +5,5 @@ test("returns date as string", () => {
 
     testDate.setDate(13);
     testDate.setMonth(5);
-    expect(getFormattedDate(testDate)).toMatch(/June 13/);
+    expect(getFormattedDate(testDate)).toHaveReturnedWith(expect.toMatch(/June 13/));
 });
