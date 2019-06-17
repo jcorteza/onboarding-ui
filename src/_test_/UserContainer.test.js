@@ -4,6 +4,7 @@ import UserContainer from "../components/UserContainer.jsx";
 test("userContainer renders diff versions based on props", () => {
     let userContainer = shallow(<UserContainer />);
     
+    expect(UserContainer).toHaveBeenCalled();
     expect(userContainer.props).toBeFalsy();
     expect(userContainer.render).toHaveReturnedWith(
         <div className="userDiv">
@@ -12,8 +13,9 @@ test("userContainer renders diff versions based on props", () => {
         </div>
     );
     
-    userContainer = shallow(<UserContainer profileImgUr="www.picture.com" name="Twitter User" userHandle="twitterUser"/>);
+    userContainer = shallow(<UserContainer profileImgUrl="www.picture.com" userName="Twitter User" userHandle="twitterUser"/>);
     
+    expect(UserContainer).toHaveBeenCalled();
     expect(userContainer.props).toBeTruthy();
     expect(userContainer.render).toHaveReturnedWith(
         <div className="userDiv">
