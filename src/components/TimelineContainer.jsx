@@ -23,6 +23,15 @@ class TimelineContainer extends React.Component {
                 });
             }
         }
+
+        this.handleClick = (e) => {
+            e.preventDefault();
+            this.setState({
+                data: [],
+                errorOccurred: false
+            })
+            requestHandler(this.updateStatus);
+        }
     }
 
     componentDidMount() {
@@ -55,16 +64,7 @@ class TimelineContainer extends React.Component {
 
         return (
             <div id="apiContainer">
-                <button id="apiButton" type="button" onClick={
-                    (e) => {
-                        e.preventDefault();
-                        this.setState({
-                            data: [],
-                            errorOccurred: false
-                        })
-                        requestHandler(this.updateStatus);
-                    }
-                }>Get Twitter Timeline</button>
+                <button id="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
                 {timelineContainer}
             </div>
         );
