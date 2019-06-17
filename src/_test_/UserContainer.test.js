@@ -1,7 +1,7 @@
 import {shallow} from "enzyme";
 import UserContainer from "../components/UserContainer.jsx";
 
-test("", () => {
+test("userContainer renders diff versions based on props", () => {
     let userContainer = shallow(<UserContainer />);
     
     expect(userContainer.props).toBeFalsy();

@@ -1,7 +1,7 @@
 import {shallow} from "enzyme";
 import TweetContainer from "../components/TweetContainer.jsx";
 
-test("", () => {
+test("tweetContainer renders with data from props", () => {
     let testDate = new Date();
     let tweetContainer = shallow(<TweetContainer postUrl="www.post.com" message="test message" date={testDate}/>);
     

@@ -1,1 +1,0 @@
-import sendRequest from "../src/js/sendRequest.js";
