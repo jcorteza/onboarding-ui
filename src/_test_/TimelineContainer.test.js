@@ -7,5 +7,10 @@ test("", () => {
     const testRequest = new XMLHttpRequest();
     const timelineContainer = shallow(<TimelineContainer error="false" finished="false" response="[]"/>);
 
+    component
+        .find("button")
+        .simulate("click");
+
+    expect(fn).toHaveBeenCalled(); 
     expect(timelineContainer).toHaveReturn("<div className=\"timelineContainer\"></div>");
 });
