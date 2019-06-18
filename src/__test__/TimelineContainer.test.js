@@ -7,7 +7,7 @@ jest.mock("../js/requestHandler.js");
 
 describe("timelineContainer updates based on state", () => {
     const timelineContainer = shallow(<TimelineContainer />);
-    const errorRendering = (<p>This content is not currently available. Please try again later.</p>);
+    const errorRendering = (<p>{timelineContainer.instance().errorMessage}</p>);
 
     test("timeline container renders stand in p-tag and triggers requestHandler", () => {
         
@@ -15,7 +15,7 @@ describe("timelineContainer updates based on state", () => {
             timelineContainer.instance().updateStatus("");
         });
     
-        expect(timelineContainer.contains(<p>Loading your Twitter timeline...</p>)).toBeTruthy();
+        expect(timelineContainer.contains(<p>{timelineContainer.instance().fillerMessage}</p>)).toBeTruthy();
         expect(requestHandler).toHaveBeenCalledWith(timelineContainer.instance().updateStatus); 
         requestHandler(timelineContainer.instance().updateStatus(""));
         expect(timelineContainer.contains(errorRendering)).toBeTruthy();

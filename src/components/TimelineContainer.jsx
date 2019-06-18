@@ -11,6 +11,9 @@ class TimelineContainer extends Component {
             errorOccurred: false
         }
 
+        this.errorMessage = "This content is not currently available. Please try again later.";
+        this.fillerMessage = "Loading your Twitter timeline...";
+
         this.updateStatus = (responseData) => {
             if(responseData === "") {
                 this.setState({
@@ -44,7 +47,7 @@ class TimelineContainer extends Component {
         if(this.state.errorOccurred === true) {
             timelineContainer = (
                 <div id="timelineContainer">
-                    <p>This content is not currently available. Please try again later.</p>
+                    <p>{this.errorMessage}</p>
                 </div>
             );
         } else if(this.state.errorOccurred === false && this.state.data.length > 0) {
@@ -58,7 +61,7 @@ class TimelineContainer extends Component {
         } else if (this.state.errorOccurred === false) {
             timelineContainer = (
                 <div id="timelineContainer">
-                    <p>Loading your Twitter timeline...</p>
+                    <p>{this.fillerMessage}</p>
                 </div>
             );
         }
