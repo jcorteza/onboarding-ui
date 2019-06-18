@@ -4,25 +4,41 @@ import TweetContainer from "../components/TweetContainer.jsx";
 import UserContainer from "../components/UserContainer.jsx";
 import StatusContainer from "../components/StatusContainer.jsx";
 
-test("tweetContainer renders with data from props", () => {
+describe("<TweetContainer />", () => {
+    
     let testDate = new Date();
-    let tweetContainer = shallow(<TweetContainer postUrl="www.post.com" message="test message" date={testDate}/>);
+    let url = "www.post.com";
+    let testMessage = "test message";
     
-    expect(tweetContainer.props.user).toBeFalsy();
-    expect(tweetContainer.render).toHaveReturnedWith(
-        <div className="tweetContainer">
-            <UserContainer />
-            <StatusContainer postUrl="www.post.com" message="test message" date={testDate}/>
-        </div>
-    );
+    test("renders with data from props not including user", () => {
+        let tweetContainer = shallow(<TweetContainer postUrl={url} message={testMessage} createdAt={testDate.valueOf()}/>);
+        
+        expect(tweetContainer.instance().props).not.toHaveProperty("user");
+        expect(tweetContainer.getElement()).toEqual(
+            <div className="tweetContainer">
+                <UserContainer />
+                <StatusContainer postUrl={url} message={testMessage} date={new Date(testDate.valueOf())}/>
+            </div>
+        );
+    });
     
-    tweetContainer = shallow(<TweetContainer postUrl="www.post.com" message="test message" date={testDate} user={{name: "Twitter User", twHanlde: "twitterUser", profileImgUrl: "www.profilePic.com"}}/>);
-    
-    expect(tweetContainer.props.user).toBeTruthy();
-    expect(tweetContainer.render).toHaveReturnedWith(
-        <div className="tweetContainer">
-            <UserContainer userName="Twitter User" userHandle="twitterUser" profileImgUrl="www.profilePic.com"/> :
-            <StatusContainer postUrl="www.post.com" message="test message" date={testDate}/>
-        </div>
-    );
+    test("renders with data from props including user", () => {
+        
+        let userObject = {
+            name: "Twitter User", 
+            twHandle: "twitterUser", 
+            profileImageUrl: "www.profilePic.com"
+        };
+        let tweetContainer = shallow(<TweetContainer postUrl={url} message={testMessage} createdAt={testDate.valueOf()} user={userObject}/>);
+        
+        expect(tweetContainer.instance().props).toHaveProperty("user");
+        expect(tweetContainer.getElement()).toEqual(
+            <div className="tweetContainer">
+                <UserContainer userName={userObject.name} userHandle={userObject.twHandle} profileImgUrl={userObject.profileImageUrl}/>
+                <StatusContainer postUrl={url} message={testMessage} date={new Date(testDate.valueOf())}/>
+            </div>
+        );
+
+    });
+
 });

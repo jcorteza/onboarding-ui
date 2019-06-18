@@ -9,7 +9,7 @@ class TweetContainer extends Component {
 
     render() {
 
-        let userDiv = (this.props.user)? 
+        let userDiv = (this.props.hasOwnProperty("user"))? 
             <UserContainer userName={this.props.user.name} userHandle={this.props.user.twHandle} profileImgUrl={this.props.user.profileImageUrl}/> :
             <UserContainer />;
 
