@@ -1,4 +1,4 @@
-import requestHandler from "../js/requestHandler.js";
+import fetchTimeline from "../js/fetchTimeline.js";
 import TweetContainer from "./TweetContainer.jsx";
 
 class TimelineContainer extends React.Component {
@@ -10,15 +10,29 @@ class TimelineContainer extends React.Component {
             errorOccurred: false
         }
 
+        this.fetchData = () => {
+            fetchTimeline()
+                .then((promiseResponse) => {
+                    return promiseResponse.json();
+                })
+                .then((data) => {
+                    this.updateStatus(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.updateStatus([]);
+                });
+        }
+
         this.updateStatus = (responseData) => {
-            if(responseData === "") {
+            if(responseData.length === 0) {
                 this.setState({
-                    data: [],
+                    data: responseData,
                     errorOccurred: true
                 });
             } else {
                 this.setState({
-                    data: JSON.parse(responseData),
+                    data: responseData,
                     errorOccurred: false
                 });
             }
@@ -30,12 +44,12 @@ class TimelineContainer extends React.Component {
                 data: [],
                 errorOccurred: false
             })
-            requestHandler(this.updateStatus);
+            this.fetchData();
         }
     }
 
     componentDidMount() {
-        requestHandler(this.updateStatus);
+        this.fetchData();
     }
 
     render() {
