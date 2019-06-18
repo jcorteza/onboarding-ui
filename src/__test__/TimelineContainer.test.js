@@ -1,50 +1,34 @@
 import React from "react";
-import {shallow} from "enzyme";
+import { shallow } from "enzyme";
 import TimelineContainer from "../components/TimelineContainer.jsx";
 import requestHandler from "../js/requestHandler.js";
 
 jest.mock("../js/requestHandler.js");
 
-test("timelineContainer updates based on state", () => {
+describe("timelineContainer updates based on state", () => {
     const timelineContainer = shallow(<TimelineContainer />);
-    const errorRendering = (
-        <div id="apiContainer">
-            <button id="apiButton" type="button" onClick={timelineContainer.handleClick}>Get Home Timeline</button>
-            <div className="timelineContainer">
-                <p>This content is not currently available. Please try again later.</p>
-            </div>
-        </div>
-    );
-    
-    requestHandler.mockImplementation((callback) => {
-        callback("");
-    });
+    const errorRendering = (<p>This content is not currently available. Please try again later.</p>);
 
-    expect(TimelineContainer).toHaveBeenCalled();
-    expect(timelineContainer.render).toHaveReturnedWith(
-        <div id="apiContainer">
-            <button id="apiButton" type="button" onClick={timelineContainer.handleClick}>Get Home Timeline</button>
-            <div className="timelineContainer">
-                <p>Loading your Twitter timeline...</p>
-            </div>
-        </div>
-    );
-    expect(timelineContainer.componentDidMount).toHaveBeenCalled();
-    expect(requestHandler).toHaveBeenCalledWith(timelineContainer.updateStatus); 
-    expect(timelineContainer.updateStatus).toHaveBeenCalledWith("");
-    expect(timelineContainer.setState).toHaveBeenCalledWith({
-        data: [],
-        errorOccurred: true
+    test("timeline container renders stand in p-tag and triggers requestHandler", () => {
+        
+        requestHandler.mockImplementation(() => {
+            timelineContainer.instance().updateStatus("");
+        });
+    
+        expect(timelineContainer.contains(<p>Loading your Twitter timeline...</p>)).toBeTruthy();
+        expect(requestHandler).toHaveBeenCalledWith(timelineContainer.instance().updateStatus); 
+        requestHandler(timelineContainer.instance().updateStatus(""));
+        expect(timelineContainer.contains(errorRendering)).toBeTruthy();
+        
     });
-    expect(timelineContainer.render).toHaveReturnedWith(errorRendering);
     
-    timelineContainer
-        .find("button#apiButton")
-        .simulate("click");
-    expect(timelineContainer.handleClick).toHaveBeenCalled();
-    expect(timelineContainer.setState).toHaveBeenCalled();
-    expect(requestHandler).toHaveBeenCalledWith(timelineContainer.updateStatus); 
-    expect(timelineContainer.updateStatus).toHaveBeenCalledWith("");
-    expect(timelineContainer.render).toHaveReturnedWith(errorRendering);
-    
+    test("button click triggers requestHandler and renders errorRendering", () => {
+
+        timelineContainer
+            .find("button#apiButton")
+            .simulate("click", {preventDefault: () => {}});
+        expect(requestHandler).toHaveBeenCalledWith(timelineContainer.instance().updateStatus); 
+        expect(timelineContainer.contains(errorRendering)).toBeTruthy();
+        
+    });
 });

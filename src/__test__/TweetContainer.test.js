@@ -1,12 +1,13 @@
 import React from "react";
-import {shallow} from "enzyme";
+import { shallow } from "enzyme";
 import TweetContainer from "../components/TweetContainer.jsx";
+import UserContainer from "../components/UserContainer.jsx";
+import StatusContainer from "../components/StatusContainer.jsx";
 
 test("tweetContainer renders with data from props", () => {
     let testDate = new Date();
     let tweetContainer = shallow(<TweetContainer postUrl="www.post.com" message="test message" date={testDate}/>);
     
-    expect(TweetContainer).toHaveBeenCalled();
     expect(tweetContainer.props.user).toBeFalsy();
     expect(tweetContainer.render).toHaveReturnedWith(
         <div className="tweetContainer">
@@ -17,7 +18,6 @@ test("tweetContainer renders with data from props", () => {
     
     tweetContainer = shallow(<TweetContainer postUrl="www.post.com" message="test message" date={testDate} user={{name: "Twitter User", twHanlde: "twitterUser", profileImgUrl: "www.profilePic.com"}}/>);
     
-    expect(TweetContainer).toHaveBeenCalled();
     expect(tweetContainer.props.user).toBeTruthy();
     expect(tweetContainer.render).toHaveReturnedWith(
         <div className="tweetContainer">
