@@ -1,9 +1,9 @@
 import requestHandler from "../js/requestHandler.js";
 
 test("requestHandler runs callback at end of call", (done) => {
+    expect.hasAssertions();
     let testCallback = (data) => {
-        expect(data).toBe(expect.any(JSON) || expect.toMatch(""))
-        expect(testCallback).toHaveBeenCalled();
+        expect(data).toBeFalsy();
         done();
     };
     requestHandler(testCallback);
