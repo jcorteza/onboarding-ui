@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
     mode: "production",
-    entry: "./src/js/functional.js",
+    entry: "./src/index.js",
     // devtool: "cheap-module-source-map",
     module: {
         rules: [
@@ -40,7 +40,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "dist"),
-        publicPath: "/",
+        publicPath: "/public/",
         filename: "bundle.js"
     }
 };

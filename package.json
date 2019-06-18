@@ -6,7 +6,7 @@
     "hello": "echo \"Hello World!\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "update-styles": "sass ./src/sass/main.scss ./src/css/main.css",
+    "update-styles": "sass ./src/style/sass/main.scss ./src/style/css/main.css",
     "dev": "npm run update-styles && npm run build && webpack-dev-server --config './webpack.config.js'",
     "build": "webpack"
   },
