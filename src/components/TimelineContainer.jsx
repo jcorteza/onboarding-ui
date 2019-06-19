@@ -14,6 +14,17 @@ class TimelineContainer extends Component {
         this.errorMessage = "This content is not currently available. Please try again later.";
         this.fillerMessage = "Loading your Twitter timeline...";
 
+        this.fetchData = () => {
+            fetchTimeline()
+            .then((data) => {
+                this.updateStatus(data);
+            })
+            .catch((error) => {
+                console.log(`Error occurred during fetchData: ${error}`);
+                this.updateStatus([]);
+            });
+        }
+
         this.updateStatus = (responseData) => {
             if(responseData.length === 0) {
                 this.setState({
@@ -33,27 +44,13 @@ class TimelineContainer extends Component {
             this.setState({
                 data: [],
                 errorOccurred: false
-            })
-            fetchTimeline()
-                .then((data) => {
-                    this.updateStatus(data);
-                })
-                .catch((error) => {
-                    console.log(`Error occurred during handleClick: ${error}`);
-                    this.updateStatus([]);
-                });
+            });
+            this.fetchData();
         }
     }
 
     componentDidMount() {
-        fetchTimeline()
-            .then((data) => {
-                this.updateStatus(data);
-            })
-            .catch((error) => {
-                console.log(`Error occurred during componentDidMount: ${error}`);
-                this.updateStatus([]);
-            });
+        this.fetchData();
     }
 
     render() {
