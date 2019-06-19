@@ -1,6 +1,7 @@
+import React, { Component } from "react";
 import getFormattedDate from "../js/getFormattedDate.js";
 
-class StatusContainer extends React.Component {
+class StatusContainer extends Component {
     constructor(props) {
         super(props);
     }

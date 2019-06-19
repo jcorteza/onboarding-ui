@@ -1,10 +1,11 @@
-class UserContainer extends React.Component {
+import React, { Component } from "react";
+class UserContainer extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        return (this.props)?
+        return (this.props.hasOwnProperty("userName") && this.props.hasOwnProperty("userHandle"))?
             <div className="userDiv">
                 <img src={this.props.profileImgUrl} alt="User profile image"/>
                 <p className="name">{this.props.userName}</p>

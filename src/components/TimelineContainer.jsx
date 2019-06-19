@@ -1,7 +1,8 @@
 import fetchTimeline from "../js/fetchTimeline.js";
+import React, { Component } from "react";
 import TweetContainer from "./TweetContainer.jsx";
 
-class TimelineContainer extends React.Component {
+class TimelineContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -9,7 +10,10 @@ class TimelineContainer extends React.Component {
             data: [],
             errorOccurred: false
         }
-
+        
+        this.errorMessage = "This content is not currently available. Please try again later.";
+        this.fillerMessage = "Loading your Twitter timeline...";
+        
         this.fetchData = () => {
             fetchTimeline()
                 .then((promiseResponse) => {
@@ -57,7 +61,7 @@ class TimelineContainer extends React.Component {
         if(this.state.errorOccurred === true) {
             timelineContainer = (
                 <div id="timelineContainer">
-                    <p>This content is not currently available. Please try again later.</p>
+                    <p>{this.errorMessage}</p>
                 </div>
             );
         } else if(this.state.errorOccurred === false && this.state.data.length > 0) {
@@ -71,7 +75,7 @@ class TimelineContainer extends React.Component {
         } else if (this.state.errorOccurred === false) {
             timelineContainer = (
                 <div id="timelineContainer">
-                    <p>Loading your Twitter timeline...</p>
+                    <p>{this.fillerMessage}</p>
                 </div>
             );
         }
