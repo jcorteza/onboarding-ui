@@ -6,7 +6,7 @@ import getFormattedDate from "../js/getFormattedDate";
 jest.mock("../js/getFormattedDate");
 
 describe("<StatusContainer />", () => {
-    test("renders with data from props", () => {
+    it("renders with data from props", () => {
 
         getFormattedDate.mockImplementation(() => "June 13"); 
         const statusContainer = shallow(<StatusContainer postUrl="www.twitter.com" message="test message"/>);
