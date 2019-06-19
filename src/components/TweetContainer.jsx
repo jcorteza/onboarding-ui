@@ -1,14 +1,15 @@
+import React, { Component } from "react";
 import UserContainer from "./UserContainer.jsx";
 import StatusContainer from "./StatusContainer.jsx";
 
-class TweetContainer extends React.Component {
+class TweetContainer extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
 
-        let userDiv = (this.props.user)? 
+        let userDiv = (this.props.hasOwnProperty("user"))? 
             <UserContainer userName={this.props.user.name} userHandle={this.props.user.twHandle} profileImgUrl={this.props.user.profileImageUrl}/> :
             <UserContainer />;
 
