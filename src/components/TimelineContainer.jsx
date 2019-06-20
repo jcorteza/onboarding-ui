@@ -57,13 +57,13 @@ class TimelineContainer extends Component {
         let timelineContainer;
         if(this.state.errorOccurred === true) {
             timelineContainer = (
-                <div id="timelineContainer">
+                <div id={`${this.props.timelineType}TimelineContainer`}>
                     <p>{this.errorMessage}</p>
                 </div>
             );
         } else if(this.state.errorOccurred === false && this.state.data.length > 0) {
             timelineContainer = (
-                <div id="timelineContainer">
+                <div id={`${this.props.timelineType}TimelineContainer`}>
                     {this.state.data.map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                     )}
@@ -71,7 +71,7 @@ class TimelineContainer extends Component {
             );
         } else if (this.state.errorOccurred === false) {
             timelineContainer = (
-                <div id="timelineContainer">
+                <div id={`${this.props.timelineType}TimelineContainer`}>
                     <p>{this.fillerMessage}</p>
                 </div>
             );
