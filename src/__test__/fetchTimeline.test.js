@@ -14,14 +14,14 @@ describe("fetchTimeline", () => {
                 })
             });
         });
-        return fetchTimeline()
+        return fetchTimeline("home")
             .then((responseData) => {
                 expect(responseData).toBe(data);
             });
     
     });
     
-    test("fetchTimeline returns an empty array", () => {
+    test("fetchTimeline returns undefined or \"\"", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({
@@ -33,9 +33,9 @@ describe("fetchTimeline", () => {
                 })
             });
         });
-        return fetchTimeline()
+        return fetchTimeline("user")
             .then((responseData) => {
-                expect(responseData).toMatchObject([]);
+                expect(responseData).toBeUndefined();
             });
     
     });
