@@ -5,7 +5,7 @@ const fetchTimeline = (timelineType) => {
         user: "http://localhost:8080/api/1.0/twitter/user-timeline"
     }
 
-    let emptyPromise = new Promise((resolve) => resolve([]));
+    let emptyPromise = new Promise((resolve) => resolve(""));
     
     return fetch(timelinePaths[timelineType])
         .then((promiseResponse) => {

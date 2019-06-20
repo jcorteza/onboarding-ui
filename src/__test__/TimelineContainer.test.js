@@ -38,7 +38,7 @@ describe("timelineContainer", () => {
             .find("button#apiButton")
             .simulate("click", {preventDefault: () => {}});
         
-        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().fillerMessage}</p>)).toBeTruthy();
+        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().loadingMessage}</p>)).toBeTruthy();
         expect(fetchTimeline).toHaveBeenCalled(); 
 
         return fetchTimeline()
@@ -73,7 +73,7 @@ describe("timelineContainer", () => {
             .find("button#apiButton")
             .simulate("click", {preventDefault: () => {}});
 
-        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().fillerMessage}</p>)).toBeTruthy();
+        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().loadingMessage}</p>)).toBeTruthy();
         expect(fetchTimeline).toHaveBeenCalled();
         
         return fetchTimeline()

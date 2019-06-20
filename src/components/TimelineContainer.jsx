@@ -13,7 +13,7 @@ class TimelineContainer extends Component {
         }
         
         this.errorMessage = "This content is not currently available. Please try again later.";
-        this.fillerMessage = "Loading your timeline...";
+        this.loadingMessage = "Loading your timeline...";
 
         this.fetchData = () => {
             fetchTimeline(this.props.timelineType)
@@ -27,9 +27,8 @@ class TimelineContainer extends Component {
         }
 
         this.updateStatus = (responseData) => {
-            if(responseData.length === 0) {
+            if(responseData === "") {
                 this.setState({
-                    data: responseData,
                     fetchComplete: true,
                     errorOccurred: true
                 });
@@ -45,7 +44,6 @@ class TimelineContainer extends Component {
         this.handleClick = (e) => {
             e.preventDefault();
             this.setState({
-                data: [],
                 fetchComplete: false,
                 errorOccurred: false
             });
@@ -66,27 +64,27 @@ class TimelineContainer extends Component {
         
         if(!thisState.fetchComplete) {
             timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`}>
-                    <p>{this.fillerMessage}</p>
+                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
+                    <p>{this.loadingMessage}</p>
                 </div>
             );
         } else if (thisState.fetchComplete && thisState.errorOccurred) {
             timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`}>
+                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
                     <p>{this.errorMessage}</p>
                 </div>
             );
-        } else if (thisState.fetchComplete && !thisState.errorOccurred)
-        if(thisState.errorOccurred === true) {
-        } else if(thisState.errorOccurred === false && thisState.data.length > 0) {
-            timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`}>
-                    {this.state.data.map(status => 
+        } else if (thisState.fetchComplete && !thisState.errorOccurred) {
+            let fillerMessage = (this.props.timelineType === "home")?
+                "No tweets are available. Follow someone on Twitter." :
+                "No tweets are available. Post a tweet!"
+            timelineContainer = (thisState.data.length === 0)?
+                <p>{fillerMessage}</p> :
+                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
+                    {thisState.data.map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                     )}
-                </div> 
-            );
-        } else if (this.state.errorOccurred === false) {
+                </div>;
         }
 
         return (
