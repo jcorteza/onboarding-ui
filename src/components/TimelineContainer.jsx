@@ -1,5 +1,5 @@
+import fetchTimeline from "../js/fetchTimeline.js";
 import React, { Component } from "react";
-import requestHandler from "../js/requestHandler.js";
 import TweetContainer from "./TweetContainer.jsx";
 
 class TimelineContainer extends Component {
@@ -10,19 +10,30 @@ class TimelineContainer extends Component {
             data: [],
             errorOccurred: false
         }
-
+        
         this.errorMessage = "This content is not currently available. Please try again later.";
         this.fillerMessage = "Loading your Twitter timeline...";
 
+        this.fetchData = () => {
+            fetchTimeline()
+            .then((data) => {
+                this.updateStatus(data);
+            })
+            .catch((error) => {
+                console.log(`Error occurred during fetchData: ${error}`);
+                this.updateStatus([]);
+            });
+        }
+
         this.updateStatus = (responseData) => {
-            if(responseData === "") {
+            if(responseData.length === 0) {
                 this.setState({
-                    data: [],
+                    data: responseData,
                     errorOccurred: true
                 });
             } else {
                 this.setState({
-                    data: JSON.parse(responseData),
+                    data: responseData,
                     errorOccurred: false
                 });
             }
@@ -33,13 +44,13 @@ class TimelineContainer extends Component {
             this.setState({
                 data: [],
                 errorOccurred: false
-            })
-            requestHandler(this.updateStatus);
+            });
+            this.fetchData();
         }
     }
 
     componentDidMount() {
-        requestHandler(this.updateStatus);
+        this.fetchData();
     }
 
     render() {
