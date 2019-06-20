@@ -9,7 +9,7 @@ jest.mock("../js/fetchTimeline", () => {
 });
 
 describe("timelineContainer", () => {
-    const timelineContainer = shallow(<TimelineContainer />);
+    const timelineContainer = shallow(<TimelineContainer timelineType="home"/>);
     const errorRendering = (<p>{timelineContainer.instance().errorMessage}</p>);
     fetchTimeline.mockImplementation(() => {
         return new Promise((resolve) => resolve());
@@ -41,7 +41,7 @@ describe("timelineContainer", () => {
         expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().loadingMessage}</p>)).toBeTruthy();
         expect(fetchTimeline).toHaveBeenCalled(); 
 
-        return fetchTimeline()
+        return fetchTimeline("home")
             .then((response) => {
                 timelineContainer.instance().updateStatus(response);
                 expect(timelineContainer.containsMatchingElement(errorRendering)).toBeTruthy();
@@ -76,7 +76,7 @@ describe("timelineContainer", () => {
         expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().loadingMessage}</p>)).toBeTruthy();
         expect(fetchTimeline).toHaveBeenCalled();
         
-        return fetchTimeline()
+        return fetchTimeline("home")
             .then((response) => {
                 timelineContainer.instance().updateStatus(response);
                 timelineContainer.update();
