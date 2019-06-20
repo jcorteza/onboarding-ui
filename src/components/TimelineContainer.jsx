@@ -8,6 +8,7 @@ class TimelineContainer extends Component {
 
         this.state = {
             data: [],
+            fetchComplete: false,
             errorOccurred: false
         }
         
@@ -29,11 +30,13 @@ class TimelineContainer extends Component {
             if(responseData.length === 0) {
                 this.setState({
                     data: responseData,
+                    fetchComplete: true,
                     errorOccurred: true
                 });
             } else {
                 this.setState({
                     data: responseData,
+                    fetchComplete: true,
                     errorOccurred: false
                 });
             }
@@ -43,6 +46,7 @@ class TimelineContainer extends Component {
             e.preventDefault();
             this.setState({
                 data: [],
+                fetchComplete: false,
                 errorOccurred: false
             });
             this.fetchData();
