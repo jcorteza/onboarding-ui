@@ -12,7 +12,7 @@ class TimelineContainer extends Component {
         }
         
         this.errorMessage = "This content is not currently available. Please try again later.";
-        this.fillerMessage = "Loading your Twitter timeline...";
+        this.fillerMessage = "Loading your timeline...";
 
         this.fetchData = () => {
             fetchTimeline(this.props.timelineType)
@@ -54,7 +54,11 @@ class TimelineContainer extends Component {
     }
 
     render() {
+        let buttonText = (this.props.timelineType === "home")?
+            "View Twitter Timeline" :
+            "View Your Tweets";
         let timelineContainer;
+        
         if(this.state.errorOccurred === true) {
             timelineContainer = (
                 <div id={`${this.props.timelineType}TimelineContainer`}>
@@ -79,7 +83,7 @@ class TimelineContainer extends Component {
 
         return (
             <div className="apiContainer">
-                <button className="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
+                <button className="apiButton" type="button" onClick={this.handleClick}>{buttonText}</button>
                 {timelineContainer}
             </div>
         );
