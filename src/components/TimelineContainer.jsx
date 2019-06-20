@@ -15,7 +15,7 @@ class TimelineContainer extends Component {
         this.fillerMessage = "Loading your Twitter timeline...";
 
         this.fetchData = () => {
-            fetchTimeline()
+            fetchTimeline(this.props.timelineType)
             .then((data) => {
                 this.updateStatus(data);
             })

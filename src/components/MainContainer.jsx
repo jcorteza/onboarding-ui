@@ -5,8 +5,8 @@ class MainContainer extends Component {
     render() {
         return(
             <div>
-                <TimelineContainer type="home" />
-                <TimelineContainer type="user" />
+                <TimelineContainer timelineType="home" />
+                <TimelineContainer timelineType="user" />
             </div>
         );
     }
