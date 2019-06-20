@@ -23,15 +23,16 @@ body {
 
     
     #root {
-        #apiContainer {
+        .apiContainer {
             
             button {
                 margin-bottom: 10px;
                 padding: 5px;
             }
 
-            #timelineContainer {
+            .timelineContainer {
                 border: 2px solid black;
+                box-sizing: border-box;
                 @include styled-font();
                 //font-size: 12pt;
         
