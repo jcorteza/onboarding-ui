@@ -61,15 +61,24 @@ class TimelineContainer extends Component {
         let buttonText = (this.props.timelineType === "home")?
             "View Twitter Timeline" :
             "View Your Tweets";
+        let thisState = this.state;
         let timelineContainer;
         
-        if(this.state.errorOccurred === true) {
+        if(!thisState.fetchComplete) {
+            timelineContainer = (
+                <div id={`${this.props.timelineType}TimelineContainer`}>
+                    <p>{this.fillerMessage}</p>
+                </div>
+            );
+        } else if (thisState.fetchComplete && thisState.errorOccurred) {
             timelineContainer = (
                 <div id={`${this.props.timelineType}TimelineContainer`}>
                     <p>{this.errorMessage}</p>
                 </div>
             );
-        } else if(this.state.errorOccurred === false && this.state.data.length > 0) {
+        } else if (thisState.fetchComplete && !thisState.errorOccurred)
+        if(thisState.errorOccurred === true) {
+        } else if(thisState.errorOccurred === false && thisState.data.length > 0) {
             timelineContainer = (
                 <div id={`${this.props.timelineType}TimelineContainer`}>
                     {this.state.data.map(status => 
@@ -78,11 +87,6 @@ class TimelineContainer extends Component {
                 </div> 
             );
         } else if (this.state.errorOccurred === false) {
-            timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`}>
-                    <p>{this.fillerMessage}</p>
-                </div>
-            );
         }
 
         return (
