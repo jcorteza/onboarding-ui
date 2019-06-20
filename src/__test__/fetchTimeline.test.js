@@ -35,7 +35,7 @@ describe("fetchTimeline", () => {
         });
         return fetchTimeline("user")
             .then((responseData) => {
-                expect(responseData).toBeUndefined();
+                expect(responseData).toMatch("");
             });
     
     });
