@@ -78,8 +78,8 @@ class TimelineContainer extends Component {
         }
 
         return (
-            <div id="apiContainer">
-                <button id="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
+            <div className="apiContainer">
+                <button className="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
                 {timelineContainer}
             </div>
         );
