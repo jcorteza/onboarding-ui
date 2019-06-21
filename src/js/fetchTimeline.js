@@ -6,6 +6,8 @@ const fetchTimeline = (timelineType) => {
     }
 
     let emptyPromise = new Promise((resolve) => resolve(""));
+
+    console.log(timelinePaths[timelineType]);
     
     return fetch(timelinePaths[timelineType])
         .then((promiseResponse) => {
