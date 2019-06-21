@@ -64,13 +64,13 @@ class TimelineContainer extends Component {
         
         if(!thisState.fetchComplete) {
             timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
+                <div className="timelineContainer">
                     <p>{this.loadingMessage}</p>
                 </div>
             );
         } else if (thisState.fetchComplete && thisState.errorOccurred) {
             timelineContainer = (
-                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
+                <div className="timelineContainer">
                     <p>{this.errorMessage}</p>
                 </div>
             );
@@ -80,7 +80,7 @@ class TimelineContainer extends Component {
                 "No tweets are available. Post a tweet!"
             timelineContainer = (thisState.data.length === 0)?
                 <p>{fillerMessage}</p> :
-                <div id={`${this.props.timelineType}TimelineContainer`} className="timelineContainer">
+                <div className="timelineContainer">
                     {thisState.data.map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                     )}
@@ -88,7 +88,7 @@ class TimelineContainer extends Component {
         }
 
         return (
-            <div className="apiContainer">
+            <div className="apiContainer" id={`${this.props.timelineType}TimelineContainer`}>
                 <button className="apiButton" type="button" onClick={this.handleClick}>{buttonText}</button>
                 {timelineContainer}
             </div>
