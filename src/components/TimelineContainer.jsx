@@ -18,7 +18,6 @@ class TimelineContainer extends Component {
         this.fetchData = () => {
             fetchTimeline(this.props.timelineType)
             .then((data) => {
-                console.log("fetch data complete. will updatStatus");
                 this.updateStatus(data);
             })
             .catch((error) => {
@@ -28,15 +27,12 @@ class TimelineContainer extends Component {
         }
 
         this.updateStatus = (responseData) => {
-            console.log(responseData);
             if(responseData === "") {
-                console.log("errorOccurred");
                 this.setState({
                     fetchComplete: true,
                     errorOccurred: true
                 });
             } else {
-                console.log("errorOccurred false");
                 this.setState({
                     data: responseData,
                     fetchComplete: true,
@@ -56,13 +52,7 @@ class TimelineContainer extends Component {
     }
 
     componentDidMount() {
-        console.log("comonent did mount. will now fetch Data");
         this.fetchData();
-    }
-
-    componentDidUpdate() {
-        console.log("timelineContainer did update");
-        console.log(`new State: ${JSON.stringify(this.state)}`);
     }
 
     render() {
