@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import TimelineContainer from "../components/TimelineContainer";
 
 class MainContainer extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return(
             <div>
@@ -11,3 +15,5 @@ class MainContainer extends Component {
         );
     }
 }
+
+export default MainContainer;
