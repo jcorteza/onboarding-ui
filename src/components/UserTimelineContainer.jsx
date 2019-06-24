@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
-import fetchHomeTimeline from "../js/fetchHomeTimeline.js/index.js";
+import fetchUserTimeline from "../js/fetchUserTimeline.js";
 
 class UserTimelineContainer extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class UserTimelineContainer extends Component {
         this.fillerMessage = "No tweets are available. Post a tweet!";
 
         this.fetchData = () => {
-            fetchHomeTimeline()
+            fetchUserTimeline()
             .then((data) => {
                 this.updateStatus(data);
             })
