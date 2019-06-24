@@ -8,7 +8,7 @@ class MainContainer extends Component {
 
     render() {
         return(
-            <div>
+            <div id="mainContainer">
                 <TimelineContainer timelineType="home" />
                 <TimelineContainer timelineType="user" />
             </div>

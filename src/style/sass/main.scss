@@ -23,94 +23,99 @@ body {
 
     
     #root {
-        .apiContainer {
-            
-            button {
-                margin-bottom: 10px;
-                padding: 5px;
-            }
-
-            .timelineContainer {
-                border: 2px solid black;
-                box-sizing: border-box;
-                @include styled-font();
-                //font-size: 12pt;
-        
-                > p {
-                    padding: 10px;
-                }
-        
-                > .tweetContainer {
-        
-                    &:nth-of-type(odd) {
-                        background-color: #e8f5fd;
-                    }
-        
-                    &:nth-of-type(even) {
-                        background-color: #e9e9e9;
-                    }
-        
-                    &:not(:last-of-type) {
-                        border-bottom: 1px solid #d1d2d2;
-                    }
-                }
-        
-                .tweetContainer {
-                    padding: 10px 20px;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-        
-                    .userDiv {
-                        text-align: center;
-                        min-width: 175px;
-                        max-width: 175px;
-                        height: 100%;
-                        margin-right: 20px;
-            
-                        img {
-                            max-width: 85px;
-                            height: auto;
-                            margin: 10px 0 5px;
-                            border-radius: 40px;
-                        }
-            
-                        p {
-                            margin-bottom: 3px;
-                        }
-            
-                        .name {
-                            @include styled-font($weight: bold);
-                            //font-weight: bold;
-                        }
-            
-                        .handle {
-                            @include styled-font($size: 8pt);
-                            // font-size: 8pt;
-                        }
-                    }
-        
-                    span {
-                        display: block;
-                        //font-size: 8pt;
-                        margin-bottom: 5px;
-                        @include styled-font($style: italic, $size: 8pt)
-                        //font-style: italic;
-                    }
-        
-                    a, a:visited {
-                        color: black;
-                        text-decoration: none;
-                    }
-                }
-            }
-
+        #mainContainer {
+            display: flex;
+            flex-flow: row nowrap;
+                
             #homeTimelineContainer {
                 width: 55%;
             }
 
             #userTimelineContainer {
                 width: 45%;
+            }
+
+            .apiContainer {
+                
+                button {
+                    margin-bottom: 10px;
+                    padding: 5px;
+                }
+    
+                .timelineContainer {
+                    border: 2px solid black;
+                    box-sizing: border-box;
+                    @include styled-font();
+                    //font-size: 12pt;
+            
+                    > p {
+                        padding: 10px;
+                    }
+            
+                    > .tweetContainer {
+            
+                        &:nth-of-type(odd) {
+                            background-color: #e8f5fd;
+                        }
+            
+                        &:nth-of-type(even) {
+                            background-color: #e9e9e9;
+                        }
+            
+                        &:not(:last-of-type) {
+                            border-bottom: 1px solid #d1d2d2;
+                        }
+                    }
+            
+                    .tweetContainer {
+                        padding: 10px 20px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+            
+                        .userDiv {
+                            text-align: center;
+                            min-width: 175px;
+                            max-width: 175px;
+                            height: 100%;
+                            margin-right: 20px;
+                
+                            img {
+                                max-width: 85px;
+                                height: auto;
+                                margin: 10px 0 5px;
+                                border-radius: 40px;
+                            }
+                
+                            p {
+                                margin-bottom: 3px;
+                            }
+                
+                            .name {
+                                @include styled-font($weight: bold);
+                            }
+                
+                            .handle {
+                                @include styled-font($size: 8pt);
+                            }
+                        }
+
+                        .textDiv {
+                            span {
+                                display: block;
+                                //font-size: 8pt;
+                                margin-bottom: 5px;
+                                @include styled-font($style: italic, $size: 8pt)
+                                //font-style: italic;
+                            }
+                
+                            a, a:visited {
+                                color: black;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
