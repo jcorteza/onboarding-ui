@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TimelineContainer from "../components/TimelineContainer.jsx";
+import TimelineContainer from "../components/UserTimelineContainer.jsx/index.js";
 import TweetContainer from "../components/TweetContainer.jsx";
-import fetchTimeline from "../js/fetchTimeline.js";
+import fetchTimeline from "../js/fetchHomeTimeline.js/index.js";
 
 jest.mock("../js/fetchTimeline", () => jest.fn().mockResolvedValue(""));
 
