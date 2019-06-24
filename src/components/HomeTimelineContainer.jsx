@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import TweetContainer from "./TweetContainer.jsx";
 import fetchHomeTimeline from "../js/fetchHomeTimeline.js";
 import TimelineContainer from "./TimelineContainer.jsx";
 
