@@ -2,7 +2,7 @@ const fetchTimeline = (timelineType, keyword) => {
 
     let emptyPromise = new Promise((resolve) => resolve([]));
 
-    // filter: `http://localhost:8080/api/1.0/twitter/timeline/filter?keyword=${keyword}`
+    // filtered: `http://localhost:8080/api/1.0/twitter/timeline/filter?keyword=${keyword}`
     
     return fetch("http://localhost:8080/api/1.0/twitter/timeline")
         .then((promiseResponse) => {
