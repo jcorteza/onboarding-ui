@@ -1,15 +1,8 @@
 const fetchUserTimeline = () => {
 
-    const timelinePaths = {
-        home: "http://localhost:8080/api/1.0/twitter/timeline",
-        user: "http://localhost:8080/api/1.0/twitter/user-timeline"
-    }
-
     let emptyPromise = new Promise((resolve) => resolve(""));
-
-    console.log(timelinePaths[timelineType]);
     
-    return fetch(timelinePaths[timelineType])
+    return fetch("http://localhost:8080/api/1.0/twitter/user-timeline")
         .then((promiseResponse) => {
             return (promiseResponse.status === 200)?
                 promiseResponse.json() :
