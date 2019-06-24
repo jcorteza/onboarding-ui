@@ -1,6 +1,6 @@
-import fetchTimeline from "../js/fetchTimeline.js";
 import React, { Component } from "react";
 import TweetContainer from "./TweetContainer.jsx";
+import fetchHomeTimeline from "../js/fetchHomeTimeline.js/index.js";
 
 class UserTimelineContainer extends Component {
     constructor(props) {
@@ -16,12 +16,12 @@ class UserTimelineContainer extends Component {
         this.loadingMessage = "Loading your timeline...";
 
         this.fetchData = () => {
-            fetchTimeline(this.props.timelineType)
+            fetchHomeTimeline()
             .then((data) => {
                 this.updateStatus(data);
             })
             .catch((error) => {
-                console.log(`Error occurred during fetchData: ${error}`);
+                console.log(`Error occurred during UserTimelineContainer fetchData: ${error}`);
                 this.updateStatus("");
             });
         }
@@ -56,12 +56,6 @@ class UserTimelineContainer extends Component {
     }
 
     render() {
-        let buttonText = (this.props.timelineType === "home")?
-            "View Twitter Timeline" :
-            "View User Timeline";
-        let headerText = (this.props.timelineType === "home")?
-            "Home Timeline" :
-            "User Timeline";
         let thisState = this.state;
         let timelineContainer;
         
@@ -78,11 +72,8 @@ class UserTimelineContainer extends Component {
                 </div>
             );
         } else if (thisState.fetchComplete && !thisState.errorOccurred) {
-            let fillerMessage = (this.props.timelineType === "home")?
-                "No tweets are available. Follow someone on Twitter." :
-                "No tweets are available. Post a tweet!"
             timelineContainer = (thisState.data.length === 0)?
-                <p>{fillerMessage}</p> :
+                <p>No tweets are available. Post a tweet!</p> :
                 <div className="timelineContainer">
                     {thisState.data.map(status => 
                         <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
@@ -91,9 +82,9 @@ class UserTimelineContainer extends Component {
         }
 
         return (
-            <div className="apiContainer" id={`${this.props.timelineType}TimelineContainer`}>
-                <h2>{headerText}</h2>
-                <button className="apiButton" type="button" onClick={this.handleClick}>{buttonText}</button>
+            <div className="apiContainer" id="UserTimelineContainer">
+                <h2>User Timeline</h2>
+                <button className="apiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
                 {timelineContainer}
             </div>
         );
