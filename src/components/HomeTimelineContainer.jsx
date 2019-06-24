@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import TweetContainer from "./TweetContainer.jsx";
+// import TweetContainer from "./TweetContainer.jsx";
 import fetchHomeTimeline from "../js/fetchHomeTimeline.js";
+import TimelineContainer from "./TimelineContainer.jsx";
 
 class HomeTimelineContainer extends Component {
     constructor(props) {
@@ -12,8 +13,7 @@ class HomeTimelineContainer extends Component {
             errorOccurred: false
         }
         
-        this.errorMessage = "This content is not currently available. Please try again later.";
-        this.loadingMessage = "Loading your timeline...";
+        this.fillerMessage = "No tweets are available. Follow someone on Twitter."
 
         this.fetchData = () => {
             fetchHomeTimeline()
@@ -56,36 +56,11 @@ class HomeTimelineContainer extends Component {
     }
 
     render() {
-        let thisState = this.state;
-        let timelineContainer;
-        
-        if(!thisState.fetchComplete) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.loadingMessage}</p>
-                </div>
-            );
-        } else if (thisState.fetchComplete && thisState.errorOccurred) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.errorMessage}</p>
-                </div>
-            );
-        } else if (thisState.fetchComplete && !thisState.errorOccurred) {
-            timelineContainer = (thisState.data.length === 0)?
-                <p>No tweets are available. Follow someone on Twitter.</p> :
-                <div className="timelineContainer">
-                    {thisState.data.map(status => 
-                        <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
-                    )}
-                </div>;
-        }
-
         return (
             <div className="apiContainer" id="HomeTimelineAPIContainer">
                 <h2>Home Timeline</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
-                {timelineContainer}
+                <TimelineContainer data={this.state.data} fetchComplete={this.state.data} errorOccurred={this.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
     }

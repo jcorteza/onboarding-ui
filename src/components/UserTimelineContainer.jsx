@@ -12,8 +12,7 @@ class UserTimelineContainer extends Component {
             errorOccurred: false
         }
         
-        this.errorMessage = "This content is not currently available. Please try again later.";
-        this.loadingMessage = "Loading your timeline...";
+        this.fillerMessage = "No tweets are available. Post a tweet!";
 
         this.fetchData = () => {
             fetchHomeTimeline()
@@ -56,36 +55,11 @@ class UserTimelineContainer extends Component {
     }
 
     render() {
-        let thisState = this.state;
-        let timelineContainer;
-        
-        if(!thisState.fetchComplete) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.loadingMessage}</p>
-                </div>
-            );
-        } else if (thisState.fetchComplete && thisState.errorOccurred) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.errorMessage}</p>
-                </div>
-            );
-        } else if (thisState.fetchComplete && !thisState.errorOccurred) {
-            timelineContainer = (thisState.data.length === 0)?
-                <p>No tweets are available. Post a tweet!</p> :
-                <div className="timelineContainer">
-                    {thisState.data.map(status => 
-                        <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
-                    )}
-                </div>;
-        }
-
         return (
             <div className="apiContainer" id="UserTimelineAPIContainer">
                 <h2>User Timeline</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
-                {timelineContainer}
+                <TimelineContainer data={this.state.data} fetchComplete={this.state.data} errorOccurred={this.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
     }
