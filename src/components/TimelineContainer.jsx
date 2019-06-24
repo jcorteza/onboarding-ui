@@ -8,7 +8,8 @@ class TimelineContainer extends Component {
 
         this.state = {
             data: [],
-            errorOccurred: false
+            errorOccurred: false,
+            filtered: false
         }
         
         this.errorMessage = "This content is not currently available. Please try again later.";
