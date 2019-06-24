@@ -58,7 +58,10 @@ class TimelineContainer extends Component {
     render() {
         let buttonText = (this.props.timelineType === "home")?
             "View Twitter Timeline" :
-            "View Your Tweets";
+            "View User Timeline";
+        let headerText = (this.props.timelineType === "home")?
+            "Home Timeline" :
+            "User Timeline";
         let thisState = this.state;
         let timelineContainer;
         
@@ -89,6 +92,7 @@ class TimelineContainer extends Component {
 
         return (
             <div className="apiContainer" id={`${this.props.timelineType}TimelineContainer`}>
+                <h2>{headerText}</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>{buttonText}</button>
                 {timelineContainer}
             </div>

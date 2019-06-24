@@ -29,48 +29,56 @@ body {
             #homeTimelineContainer {
                 width: 55%;
                 margin-right: 20px;
+                
+                button {
+                    float: left;
+                }
             }
 
             #userTimelineContainer {
                 width: 45%;
 
                 .timelineContainer {
-                    clear: both;
                     
                     > .tweetContainer {
-
+                        
                         &:nth-of-type(odd) {
                             background-color: #f5f8fa;
                         }
-            
+                        
                         &:nth-of-type(even) {
                             background-color: #1da1f2;
                         }
-
+                        
                         .handle {
                             display: none;
                         }
                     }
                 }
-
+                
                 button {
                     float: right;
                 }
-
+                
             }
-
+            
             .apiContainer {
+                
+                h2 {
+                    text-align: center;
+                    margin-top: 20px;
+                }
                 
                 button {
                     margin-bottom: 10px;
                     padding: 5px;
                 }
-    
+                
                 .timelineContainer {
+                    clear: both;
                     border: 2px solid black;
                     box-sizing: border-box;
                     @include styled-font();
-                    //font-size: 12pt;
             
                     > p {
                         padding: 10px;
@@ -127,10 +135,8 @@ body {
                         .textDiv {
                             span {
                                 display: block;
-                                //font-size: 8pt;
                                 margin-bottom: 5px;
                                 @include styled-font($style: italic, $size: 8pt)
-                                //font-style: italic;
                             }
                 
                             a, a:visited {
