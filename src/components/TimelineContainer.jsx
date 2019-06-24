@@ -51,6 +51,14 @@ class TimelineContainer extends Component {
         }
     }
 
+    handleChange() {
+        this.setState({keyword: event.target.value});
+    }
+
+    handleFilter() {
+        this.setState({filtered: !this.state.filtered});
+    }
+
     componentDidMount() {
         this.fetchData();
     }
@@ -85,8 +93,8 @@ class TimelineContainer extends Component {
                 {(this.props.type === "home")?
                     <div>
                         <label for="filterInput">Filter By Keyword</label>
-                        <input type="text" name="filterInput" value="" placeholder="filter keyword"></input> 
-                        <button type="button">Filter</button>
+                        <input type="text" name="filterInput" value="" placeholder="filter keyword" onChange={this.handleChange}></input> 
+                        <button type="button" onClick={this.handleFilter}>Filter</button>
                     </div>:
                     null}
                 {timelineContainer}
