@@ -53,7 +53,7 @@ describe("timelineContainer", () => {
             }
         };
         let expectedDiv = (
-            <div id="homeTimelineContainer">
+            <div className="timelineContainer">
                 <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user} />
                 <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user}/>
             </div>
