@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Trebuchet MS', Arial, sans-serif;
-    padding: 30px 60px;
+    padding: 30px 25px;
 
     header {
         text-align: center;
@@ -28,10 +28,35 @@ body {
                 
             #homeTimelineContainer {
                 width: 55%;
+                margin-right: 20px;
             }
 
             #userTimelineContainer {
                 width: 45%;
+
+                .timelineContainer {
+                    clear: both;
+                    
+                    > .tweetContainer {
+
+                        &:nth-of-type(odd) {
+                            background-color: #f5f8fa;
+                        }
+            
+                        &:nth-of-type(even) {
+                            background-color: #1da1f2;
+                        }
+
+                        .handle {
+                            display: none;
+                        }
+                    }
+                }
+
+                button {
+                    float: right;
+                }
+
             }
 
             .apiContainer {
