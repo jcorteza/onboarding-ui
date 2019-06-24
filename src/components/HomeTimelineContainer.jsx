@@ -21,7 +21,7 @@ class HomeTimelineContainer extends Component {
                 this.updateStatus(data);
             })
             .catch((error) => {
-                console.log(`Error occurred during fetchData: ${error}`);
+                console.log(`Error occurred during HomeTimelineContainer fetchData: ${error}`);
                 this.updateStatus("");
             });
         }
@@ -82,7 +82,7 @@ class HomeTimelineContainer extends Component {
         }
 
         return (
-            <div className="apiContainer" id={`${this.props.timelineType}TimelineContainer`}>
+            <div className="apiContainer" id="HomeTimelineContainer">
                 <h2>Home Timeline</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
                 {timelineContainer}
