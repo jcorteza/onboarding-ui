@@ -81,6 +81,13 @@ class TimelineContainer extends Component {
         return (
             <div id="apiContainer">
                 <button id="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
+                {(this.props.type === "home")?
+                    <div>
+                        <label for="filterInput">Filter By Keyword</label>
+                        <input type="text" name="filterInput" value="" placeholder="filter keyword"></input> 
+                        <button type="button">Filter</button>
+                    </div>:
+                    null}
                 {timelineContainer}
             </div>
         );
