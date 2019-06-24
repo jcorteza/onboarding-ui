@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
 import fetchUserTimeline from "../js/fetchUserTimeline.js";
 
-class UserTimelineContainer extends Component {
+class UserTimelineAPIContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -65,4 +65,4 @@ class UserTimelineContainer extends Component {
     }
 }
 
-export default UserTimelineContainer;
+export default UserTimelineAPIContainer;

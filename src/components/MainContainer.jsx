@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import HomeTimelineContainer from "../components/HomeTimelineContainer";
-import UserTimelineContainer from "../components/UserTimelineContainer";
+import HomeTimelineAPIContainer from "../components/HomeTimelineAPIContainer";
+import UserTimelineAPIContainer from "../components/UserTimelineAPIContainer";
 
 class MainContainer extends Component {
     constructor(props) {
@@ -10,8 +10,8 @@ class MainContainer extends Component {
     render() {
         return(
             <div id="mainContainer">
-                <HomeTimelineContainer />
-                <UserTimelineContainer />
+                <HomeTimelineAPIContainer />
+                <UserTimelineAPIContainer />
             </div>
         );
     }
