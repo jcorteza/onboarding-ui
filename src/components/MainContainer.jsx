@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import HomeTimelineContainer from "../components/HomeTimelineContainer";
-import HomeTimelineContainer from "../components/HomeTimelineContainer";
 import UserTimelineContainer from "../components/UserTimelineContainer";
 
 class MainContainer extends Component {
