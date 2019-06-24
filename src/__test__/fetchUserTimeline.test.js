@@ -1,6 +1,6 @@
-import fetchTimeline from "../js/fetchTimeline.js";
+import fetchUserTimeline from "../js/fetchUserTimeline.js";
 
-describe("fetchTimeline", () => {
+describe("fetchUserTimeline", () => {
     test("returns array with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
@@ -14,14 +14,14 @@ describe("fetchTimeline", () => {
                 })
             });
         });
-        return fetchTimeline("home")
+        return fetchUserTimeline()
             .then((responseData) => {
                 expect(responseData).toBe(data);
             });
     
     });
     
-    test("fetchTimeline returns undefined or \"\"", () => {
+    test("fetchUserTimeline returns undefined or \"\"", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({
@@ -33,7 +33,7 @@ describe("fetchTimeline", () => {
                 })
             });
         });
-        return fetchTimeline("user")
+        return fetchUserTimeline()
             .then((responseData) => {
                 expect(responseData).toMatch("");
             });
