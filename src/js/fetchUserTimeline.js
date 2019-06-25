@@ -22,7 +22,9 @@ const fetchUserTimeline = () => {
             .catch((error) => {
                 reject(error);
             });
+
     });
+    
 }
 
 export default fetchUserTimeline;

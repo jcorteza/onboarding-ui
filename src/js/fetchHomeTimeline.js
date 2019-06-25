@@ -1,6 +1,7 @@
 const fetchHomeTimeline = () => {
 
     return new Promise((resolve, reject) => {
+
         fetch("http://localhost:8080/api/1.0/twitter/timeline")
             .then((promiseResponse) => {
 
@@ -21,7 +22,9 @@ const fetchHomeTimeline = () => {
             .catch((error) => {
                 reject(error);
             });
+
     });
+    
 }
 
 export default fetchHomeTimeline;
