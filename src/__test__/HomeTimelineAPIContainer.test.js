@@ -4,7 +4,9 @@ import HomeTimelineAPIContainer from "../components/HomeTimelineAPIContainer";
 import TimelineContainer from "../components/TimelineContainer";
 import fetchHomeTimeline from "../js/fetchHomeTimeline";
 
-jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockResolvedValue(""));
+jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
+    return new Promise((resolve, reject) => reject(new Error("test error")));
+}));
 
 describe("HomeTimelineAPIContainer", () => {
     const homeTimelineAPIContainer = shallow(<HomeTimelineAPIContainer />)
@@ -33,7 +35,9 @@ describe("HomeTimelineAPIContainer", () => {
 
         expect(homeTimelineAPIContainer.html()).toEqual(expect.stringContaining(errorMessage));
 
-        fetchHomeTimeline.mockResolvedValue("");
+        fetchHomeTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => reject(new Error("test error")));
+        });
         homeTimelineAPIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
@@ -57,7 +61,9 @@ describe("HomeTimelineAPIContainer", () => {
         };
         let expectedTimeline = <TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={homeTimelineAPIContainer.instance().fillerMessage}/>;
         
-        fetchHomeTimeline.mockResolvedValue([testData]);
+        fetchHomeTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => resolve([testData]));
+        });
         homeTimelineAPIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
@@ -67,7 +73,7 @@ describe("HomeTimelineAPIContainer", () => {
         
         return fetchHomeTimeline("home")
             .then((response) => {
-                homeTimelineAPIContainer.instance().updateStatus(response);
+                homeTimelineAPIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
                 homeTimelineAPIContainer.update();
                 expect(homeTimelineAPIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
                 expect(homeTimelineAPIContainer.containsMatchingElement(<button className="apiButton" type="button">View Twitter Timeline</button>)).toBeTruthy();

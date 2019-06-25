@@ -4,7 +4,9 @@ import UserTimelineAPIContainer from "../components/UserTimelineAPIContainer";
 import TimelineContainer from "../components/TimelineContainer";
 import fetchUserTimeline from "../js/fetchUserTimeline";
 
-jest.mock("../js/fetchUserTimeline", () => jest.fn().mockResolvedValue(""));
+jest.mock("../js/fetchUserTimeline", () => jest.fn().mockImplementation(() => {
+    return new Promise((resolve, reject) => reject(new Error("test error")));
+}));
 
 describe("UserTimelineAPIContainer", () => {
     const userAPIContainer = shallow(<UserTimelineAPIContainer timelineType="home"/>);
@@ -34,7 +36,9 @@ describe("UserTimelineAPIContainer", () => {
 
         expect(userAPIContainer.html()).toEqual(expect.stringContaining(errorMessage));
 
-        fetchUserTimeline.mockResolvedValue(new Error("test error"));
+        fetchUserTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => reject(new Error("test error")));
+        });
         userAPIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
@@ -58,7 +62,9 @@ describe("UserTimelineAPIContainer", () => {
         };
         let expectedTimeline = <TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={userAPIContainer.instance().fillerMessage}/>;
         
-        fetchUserTimeline.mockResolvedValue([testData]);
+        fetchUserTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => resolve([testData]));
+        });
         userAPIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
