@@ -4,9 +4,6 @@ import TweetContainer from "./TweetContainer";
 class TimelineContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.errorMessage = "This content is not currently available. Please try again later.";
-        this.loadingMessage = "Loading your timeline...";
     }
 
     render() {
@@ -37,5 +34,8 @@ class TimelineContainer extends Component {
         return timelineContainer;
     }
 }
+
+TimelineContainer.prototype.errorMessage = "This content is not currently available. Please try again later.";
+TimelineContainer.prototype.loadingMessage = "Loading your timeline...";
 
 export default TimelineContainer;

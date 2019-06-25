@@ -8,8 +8,8 @@ jest.mock("../js/fetchUserTimeline", () => jest.fn().mockResolvedValue(""));
 
 describe("UserTimelineAPIContainer", () => {
     const userAPIContainer = shallow(<UserTimelineAPIContainer timelineType="home"/>);
-    const errorMessage = (<p>{TimelineContainer.prototype.errorMessage}</p>);
-    const loadingMessage = (<p>{TimelineContainer.prototype.loadingMessage}</p>);
+    const errorMessage = `<p>${TimelineContainer.prototype.errorMessage}</p>`;
+    const loadingMessage = `<p>${TimelineContainer.prototype.loadingMessage}</p>`;
 
     beforeEach(() => {
         jest.resetModules();
@@ -29,53 +29,51 @@ describe("UserTimelineAPIContainer", () => {
         expect(userAPIContainer.childAt(2).type()).toEqual(TimelineContainer);
         
     });
+
+    it("simulates button click, triggers requestHandler and renders errorMessage", () => {
+
+        expect(userAPIContainer.html()).toEqual(expect.stringContaining(errorMessage));
+
+        fetchUserTimeline.mockResolvedValue("");
+        userAPIContainer
+            .find("button")
+            .simulate("click", {preventDefault: () => {}});
+
+        expect(fetchUserTimeline).toHaveBeenCalled(); 
+        expect(userAPIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        
+    });
+
+    it("simulates button click, triggers requestHandler and renders timeline", () => {
+        
+        let testData = {
+            postUrl: "www.twitter.com",
+            message: "test message",
+            createdAt: Date.now().valueOf(),
+            user: {
+                name: "Twitter User",
+                twHandle: "twUser",
+                profileImageUrl: "picture.com"
+            }
+        };
+        let expectedTimeline = <TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={userAPIContainer.instance().fillerMessage}/>;
+        
+        fetchUserTimeline.mockResolvedValue([testData]);
+        userAPIContainer
+            .find("button")
+            .simulate("click", {preventDefault: () => {}});
+
+        expect(userAPIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        expect(fetchUserTimeline).toHaveBeenCalled();
+        
+        return fetchUserTimeline("home")
+            .then((response) => {
+                userAPIContainer.instance().updateStatus(response);
+                userAPIContainer.update();
+                expect(userAPIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
+                expect(userAPIContainer.containsMatchingElement(<button className="apiButton" type="button">View User Timeline</button>)).toBeTruthy();
+                expect(userAPIContainer.contains(expectedTimeline)).toBeTruthy();
+            });
+    });
     
-    // it("simulates button click, triggers requestHandler and renders errorMessage", () => {
-
-    //     expect(userAPIContainer.containsMatchingElement(errorMessage)).toBeTruthy();
-
-    //     fetchUserTimeline.mockResolvedValue("");
-    //     userAPIContainer
-    //         .find("button")
-    //         .simulate("click", {preventDefault: () => {}});
-
-    //     expect(fetchUserTimeline).toHaveBeenCalled(); 
-    //     expect(userAPIContainer.containsMatchingElement(loadingMessage)).toBeTruthy();
-        
-    // });
-    
-    // it("simulates button click, triggers requestHandler and renders timeline", () => {
-        
-    //     let testData = {
-    //         postUrl: "www.twitter.com",
-    //         message: "test message",
-    //         createdAt: Date.now().valueOf(),
-    //         user: {
-    //             name: "Twitter User",
-    //             twHandle: "twUser",
-    //             profileImageUrl: "picture.com"
-    //         }
-    //     };
-    //     let expectedDiv = (
-    //         <div className="userAPIContainer">
-    //             <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user} />
-    //             <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user}/>
-    //         </div>
-    //     );
-        
-    //     fetchUserTimeline.mockResolvedValue([testData, testData]);
-    //     userAPIContainer
-    //         .find("button")
-    //         .simulate("click", {preventDefault: () => {}});
-
-    //     expect(userAPIContainer.containsMatchingElement(<p>{userAPIContainer.instance().loadingMessage}</p>)).toBeTruthy();
-    //     expect(fetchUserTimeline).toHaveBeenCalled();
-        
-    //     return fetchUserTimeline("home")
-    //         .then((response) => {
-    //             userAPIContainer.instance().updateStatus(response);
-    //             userAPIContainer.update();
-    //             expect(userAPIContainer.childAt(1).getElement()).toMatchObject(expectedDiv);
-    //         });
-    // });
 });
