@@ -24,16 +24,16 @@ class HomeTimelineAPIContainer extends Component {
         }
 
         this.updateStatus = (responseData) => {
-            if(typeof(responseData) !== "object") {
-                this.setState({
-                    fetchComplete: true,
-                    errorOccurred: true
-                });
-            } else {
+            if(responseData instanceof Array) {
                 this.setState({
                     data: responseData,
                     fetchComplete: true,
                     errorOccurred: false
+                });
+            } else {
+                this.setState({
+                    fetchComplete: true,
+                    errorOccurred: true
                 });
             }
         }
