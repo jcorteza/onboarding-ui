@@ -24,7 +24,7 @@ class UserTimelineAPIContainer extends Component {
         }
 
         this.updateStatus = (responseData) => {
-            if(responseData === "") {
+            if(typeof(responseData) !== "object") {
                 this.setState({
                     fetchComplete: true,
                     errorOccurred: true
