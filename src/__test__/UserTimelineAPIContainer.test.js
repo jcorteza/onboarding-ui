@@ -34,7 +34,7 @@ describe("UserTimelineAPIContainer", () => {
 
         expect(userAPIContainer.html()).toEqual(expect.stringContaining(errorMessage));
 
-        fetchUserTimeline.mockResolvedValue("");
+        fetchUserTimeline.mockResolvedValue(new Error("test error"));
         userAPIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
@@ -68,7 +68,7 @@ describe("UserTimelineAPIContainer", () => {
         
         return fetchUserTimeline("home")
             .then((response) => {
-                userAPIContainer.instance().updateStatus(response);
+                userAPIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
                 userAPIContainer.update();
                 expect(userAPIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
                 expect(userAPIContainer.containsMatchingElement(<button className="apiButton" type="button">View User Timeline</button>)).toBeTruthy();
