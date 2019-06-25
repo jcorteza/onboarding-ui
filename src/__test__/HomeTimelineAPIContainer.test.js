@@ -1,43 +1,50 @@
 import React from "react";
 import { shallow } from "enzyme";
 import HomeTimelineAPIContainer from "../components/HomeTimelineAPIContainer";
+import TimelineContainer from "../components/TimelineContainer";
 import fetchHomeTimeline from "../js/fetchHomeTimeline";
 
 jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockResolvedValue(""));
 
 describe("HomeTimelineAPIContainer", () => {
     const homeTimelineAPIContainer = shallow(<HomeTimelineAPIContainer />)
-    const errorMessage = (<p>{homeTimelineAPIContainer.instance().errorMessage}</p>);
-    const loadingMessage = (<p>{homeTimelineAPIContainer.instance().loadingMessage}</p>);
+    const errorMessage = (<p>{TimelineContainer.prototype.errorMessage}</p>);
+    const loadingMessage = (<p>{TimelineContainer.prototype.loadingMessage}</p>);
 
     beforeEach(() => {
         jest.resetModules();
     });
-
+    
     afterEach(() => {
         jest.resetAllMocks();
     });
 
-    it("renders stand in p-tag and triggers requestHandler", () => {
+    it("renders expected types", () => {
         
         expect(fetchHomeTimeline).toHaveBeenCalled();
-        expect(homeTimelineAPIContainer.containsMatchingElement(errorMessage)).toBeTruthy();
-        
+        expect(homeTimelineAPIContainer.hasClass("apiContainer")).toBeTruthy();
+        expect(homeTimelineAPIContainer.type()).toMatch("div");
+        expect(homeTimelineAPIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
+        expect(homeTimelineAPIContainer.childAt(1).type()).toMatch("button");
+        expect(homeTimelineAPIContainer.childAt(2).type()).toEqual(TimelineContainer);
     });
     
-    // it("simulates button click, triggers requestHandler and renders errorMessage", () => {
+    it("simulates button click, triggers requestHandler and renders errorMessage", () => {
 
-    //     expect(homeTimelineAPIContainer.containsMatchingElement(errorMessage)).toBeTruthy();
+        console.log(homeTimelineAPIContainer.html());
+        console.log(JSON.stringify(homeTimelineAPIContainer.state()));
+        console.log(JSON.stringify(homeTimelineAPIContainer.childAt(2).props()));
+        expect(homeTimelineAPIContainer.containsMatchingElement(errorMessage)).toBeTruthy();
 
-    //     fetchHomeTimeline.mockResolvedValue("");
-    //     homeTimelineAPIContainer
-    //         .find("button")
-    //         .simulate("click", {preventDefault: () => {}});
+        fetchHomeTimeline.mockResolvedValue("");
+        homeTimelineAPIContainer
+            .find("button")
+            .simulate("click", {preventDefault: () => {}});
 
-    //     expect(fetchHomeTimeline).toHaveBeenCalled(); 
-    //     expect(homeTimelineAPIContainer.containsMatchingElement(loadingMessage)).toBeTruthy();
+        expect(fetchHomeTimeline).toHaveBeenCalled(); 
+        expect(homeTimelineAPIContainer.containsMatchingElement(loadingMessage)).toBeTruthy();
         
-    // });
+    });
     
     // it("simulates button click, triggers requestHandler and renders timeline", () => {
         

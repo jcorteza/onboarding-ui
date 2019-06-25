@@ -59,7 +59,7 @@ class HomeTimelineAPIContainer extends Component {
             <div className="apiContainer" id="homeTimelineAPIContainer">
                 <h2>Home Timeline</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
-                <TimelineContainer data={this.state.data} fetchComplete={this.state.data} errorOccurred={this.errorOccurred} fillerMessage={this.fillerMessage}/>
+                <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
     }

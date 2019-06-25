@@ -1,14 +1,15 @@
 import React from "react";
 import { shallow } from "enzyme";
 import UserTimelineAPIContainer from "../components/UserTimelineAPIContainer";
+import TimelineContainer from "../components/TimelineContainer";
 import fetchUserTimeline from "../js/fetchUserTimeline";
 
 jest.mock("../js/fetchUserTimeline", () => jest.fn().mockResolvedValue(""));
 
 describe("UserTimelineAPIContainer", () => {
     const userAPIContainer = shallow(<UserTimelineAPIContainer timelineType="home"/>);
-    const errorMessage = (<p>{userAPIContainer.instance().errorMessage}</p>);
-    const loadingMessage = (<p>{userAPIContainer.instance().loadingMessage}</p>);
+    const errorMessage = (<p>{TimelineContainer.prototype.errorMessage}</p>);
+    const loadingMessage = (<p>{TimelineContainer.prototype.loadingMessage}</p>);
 
     beforeEach(() => {
         jest.resetModules();
@@ -18,10 +19,14 @@ describe("UserTimelineAPIContainer", () => {
         jest.resetAllMocks();
     });
 
-    it("renders stand in p-tag and triggers requestHandler", () => {
+    it("renders expected types", () => {
         
         expect(fetchUserTimeline).toHaveBeenCalled();
-        expect(userAPIContainer.containsMatchingElement(errorMessage)).toBeTruthy();
+        expect(userAPIContainer.hasClass("apiContainer")).toBeTruthy();
+        expect(userAPIContainer.type()).toMatch("div");
+        expect(userAPIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
+        expect(userAPIContainer.childAt(1).type()).toMatch("button");
+        expect(userAPIContainer.childAt(2).type()).toEqual(TimelineContainer);
         
     });
     
