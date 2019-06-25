@@ -13,7 +13,7 @@ describe("<StatusContainer />", () => {
     
         expect(statusContainer.getElement()).toEqual(
             <div className="textDiv">
-                <p>{getFormattedDate()}</p>
+                <span>{getFormattedDate()}</span>
                 <a href="www.twitter.com" target="_blank">
                     <p>test message</p>
                 </a>
