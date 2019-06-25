@@ -56,7 +56,7 @@ class UserTimelineAPIContainer extends Component {
 
     render() {
         return (
-            <div className="apiContainer" id="UserTimelineAPIContainer">
+            <div className="apiContainer" id="userTimelineAPIContainer">
                 <h2>User Timeline</h2>
                 <button className="apiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
                 <TimelineContainer data={this.state.data} fetchComplete={this.state.data} errorOccurred={this.errorOccurred} fillerMessage={this.fillerMessage}/>
