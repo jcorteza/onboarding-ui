@@ -139,7 +139,7 @@ body {
                                 @include styled-font($style: italic, $size: 8pt)
                             }
                 
-                            a, a:visited {
+                            .tweetLink, .tweetLink:visited {
                                 color: black;
                                 text-decoration: none;
                             }

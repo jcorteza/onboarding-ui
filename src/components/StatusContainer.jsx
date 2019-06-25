@@ -10,7 +10,7 @@ class StatusContainer extends Component {
         return(
             <div className="textDiv">
                 <span>{getFormattedDate(this.props.date)}</span>
-                <a href={this.props.postUrl} target="_blank">
+                <a className="tweetLink" href={this.props.postUrl} target="_blank">
                     <p>{this.props.message}</p>
                 </a>
             </div>
