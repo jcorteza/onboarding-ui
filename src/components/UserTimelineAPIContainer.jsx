@@ -14,28 +14,24 @@ class UserTimelineAPIContainer extends Component {
 
         this.fetchData = () => {
             fetchUserTimeline()
-            .then((data) => {
-                this.updateStatus(data);
-            })
-            .catch((error) => {
-                console.log(`Error occurred during UserTimelineContainer fetchData: ${error}`);
-                this.updateStatus("");
-            });
-        }
+                .then((responseData) => {
 
-        this.updateStatus = (responseData) => {
-            if(responseData instanceof Array) {
-                this.setState({
-                    data: responseData,
-                    fetchComplete: true,
-                    errorOccurred: false
+                    this.setState({
+                        data: responseData,
+                        fetchComplete: true,
+                        errorOccurred: false
+                    });
+
+                })
+                .catch((error) => {
+
+                    console.log(`Error occurred during fetchUserTimeline: ${error}`);
+                    this.setState({
+                        fetchComplete: true,
+                        errorOccurred: true
+                    });
+
                 });
-            } else {
-                this.setState({
-                    fetchComplete: true,
-                    errorOccurred: true
-                });
-            }
         }
 
         this.handleClick = (e) => {
