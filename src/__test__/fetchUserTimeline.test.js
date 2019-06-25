@@ -1,7 +1,7 @@
 import fetchUserTimeline from "../js/fetchUserTimeline.js";
 
 describe("fetchUserTimeline", () => {
-    test("returns array with data", () => {
+    test("returns a Promise that resolves with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
@@ -21,7 +21,7 @@ describe("fetchUserTimeline", () => {
     
     });
     
-    test("fetchUserTimeline returns undefined or \"\"", () => {
+    test("returns a Promise that rejects with an Error", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({
@@ -34,8 +34,8 @@ describe("fetchUserTimeline", () => {
             });
         });
         return fetchUserTimeline()
-            .then((responseData) => {
-                expect(responseData).toMatch("");
+            .catch((error) => {
+                expect(error).toEqual(new Error("Something went wrong during the API call. Status: 500"));
             });
     
     });

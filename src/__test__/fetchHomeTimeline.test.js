@@ -34,9 +34,8 @@ describe("fetchHomeTimeline", () => {
             });
         });
         return fetchHomeTimeline("user")
-            .then((responseData) => {
-                expect(responseData).toMatch("");
+            .catch((error) => {
+                expect(error).toEqual(new Error("Something went wrong during the API call. Status: 500"));
             });
-    
     });
 });
