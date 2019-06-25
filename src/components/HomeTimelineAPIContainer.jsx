@@ -11,8 +11,6 @@ class HomeTimelineAPIContainer extends Component {
             fetchComplete: false,
             errorOccurred: false
         }
-        
-        this.fillerMessage = "No tweets are available. Follow someone on Twitter."
 
         this.fetchData = () => {
             fetchHomeTimeline()
@@ -64,5 +62,7 @@ class HomeTimelineAPIContainer extends Component {
         );
     }
 }
+
+HomeTimelineAPIContainer.prototype.fillerMessage = "No tweets are available. Follow someone on Twitter.";
 
 export default HomeTimelineAPIContainer;

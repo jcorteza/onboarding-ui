@@ -11,8 +11,6 @@ class UserTimelineAPIContainer extends Component {
             fetchComplete: false,
             errorOccurred: false
         }
-        
-        this.fillerMessage = "No tweets are available. Post a tweet!";
 
         this.fetchData = () => {
             fetchUserTimeline()
@@ -64,5 +62,7 @@ class UserTimelineAPIContainer extends Component {
         );
     }
 }
+
+UserTimelineAPIContainer.prototype.fillerMessage = "No tweets are available. Post a tweet!";
 
 export default UserTimelineAPIContainer;
