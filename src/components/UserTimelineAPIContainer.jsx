@@ -47,6 +47,7 @@ class UserTimelineAPIContainer extends Component {
         this.handleClick = (e) => {
             e.preventDefault();
             this.setState({
+                data: [],
                 fetchComplete: false,
                 errorOccurred: false
             });
