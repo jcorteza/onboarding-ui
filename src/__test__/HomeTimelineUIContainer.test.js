@@ -3,8 +3,12 @@ import { shallow } from "enzyme";
 import HomeTimelineUIContainer from "../components/HomeTimelineUIContainer";
 import TimelineContainer from "../components/TimelineContainer";
 import fetchHomeTimeline from "../js/fetchHomeTimeline";
+import fetchFilteredHomeTimeline from "../js/fetchFilteredHomeTimeline";
 
 jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
+    return new Promise((resolve, reject) => reject(new Error("test error")));
+}));
+jest.mock("../js/fetchFilteredHomeTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
 
@@ -14,7 +18,7 @@ describe("HomeTimelineUIContainer", () => {
     const loadingMessage = `<p class="infoText">${TimelineContainer.prototype.loadingMessage}</p>`;
 
     beforeEach(() => {
-        jest.resetModules();
+        // jest.resetModules();
     });
     
     afterEach(() => {
@@ -28,7 +32,41 @@ describe("HomeTimelineUIContainer", () => {
         expect(homeTimelineUIContainer.type()).toMatch("div");
         expect(homeTimelineUIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
         expect(homeTimelineUIContainer.childAt(1).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(2).type()).toEqual(TimelineContainer);
+        expect(homeTimelineUIContainer.childAt(2).type()).toMatch("input");
+        expect(homeTimelineUIContainer.childAt(3).type()).toMatch("button");
+        expect(homeTimelineUIContainer.childAt(4).type()).toEqual(TimelineContainer);
+    });
+    
+    it("simulates filter button click, triggers fetchFilteredHomeTimeline method call", () => {
+
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(errorMessage));
+
+        fetchFilteredHomeTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => reject(new Error("test error")));
+        });
+        homeTimelineUIContainer
+            .find("#filterButton")
+            .simulate("click", { preventDefault: () => {} });
+
+        expect(fetchFilteredHomeTimeline).toHaveBeenCalled(); 
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        
+    });
+    
+    it("simulates filter button click, triggers fetchHomeTimeline method call", () => {
+
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(errorMessage));
+
+        fetchHomeTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => reject(new Error("test error")));
+        });
+        homeTimelineUIContainer
+            .find("#filterButton")
+            .simulate("click", { preventDefault: () => {} });
+
+        expect(fetchHomeTimeline).toHaveBeenCalled(); 
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+    
     });
     
     it("simulates button click, triggers requestHandler and renders errorMessage", () => {
@@ -39,8 +77,8 @@ describe("HomeTimelineUIContainer", () => {
             return new Promise((resolve, reject) => reject(new Error("test error")));
         });
         homeTimelineUIContainer
-            .find("button")
-            .simulate("click", {preventDefault: () => {}});
+            .find("button.uiButton")
+            .simulate("click", { preventDefault: () => {} });
 
         expect(fetchHomeTimeline).toHaveBeenCalled(); 
         expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
@@ -65,8 +103,9 @@ describe("HomeTimelineUIContainer", () => {
             return new Promise((resolve, reject) => resolve([testData]));
         });
         homeTimelineUIContainer
-            .find("button")
-            .simulate("click", {preventDefault: () => {}});
+            .find("button.uiButton")
+            .simulate("click", { preventDefault: () => {} });
+
 
         expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
         expect(fetchHomeTimeline).toHaveBeenCalled();

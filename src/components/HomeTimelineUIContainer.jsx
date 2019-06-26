@@ -15,6 +15,11 @@ class HomeTimelineUIContainer extends Component {
             errorOccurred: false
         }
 
+        this.fetchData = this.fetchData.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.toggleFilter = this.toggleFilter.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+
     }
 
     fetchData(isFiltered) {
@@ -79,7 +84,12 @@ class HomeTimelineUIContainer extends Component {
         let isFiltered = !this.state.filtered;
 
         e.preventDefault();
-        this.setState({ filtered: isFiltered });
+        this.setState({
+            data: [], 
+            filtered: isFiltered,
+            fetchComplete: false,
+            errorOccurred: false 
+        });
         this.fetchData(isFiltered);
     }
 
