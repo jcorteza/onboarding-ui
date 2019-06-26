@@ -11,12 +11,12 @@ class UserContainer extends Component {
 
         return (this.props.hasOwnProperty("userName") && this.props.hasOwnProperty("userHandle"))?
             <div className="userDiv">
-                <img src={this.props.profileImgUrl} alt="User profile image"/>
+                <img className="userImg" src={this.props.profileImgUrl} alt="User profile image"/>
                 <p className="name">{this.props.userName}</p>
                 {handle}
             </div> :
             <div className="userDiv">
-                <img src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
+                <img className="userImg" src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
                 <p className="name">Unknown User</p>
             </div>;
     }

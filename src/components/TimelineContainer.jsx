@@ -11,16 +11,16 @@ class TimelineContainer extends Component {
 
         if(!this.props.fetchComplete) {
             
-            content = <p>{this.loadingMessage}</p>;
+            content = <p className="infoText">{this.loadingMessage}</p>;
 
         } else if (this.props.fetchComplete && (this.props.errorOccurred || !this.props.data instanceof Array)) {
             
-            content = <p>{this.errorMessage}</p>;
+            content = <p className="infoText">{this.errorMessage}</p>;
 
         } else if (this.props.fetchComplete && !this.props.errorOccurred) {
 
             content = (this.props.data.length === 0)?
-                <p>{this.props.fillerMessage}</p> :
+                <p className="infoText">{this.props.fillerMessage}</p> :
                 this.props.data.map(status => 
                     <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                 );

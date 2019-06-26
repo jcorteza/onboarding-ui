@@ -52,7 +52,7 @@ class HomeTimelineUIContainer extends Component {
     render() {
         return (
             <div className="uiContainer" id="homeTimelineUIContainer">
-                <h2>Home Timeline</h2>
+                <h2 className="timelineHeaderText">Home Timeline</h2>
                 <button className="uiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
                 <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
