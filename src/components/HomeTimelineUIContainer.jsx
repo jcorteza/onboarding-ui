@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
-import fetchUserTimeline from "../js/fetchUserTimeline.js";
+import fetchHomeTimeline from "../js/fetchHomeTimeline.js";
 
-class UserTimelineAPIContainer extends Component {
+class HomeTimelineUIContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -13,21 +13,11 @@ class UserTimelineAPIContainer extends Component {
         }
 
         this.fetchData = () => {
-            fetchUserTimeline()
+            fetchHomeTimeline()
                 .then((responseData) => {
-                    let updatedData = responseData.map(status => ({
-                        message: status.message,
-                        user: {
-                            name: status.user.name,
-                            profileImageUrl: status.user.profileImageUrl
-                        },
-                        createdAt: status.createdAt,
-                        postUrl: status.postUrl
-                    }));
-
 
                     this.setState({
-                        data: updatedData,
+                        data: responseData,
                         fetchComplete: true,
                         errorOccurred: false
                     });
@@ -35,7 +25,7 @@ class UserTimelineAPIContainer extends Component {
                 })
                 .catch((error) => {
 
-                    console.log(`Error occurred during fetchUserTimeline: ${error}`);
+                    console.log(`Error occurred during fetchHomeTimeline: ${error}`);
                     this.setState({
                         fetchComplete: true,
                         errorOccurred: true
@@ -61,15 +51,15 @@ class UserTimelineAPIContainer extends Component {
 
     render() {
         return (
-            <div className="apiContainer" id="userTimelineAPIContainer">
-                <h2>User Timeline</h2>
-                <button className="apiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
+            <div className="uiContainer" id="homeTimelineUIContainer">
+                <h2>Home Timeline</h2>
+                <button className="uiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
                 <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
     }
 }
 
-UserTimelineAPIContainer.prototype.fillerMessage = "No tweets are available. Post a tweet!";
+HomeTimelineUIContainer.prototype.fillerMessage = "No tweets are available. Follow someone on Twitter.";
 
-export default UserTimelineAPIContainer;
+export default HomeTimelineUIContainer;

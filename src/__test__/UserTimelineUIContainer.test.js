@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserTimelineAPIContainer from "../components/UserTimelineAPIContainer";
+import UserTimelineUIContainer from "../components/UserTimelineUIContainer";
 import TimelineContainer from "../components/TimelineContainer";
 import fetchUserTimeline from "../js/fetchUserTimeline";
 
@@ -8,8 +8,8 @@ jest.mock("../js/fetchUserTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
 
-describe("UserTimelineAPIContainer", () => {
-    const userAPIContainer = shallow(<UserTimelineAPIContainer timelineType="home"/>);
+describe("UserTimelineUIContainer", () => {
+    const userUIContainer = shallow(<UserTimelineUIContainer timelineType="home"/>);
     const errorMessage = `<p>${TimelineContainer.prototype.errorMessage}</p>`;
     const loadingMessage = `<p>${TimelineContainer.prototype.loadingMessage}</p>`;
 
@@ -24,27 +24,27 @@ describe("UserTimelineAPIContainer", () => {
     it("renders expected types", () => {
         
         expect(fetchUserTimeline).toHaveBeenCalled();
-        expect(userAPIContainer.hasClass("apiContainer")).toBeTruthy();
-        expect(userAPIContainer.type()).toMatch("div");
-        expect(userAPIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
-        expect(userAPIContainer.childAt(1).type()).toMatch("button");
-        expect(userAPIContainer.childAt(2).type()).toEqual(TimelineContainer);
+        expect(userUIContainer.hasClass("uiContainer")).toBeTruthy();
+        expect(userUIContainer.type()).toMatch("div");
+        expect(userUIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
+        expect(userUIContainer.childAt(1).type()).toMatch("button");
+        expect(userUIContainer.childAt(2).type()).toEqual(TimelineContainer);
         
     });
 
     it("simulates button click, triggers requestHandler and renders errorMessage", () => {
 
-        expect(userAPIContainer.html()).toEqual(expect.stringContaining(errorMessage));
+        expect(userUIContainer.html()).toEqual(expect.stringContaining(errorMessage));
 
         fetchUserTimeline.mockImplementation(() => {
             return new Promise((resolve, reject) => reject(new Error("test error")));
         });
-        userAPIContainer
+        userUIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
 
         expect(fetchUserTimeline).toHaveBeenCalled(); 
-        expect(userAPIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        expect(userUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
         
     });
 
@@ -60,25 +60,25 @@ describe("UserTimelineAPIContainer", () => {
                 profileImageUrl: "picture.com"
             }
         };
-        let expectedTimeline = <TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={userAPIContainer.instance().fillerMessage}/>;
+        let expectedTimeline = <TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={userUIContainer.instance().fillerMessage}/>;
         
         fetchUserTimeline.mockImplementation(() => {
             return new Promise((resolve, reject) => resolve([testData]));
         });
-        userAPIContainer
+        userUIContainer
             .find("button")
             .simulate("click", {preventDefault: () => {}});
 
-        expect(userAPIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        expect(userUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
         expect(fetchUserTimeline).toHaveBeenCalled();
         
         return fetchUserTimeline("home")
             .then((response) => {
-                userAPIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
-                userAPIContainer.update();
-                expect(userAPIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
-                expect(userAPIContainer.containsMatchingElement(<button className="apiButton" type="button">View User Timeline</button>)).toBeTruthy();
-                expect(userAPIContainer.contains(expectedTimeline)).toBeTruthy();
+                userUIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
+                userUIContainer.update();
+                expect(userUIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
+                expect(userUIContainer.containsMatchingElement(<button className="uiButton" type="button">View User Timeline</button>)).toBeTruthy();
+                expect(userUIContainer.contains(expectedTimeline)).toBeTruthy();
             });
     });
     
