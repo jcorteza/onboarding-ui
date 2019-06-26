@@ -5,15 +5,15 @@ class UserContainer extends Component {
     }
 
     render() {
-        let handle = (this.props.hasOwnProperty("userHandle"))?
-            <p className="handle">{this.props.userHandle}</p> :
-            null;
+        let handle = (this.props.userHandle === undefined)?
+            null :
+            <p className="handle">{this.props.userHandle}</p>;
 
         return (this.props.hasOwnProperty("userName") && this.props.hasOwnProperty("userHandle"))?
             <div className="userDiv">
                 <img src={this.props.profileImgUrl} alt="User profile image"/>
                 <p className="name">{this.props.userName}</p>
-                {handle};
+                {handle}
             </div> :
             <div className="userDiv">
                 <img src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
