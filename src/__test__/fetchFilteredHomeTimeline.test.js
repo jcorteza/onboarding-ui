@@ -1,7 +1,7 @@
 import fetchFilteredHomeTimeline from "../js/fetchFilteredHomeTimeline.js";
 
 describe("fetchFilteredHomeTimeline", () => {
-    test("returns array with data", () => {
+    it("returns a Promise that resolves with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
@@ -34,8 +34,8 @@ describe("fetchFilteredHomeTimeline", () => {
             });
         });
         return fetchFilteredHomeTimeline("keyword")
-            .then((responseData) => {
-                expect(responseData).toMatchObject([]);
+            .catch((error) => {
+                expect(error).toEqual(new Error("Something went wrong during the API call. Status: 500"));
             });
     
     });

@@ -1,7 +1,7 @@
 import fetchHomeTimeline from "../js/fetchHomeTimeline.js";
 
 describe("fetchHomeTimeline", () => {
-    test("returns array with data", () => {
+    test("returns a Promise that resolves with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
@@ -14,7 +14,7 @@ describe("fetchHomeTimeline", () => {
                 })
             });
         });
-        return fetchHomeTimeline("home")
+        return fetchHomeTimeline()
             .then((responseData) => {
                 expect(responseData).toBe(data);
             });
@@ -33,7 +33,7 @@ describe("fetchHomeTimeline", () => {
                 })
             });
         });
-        return fetchHomeTimeline("user")
+        return fetchHomeTimeline()
             .catch((error) => {
                 expect(error).toEqual(new Error("Something went wrong during the API call. Status: 500"));
             });
