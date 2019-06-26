@@ -13,9 +13,9 @@ describe("<StatusContainer />", () => {
     
         expect(statusContainer.getElement()).toEqual(
             <div className="textDiv">
-                <p>{getFormattedDate()}</p>
-                <a href="www.twitter.com" target="_blank">
-                    <p>test message</p>
+                <span className="dateSpan">{getFormattedDate()}</span>
+                <a className="tweetLink" href="www.twitter.com" target="_blank">
+                    <p className="tweetText">test message</p>
                 </a>
             </div>
         );

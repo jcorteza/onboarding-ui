@@ -1,56 +1,46 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TimelineContainer from "../components/TimelineContainer.jsx";
-import TweetContainer from "../components/TweetContainer.jsx";
-import fetchTimeline from "../js/fetchTimeline.js";
+import TimelineContainer from "../components/TimelineContainer";
+import HomeTimlineUIContainer from "../components/HomeTimelineUIContainer";
+import TweetContainer from "../components/TweetContainer";
 
-jest.mock("../js/fetchTimeline", () => {
-    return jest.fn(() => new Promise((resolve) => resolve()));
-});
+describe("TimelineContainer", () => {
+    const errorMessage = <p className="infoText">{TimelineContainer.prototype.errorMessage}</p>;
+    const loadingMessage = <p className="infoText">{TimelineContainer.prototype.loadingMessage}</p>;
+    let testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={false} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
+    let testRendering = <div className="timelineContainer">{loadingMessage}</div>
 
-describe("timelineContainer", () => {
-    const timelineContainer = shallow(<TimelineContainer />);
-    const errorRendering = (<p>{timelineContainer.instance().errorMessage}</p>);
-    fetchTimeline.mockImplementation(() => {
-        return new Promise((resolve) => resolve());
+    beforeEach(() => {
+        jest.resetModules();
     });
 
     afterEach(() => {
         jest.resetAllMocks();
     });
 
-    it("renders stand in p-tag and triggers requestHandler", () => {
-        let testData = [];
+    it("renders loading message p-tag", () => {
         
-        fetchTimeline.mockResolvedValue(testData);
-        expect(fetchTimeline).toHaveBeenCalled();
-        expect(timelineContainer.containsMatchingElement(errorRendering)).toBeTruthy();
+        expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
         
     });
-    
-    it("simulates button click, triggers requestHandler and renders errorRendering", () => {
-        let testData = [];
 
-        expect(timelineContainer.containsMatchingElement(errorRendering)).toBeTruthy();
+    it("renders error message p-tag", () => {
+        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={true} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
+        testRendering = <div className="timelineContainer">{errorMessage}</div>;
 
-        fetchTimeline.mockResolvedValue(testData);
-        timelineContainer
-            .find("button#apiButton")
-            .simulate("click", {preventDefault: () => {}});
-        
-        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().fillerMessage}</p>)).toBeTruthy();
-        expect(fetchTimeline).toHaveBeenCalled(); 
+        expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
 
-        return fetchTimeline()
-            .then((response) => {
-                timelineContainer.instance().updateStatus(response);
-                expect(timelineContainer.containsMatchingElement(errorRendering)).toBeTruthy();
-            });
+    });
+
+    it("renders filler message p-tag", () => {
+        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
+        testRendering = <div className="timelineContainer"><p className="infoText">{testTimelineContainer.instance().props.fillerMessage}</p></div>;
+
+        expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
         
     });
-    
-    it("simulates button click, triggers requestHandler and renders timeline", () => {
-        
+
+    it("renders filler message p-tag", () => {
         let testData = {
             postUrl: "www.twitter.com",
             message: "test message",
@@ -61,26 +51,15 @@ describe("timelineContainer", () => {
                 profileImageUrl: "picture.com"
             }
         };
-        let expectedDiv = (
-            <div id="timelineContainer">
-                <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user} />
-                <TweetContainer key={testData.postUrl} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt} user={testData.user}/>
+        testTimelineContainer = shallow(<TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
+        testRendering = (
+            <div className="timelineContainer">
+                <TweetContainer key={testData.postUrl} user={testData.user} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt}/>
             </div>
         );
-        
-        fetchTimeline.mockResolvedValue([testData, testData]);
-        timelineContainer
-            .find("button#apiButton")
-            .simulate("click", {preventDefault: () => {}});
 
-        expect(timelineContainer.containsMatchingElement(<p>{timelineContainer.instance().fillerMessage}</p>)).toBeTruthy();
-        expect(fetchTimeline).toHaveBeenCalled();
+        expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
         
-        return fetchTimeline()
-            .then((response) => {
-                timelineContainer.instance().updateStatus(response);
-                timelineContainer.update();
-                expect(timelineContainer.childAt(1).getElement()).toMatchObject(expectedDiv);
-            });
     });
+
 });

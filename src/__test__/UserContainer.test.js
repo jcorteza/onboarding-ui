@@ -12,7 +12,7 @@ describe("<UserContainer />", () => {
         expect(userContainer.instance().props).not.toHaveProperty("userHandle");
         expect(userContainer.getElement()).toEqual(
             <div className="userDiv">
-                <img src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
+                <img className="userImg" src={require("../assets/img/twitter-logo.png")} alt="twitter logo image" />
                 <p className="name">Unknown User</p>
             </div>
         );
@@ -28,7 +28,7 @@ describe("<UserContainer />", () => {
         expect(userContainer.instance().props).toHaveProperty("userHandle", "twitterUser");
         expect(userContainer.getElement()).toEqual(
             <div className="userDiv">
-                <img src="www.picture.com" alt="User profile image"/>
+                <img className="userImg" src="www.picture.com" alt="User profile image"/>
                 <p className="name">Twitter User</p>
                 <p className="handle">twitterUser</p>
             </div> 

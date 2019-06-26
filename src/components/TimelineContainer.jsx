@@ -1,89 +1,37 @@
-import fetchTimeline from "../js/fetchTimeline.js";
 import React, { Component } from "react";
-import TweetContainer from "./TweetContainer.jsx";
+import TweetContainer from "./TweetContainer";
 
 class TimelineContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            data: [],
-            errorOccurred: false
-        }
-        
-        this.errorMessage = "This content is not currently available. Please try again later.";
-        this.fillerMessage = "Loading your Twitter timeline...";
-
-        this.fetchData = () => {
-            fetchTimeline()
-            .then((data) => {
-                this.updateStatus(data);
-            })
-            .catch((error) => {
-                console.log(`Error occurred during fetchData: ${error}`);
-                this.updateStatus([]);
-            });
-        }
-
-        this.updateStatus = (responseData) => {
-            if(responseData.length === 0) {
-                this.setState({
-                    data: responseData,
-                    errorOccurred: true
-                });
-            } else {
-                this.setState({
-                    data: responseData,
-                    errorOccurred: false
-                });
-            }
-        }
-
-        this.handleClick = (e) => {
-            e.preventDefault();
-            this.setState({
-                data: [],
-                errorOccurred: false
-            });
-            this.fetchData();
-        }
-    }
-
-    componentDidMount() {
-        this.fetchData();
     }
 
     render() {
-        let timelineContainer;
-        if(this.state.errorOccurred === true) {
-            timelineContainer = (
-                <div id="timelineContainer">
-                    <p>{this.errorMessage}</p>
-                </div>
-            );
-        } else if(this.state.errorOccurred === false && this.state.data.length > 0) {
-            timelineContainer = (
-                <div id="timelineContainer">
-                    {this.state.data.map(status => 
-                        <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
-                    )}
-                </div> 
-            );
-        } else if (this.state.errorOccurred === false) {
-            timelineContainer = (
-                <div id="timelineContainer">
-                    <p>{this.fillerMessage}</p>
-                </div>
-            );
+        let content = <p></p>;
+
+        if(!this.props.fetchComplete) {
+            
+            content = <p className="infoText">{this.loadingMessage}</p>;
+
+        } else if (this.props.fetchComplete && (this.props.errorOccurred || !this.props.data instanceof Array)) {
+            
+            content = <p className="infoText">{this.errorMessage}</p>;
+
+        } else if (this.props.fetchComplete && !this.props.errorOccurred) {
+
+            content = (this.props.data.length === 0)?
+                <p className="infoText">{this.props.fillerMessage}</p> :
+                this.props.data.map(status => 
+                    <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
+                );
+
         }
 
-        return (
-            <div id="apiContainer">
-                <button id="apiButton" type="button" onClick={this.handleClick}>Get Twitter Timeline</button>
-                {timelineContainer}
-            </div>
-        );
+        return <div className="timelineContainer">{content}</div>;
     }
 }
+
+TimelineContainer.prototype.errorMessage = "This content is not currently available. Please try again later.";
+TimelineContainer.prototype.loadingMessage = "Loading your timeline...";
 
 export default TimelineContainer;
