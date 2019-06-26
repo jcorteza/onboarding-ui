@@ -1,13 +1,13 @@
 import React from "react";
 import { shallow } from "enzyme";
 import TimelineContainer from "../components/TimelineContainer";
-import HomeTimlineAPIContainer from "../components/HomeTimelineAPIContainer";
+import HomeTimlineUIContainer from "../components/HomeTimelineUIContainer";
 import TweetContainer from "../components/TweetContainer";
 
 describe("TimelineContainer", () => {
     const errorMessage = <p>{TimelineContainer.prototype.errorMessage}</p>;
     const loadingMessage = <p>{TimelineContainer.prototype.loadingMessage}</p>;
-    let testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={false} errorOccurred={false} fillerMessage={HomeTimlineAPIContainer.prototype.fillerMessage}/>);
+    let testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={false} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
     let testRendering = <div className="timelineContainer">{loadingMessage}</div>
 
     beforeEach(() => {
@@ -25,7 +25,7 @@ describe("TimelineContainer", () => {
     });
 
     it("renders error message p-tag", () => {
-        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={true} fillerMessage={HomeTimlineAPIContainer.prototype.fillerMessage}/>);
+        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={true} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
         testRendering = <div className="timelineContainer">{errorMessage}</div>;
 
         expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
@@ -33,7 +33,7 @@ describe("TimelineContainer", () => {
     });
 
     it("renders filler message p-tag", () => {
-        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineAPIContainer.prototype.fillerMessage}/>);
+        testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
         testRendering = <div className="timelineContainer"><p>{testTimelineContainer.instance().props.fillerMessage}</p></div>;
 
         expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
@@ -51,7 +51,7 @@ describe("TimelineContainer", () => {
                 profileImageUrl: "picture.com"
             }
         };
-        testTimelineContainer = shallow(<TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineAPIContainer.prototype.fillerMessage}/>);
+        testTimelineContainer = shallow(<TimelineContainer data={[testData]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
         testRendering = (
             <div className="timelineContainer">
                 <TweetContainer key={testData.postUrl} user={testData.user} postUrl={testData.postUrl} message={testData.message} createdAt={testData.createdAt}/>
