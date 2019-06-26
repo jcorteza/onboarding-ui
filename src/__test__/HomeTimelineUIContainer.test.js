@@ -53,22 +53,6 @@ describe("HomeTimelineUIContainer", () => {
         
     });
     
-    it("simulates filter button click, triggers fetchHomeTimeline method call", () => {
-
-        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(errorMessage));
-
-        fetchHomeTimeline.mockImplementation(() => {
-            return new Promise((resolve, reject) => reject(new Error("test error")));
-        });
-        homeTimelineUIContainer
-            .find("#filterButton")
-            .simulate("click", { preventDefault: () => {} });
-
-        expect(fetchHomeTimeline).toHaveBeenCalled(); 
-        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
-    
-    });
-    
     it("simulates button click, triggers requestHandler and renders errorMessage", () => {
 
         expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(errorMessage));

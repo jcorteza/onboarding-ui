@@ -10,64 +10,38 @@ class HomeTimelineUIContainer extends Component {
         this.state = {
             data: [],
             keyword: "",
-            filtered: false,
             fetchComplete: false,
             errorOccurred: false
         }
 
         this.fetchData = this.fetchData.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.toggleFilter = this.toggleFilter.bind(this);
+        this.fetchFilteredData = this.fetchFilteredData.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
 
     }
 
-    fetchData(isFiltered) {
+    fetchData() {
+        fetchHomeTimeline()
+            .then((responseData) => {
 
-        if(isFiltered) {
-
-            fetchFilteredHomeTimeline(this.state.keyword)
-                .then((responseData) => {
-
-                    this.setState({
-                        data: responseData,
-                        fetchComplete: true,
-                        errorOccurred: false
-                    });
-
-                })
-                .catch((error) => {
-
-                    console.log(`Error occurred during fetchHomeTimeline: ${error}`);
-                    this.setState({
-                        fetchComplete: true,
-                        errorOccurred: true
-                    });
-
+                this.setState({
+                    data: responseData,
+                    fetchComplete: true,
+                    errorOccurred: false
                 });
-        } else {
 
-            fetchHomeTimeline()
-                .then((responseData) => {
+            })
+            .catch((error) => {
 
-                    this.setState({
-                        data: responseData,
-                        fetchComplete: true,
-                        errorOccurred: false
-                    });
-
-                })
-                .catch((error) => {
-
-                    console.log(`Error occurred during fetchHomeTimeline: ${error}`);
-                    this.setState({
-                        fetchComplete: true,
-                        errorOccurred: true
-                    });
-
+                console.log(`Error occurred during fetchHomeTimeline: ${error}`);
+                this.setState({
+                    fetchComplete: true,
+                    errorOccurred: true
                 });
-                
-        }
+
+            }); 
     }
 
     handleClick(e) {
@@ -80,21 +54,46 @@ class HomeTimelineUIContainer extends Component {
         this.fetchData(this.state.filtered);
     }
 
-    toggleFilter(e) {
-        let isFiltered = !this.state.filtered;
+    fetchFilteredData(e) {
 
-        e.preventDefault();
+        if(e) {
+            e.preventDefault();
+        }
+
         this.setState({
             data: [], 
-            filtered: isFiltered,
             fetchComplete: false,
             errorOccurred: false 
         });
-        this.fetchData(isFiltered);
+        fetchFilteredHomeTimeline(this.state.keyword)
+            .then((responseData) => {
+
+                this.setState({
+                    data: responseData,
+                    fetchComplete: true,
+                    errorOccurred: false
+                });
+
+            })
+            .catch((error) => {
+
+                console.log(`Error occurred during fetchHomeTimeline: ${error}`);
+                this.setState({
+                    fetchComplete: true,
+                    errorOccurred: true
+                });
+
+            });
     }
 
     handleTextChange(e) {
         this.setState({ keyword: e.target.value});
+    }
+
+    handleKeyPress(e) {
+        if (e.key === "Enter" && this.state.keyword.valueOf()) {
+            this.fetchFilteredData();
+        }
     }
 
     componentDidMount() {
@@ -106,8 +105,8 @@ class HomeTimelineUIContainer extends Component {
             <div className="uiContainer" id="homeTimelineUIContainer">
                 <h2 className="timelineHeaderText">Home Timeline</h2>
                 <button className="uiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
-                <input id="filterInput" type="text" placeholder="filter text" value={this.state.keyword} onChange={this.handleTextChange}></input>
-                <button id="filterButton" type="button" onClick={this.toggleFilter}>Filter</button>
+                <input id="filterInput" type="text" placeholder="filter text" value={this.state.keyword} onChange={this.handleTextChange} onKeyPress={this.handleKeyPress}></input>
+                <button id="filterButton" type="button" onClick={this.fetchFilteredData} disabled={(this.state.keyword)? false : true}>Filter</button>
                 <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
