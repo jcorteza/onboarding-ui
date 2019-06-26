@@ -8,98 +8,137 @@
 
 body {
     font-family: 'Trebuchet MS', Arial, sans-serif;
-    padding: 30px 60px;
+    padding: 30px 25px;
 
-    header {
+    #header {
         text-align: center;
 
-        h1 {
+        #headerHeaderText {
             @include styled-font($weight: bold, $size: 40pt);
-            // font-weight: bold;
-            // font-size: 40pt;
         }
 
     }
-
     
     #root {
-        #apiContainer {
-            
-            button {
-                margin-bottom: 10px;
-                padding: 5px;
+        #mainContainer {
+            display: flex;
+            flex-flow: row nowrap;
+                
+            #homeTimelineUIContainer {
+                width: 55%;
+                margin-right: 20px;
+                
+                .uiButton {
+                    float: left;
+                }
             }
 
-            #timelineContainer {
-                border: 2px solid black;
-                @include styled-font();
-                //font-size: 12pt;
-        
-                > p {
-                    padding: 10px;
-                }
-        
-                > .tweetContainer {
-        
-                    &:nth-of-type(odd) {
-                        background-color: #e8f5fd;
-                    }
-        
-                    &:nth-of-type(even) {
-                        background-color: #e9e9e9;
-                    }
-        
-                    &:not(:last-of-type) {
-                        border-bottom: 1px solid #d1d2d2;
+            #userTimelineUIContainer {
+                width: 45%;
+
+                .timelineContainer {
+                    
+                    > .tweetContainer {
+                        
+                        &:nth-of-type(odd) {
+                            background-color: #f5f8fa;
+                        }
+                        
+                        &:nth-of-type(even) {
+                            background-color: #1da1f2;
+                        }
+
                     }
                 }
-        
-                .tweetContainer {
-                    padding: 10px 20px;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-        
-                    .userDiv {
-                        text-align: center;
-                        min-width: 175px;
-                        max-width: 175px;
-                        height: 100%;
-                        margin-right: 20px;
+                
+                .uiButton {
+                    float: right;
+                }
+                
+            }
             
-                        img {
-                            max-width: 85px;
-                            height: auto;
-                            margin: 10px 0 5px;
-                            border-radius: 40px;
+            .uiContainer {
+                
+                .timelineHeaderText {
+                    text-align: center;
+                    margin-top: 20px;
+                }
+                
+                .uiButton {
+                    margin-bottom: 10px;
+                    padding: 5px;
+                }
+                
+                .timelineContainer {
+                    clear: both;
+                    border: 2px solid black;
+                    box-sizing: border-box;
+                    @include styled-font();
+            
+                    > .infoText {
+                        padding: 10px;
+                    }
+            
+                    > .tweetContainer {
+            
+                        &:nth-of-type(odd) {
+                            background-color: #e8f5fd;
                         }
             
-                        p {
-                            margin-bottom: 3px;
+                        &:nth-of-type(even) {
+                            background-color: #e9e9e9;
                         }
             
-                        .name {
-                            @include styled-font($weight: bold);
-                            //font-weight: bold;
-                        }
-            
-                        .handle {
-                            @include styled-font($size: 8pt);
-                            // font-size: 8pt;
+                        &:not(:last-of-type) {
+                            border-bottom: 1px solid #d1d2d2;
                         }
                     }
-        
-                    span {
-                        display: block;
-                        //font-size: 8pt;
-                        margin-bottom: 5px;
-                        @include styled-font($style: italic, $size: 8pt)
-                        //font-style: italic;
-                    }
-        
-                    a, a:visited {
-                        color: black;
-                        text-decoration: none;
+            
+                    .tweetContainer {
+                        padding: 10px 20px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+            
+                        .userDiv {
+                            text-align: center;
+                            min-width: 175px;
+                            max-width: 175px;
+                            height: 100%;
+                            margin-right: 20px;
+                
+                            .userImg {
+                                max-width: 85px;
+                                height: auto;
+                                margin: 10px 0 5px;
+                                border-radius: 40px;
+                            }
+                
+                            .name, .handle {
+                                margin-bottom: 3px;
+                            }
+                
+                            .name {
+                                @include styled-font($weight: bold);
+                            }
+                
+                            .handle {
+                                @include styled-font($size: 8pt);
+                            }
+                        }
+
+                        .textDiv {
+                            .dateSpan {
+                                display: block;
+                                margin-bottom: 5px;
+                                @include styled-font($style: italic, $size: 8pt)
+                            }
+                
+                            .tweetLink, .tweetLink:visited {
+                                color: black;
+                                text-decoration: none;
+                            }
+                        }
                     }
                 }
             }

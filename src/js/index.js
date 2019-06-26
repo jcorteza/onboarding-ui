@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "../style/css/main.css";
-import TimelineContainer from "../components/TimelineContainer.jsx";
+import MainContainer from "../components/MainContainer.jsx";
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("root");
-    ReactDOM.render(<TimelineContainer />, document.getElementById("root"));
+    ReactDOM.render(<MainContainer />, document.getElementById("root"));
 });
