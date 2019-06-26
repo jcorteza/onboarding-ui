@@ -7,33 +7,27 @@ class TimelineContainer extends Component {
     }
 
     render() {
-        let timelineContainer = <div></div>;
+        let content = <p></p>;
 
         if(!this.props.fetchComplete) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.loadingMessage}</p>
-                </div>
-            );
+            
+            content = <p>{this.loadingMessage}</p>;
+
         } else if (this.props.fetchComplete && this.props.errorOccurred) {
-            timelineContainer = (
-                <div className="timelineContainer">
-                    <p>{this.errorMessage}</p>
-                </div>
-            );
+            
+            content = <p>{this.errorMessage}</p>;
+
         } else if (this.props.fetchComplete && !this.props.errorOccurred) {
-            timelineContainer = (this.props.data.length === 0)?
-                <div className="timelineContainer">
-                    <p>{this.props.fillerMessage}</p> 
-                </div> :
-                <div className="timelineContainer">
-                    {this.props.data.map(status => 
-                        <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
-                    )}
-                </div>;
+
+            content = (this.props.data.length === 0)?
+                <p>{this.props.fillerMessage}</p> :
+                this.props.data.map(status => 
+                    <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
+                );
+                
         }
 
-        return timelineContainer;
+        return <div className="timelineContainer">{content}</div>;
     }
 }
 
