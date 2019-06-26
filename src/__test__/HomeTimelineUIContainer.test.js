@@ -10,8 +10,8 @@ jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
 
 describe("HomeTimelineUIContainer", () => {
     const homeTimelineUIContainer = shallow(<HomeTimelineUIContainer />)
-    const errorMessage = `<p>${TimelineContainer.prototype.errorMessage}</p>`;
-    const loadingMessage = `<p>${TimelineContainer.prototype.loadingMessage}</p>`;
+    const errorMessage = `<p class="infoText">${TimelineContainer.prototype.errorMessage}</p>`;
+    const loadingMessage = `<p class="infoText">${TimelineContainer.prototype.loadingMessage}</p>`;
 
     beforeEach(() => {
         jest.resetModules();

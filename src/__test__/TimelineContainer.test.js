@@ -5,8 +5,8 @@ import HomeTimlineUIContainer from "../components/HomeTimelineUIContainer";
 import TweetContainer from "../components/TweetContainer";
 
 describe("TimelineContainer", () => {
-    const errorMessage = <p>{TimelineContainer.prototype.errorMessage}</p>;
-    const loadingMessage = <p>{TimelineContainer.prototype.loadingMessage}</p>;
+    const errorMessage = <p className="infoText">{TimelineContainer.prototype.errorMessage}</p>;
+    const loadingMessage = <p className="infoText">{TimelineContainer.prototype.loadingMessage}</p>;
     let testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={false} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
     let testRendering = <div className="timelineContainer">{loadingMessage}</div>
 
@@ -34,7 +34,7 @@ describe("TimelineContainer", () => {
 
     it("renders filler message p-tag", () => {
         testTimelineContainer = shallow(<TimelineContainer data={[]} fetchComplete={true} errorOccurred={false} fillerMessage={HomeTimlineUIContainer.prototype.fillerMessage}/>);
-        testRendering = <div className="timelineContainer"><p>{testTimelineContainer.instance().props.fillerMessage}</p></div>;
+        testRendering = <div className="timelineContainer"><p className="infoText">{testTimelineContainer.instance().props.fillerMessage}</p></div>;
 
         expect(testTimelineContainer.contains(testRendering)).toBeTruthy();
         
