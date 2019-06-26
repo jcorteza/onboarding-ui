@@ -13,7 +13,7 @@ class TimelineContainer extends Component {
             
             content = <p>{this.loadingMessage}</p>;
 
-        } else if (this.props.fetchComplete && this.props.errorOccurred) {
+        } else if (this.props.fetchComplete && (this.props.errorOccurred || !this.props.data instanceof Array)) {
             
             content = <p>{this.errorMessage}</p>;
 
@@ -24,7 +24,7 @@ class TimelineContainer extends Component {
                 this.props.data.map(status => 
                     <TweetContainer key={status.postUrl} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
                 );
-                
+
         }
 
         return <div className="timelineContainer">{content}</div>;
