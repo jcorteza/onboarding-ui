@@ -65,7 +65,7 @@ class HomeTimelineUIContainer extends Component {
             fetchComplete: false,
             errorOccurred: false 
         });
-        fetchFilteredHomeTimeline(this.state.keyword)
+        fetchFilteredHomeTimeline(this.state.keyword.toLowerCase())
             .then((responseData) => {
 
                 this.setState({

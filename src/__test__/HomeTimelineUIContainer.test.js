@@ -32,9 +32,10 @@ describe("HomeTimelineUIContainer", () => {
         expect(homeTimelineUIContainer.type()).toMatch("div");
         expect(homeTimelineUIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
         expect(homeTimelineUIContainer.childAt(1).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(2).type()).toMatch("input");
-        expect(homeTimelineUIContainer.childAt(3).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(4).type()).toEqual(TimelineContainer);
+        expect(homeTimelineUIContainer.childAt(2).type()).toMatch("div");
+        expect(homeTimelineUIContainer.childAt(2).childAt(0).type()).toMatch("input");
+        expect(homeTimelineUIContainer.childAt(2).childAt(1).type()).toMatch("button");
+        expect(homeTimelineUIContainer.childAt(3).type()).toEqual(TimelineContainer);
     });
     
     it("simulates filter button click, triggers fetchFilteredHomeTimeline method call", () => {
