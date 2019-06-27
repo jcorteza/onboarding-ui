@@ -31,6 +31,20 @@ body {
                 .uiButton {
                     float: left;
                 }
+
+                #filterDiv {
+                    display: flex;
+                    float: right;
+
+                    #filterInput {
+                        border-width: 1px;
+                        margin-right: 10px;
+                    }
+
+                    #filterButton[disabled] {
+                        opacity: 0.6;
+                    }
+                }
             }
 
             #userTimelineUIContainer {
@@ -64,7 +78,7 @@ body {
                     margin-top: 20px;
                 }
                 
-                .uiButton {
+                .uiButton, #filterButton, #filterInput {
                     margin-bottom: 10px;
                     padding: 5px;
                 }

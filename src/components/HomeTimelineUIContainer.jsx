@@ -105,8 +105,10 @@ class HomeTimelineUIContainer extends Component {
             <div className="uiContainer" id="homeTimelineUIContainer">
                 <h2 className="timelineHeaderText">Home Timeline</h2>
                 <button className="uiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
-                <input id="filterInput" type="text" placeholder="filter text" value={this.state.keyword} onChange={this.handleTextChange} onKeyPress={this.handleKeyPress}></input>
-                <button id="filterButton" type="button" onClick={this.fetchFilteredData} disabled={(this.state.keyword)? false : true}>Filter</button>
+                <div id="filterDiv">
+                    <input id="filterInput" type="text" placeholder="filter text" value={this.state.keyword} onChange={this.handleTextChange} onKeyPress={this.handleKeyPress}></input>
+                    <button id="filterButton" type="button" onClick={this.fetchFilteredData} disabled={(this.state.keyword)? false : true}>Filter</button>
+                </div>
                 <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
             </div>
         );
