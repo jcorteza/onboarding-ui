@@ -1,14 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
-import HomeTimelineUIContainer from "../components/HomeTimelineUIContainer";
-import TimelineContainer from "../components/TimelineContainer";
-import fetchHomeTimeline from "../utils/fetchHomeTimeline";
-import fetchFilteredHomeTimeline from "../utils/fetchFilteredHomeTimeline";
+import HomeTimelineUIContainer from "../view/components/HomeTimelineUIContainer";
+import TimelineContainer from "../view/components/TimelineContainer";
+import fetchHomeTimeline from "../service/utils/fetchHomeTimeline";
+import fetchFilteredHomeTimeline from "../service/utils/fetchFilteredHomeTimeline";
 
-jest.mock("../utils/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
+jest.mock("../service/utils/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
-jest.mock("../utils/fetchFilteredHomeTimeline", () => jest.fn().mockImplementation(() => {
+jest.mock("../service/utils/fetchFilteredHomeTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
 

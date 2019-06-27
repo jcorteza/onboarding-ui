@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer";
-import fetchHomeTimeline from "../utils/fetchHomeTimeline";
-import fetchFilteredHomeTimeline from "../utils/fetchFilteredHomeTimeline";
+import fetchHomeTimeline from "../../service/utils/fetchHomeTimeline";
+import fetchFilteredHomeTimeline from "../../service/utils/fetchFilteredHomeTimeline";
 
 class HomeTimelineUIContainer extends Component {
     constructor(props) {

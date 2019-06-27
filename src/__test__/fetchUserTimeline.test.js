@@ -1,4 +1,4 @@
-import fetchUserTimeline from "../utils/fetchUserTimeline.js";
+import fetchUserTimeline from "../service/utils/fetchUserTimeline.js";
 
 describe("fetchUserTimeline", () => {
     it("returns a Promise that resolves with data", () => {

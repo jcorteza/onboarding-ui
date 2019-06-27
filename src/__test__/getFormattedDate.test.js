@@ -1,4 +1,4 @@
-import getFormattedDate from "../utils/getFormattedDate.js";
+import getFormattedDate from "../service/utils/getFormattedDate.js";
 
 test("returns date as string", () => {
     let testDate = new Date();
