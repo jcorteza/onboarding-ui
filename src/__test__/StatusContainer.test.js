@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import StatusContainer from "../view/components/StatusContainer";
-import getFormattedDate from "../service/utils/getFormattedDate";
+import getFormattedDate from "../utils/getFormattedDate";
 
-jest.mock("../service/utils/getFormattedDate");
+jest.mock("../utils/getFormattedDate");
 
 describe("<StatusContainer />", () => {
     it("renders with data from props", () => {

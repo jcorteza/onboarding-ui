@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
-import fetchUserTimeline from "../../service/utils/fetchUserTimeline.js";
+import fetchUserTimeline from "../../service/fetchUserTimeline.js";
 
 class UserTimelineUIContainer extends Component {
     constructor(props) {

@@ -39,10 +39,12 @@ body {
 
                     #filterInput {
                         border-width: 1px;
+                        margin-right: 10px;
                     }
 
                     #filterButton {
-                        margin: 0 5px 0 15px;
+                        padding-left: 10px;
+                        padding-right: 10px;
 
                         &[disabled] {
                             opacity: 0.6;

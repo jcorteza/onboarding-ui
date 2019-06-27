@@ -1,4 +1,4 @@
-import fetchHomeTimeline from "../service/utils/fetchHomeTimeline.js";
+import fetchHomeTimeline from "../service/fetchHomeTimeline.js";
 
 describe("fetchHomeTimeline", () => {
     test("returns a Promise that resolves with data", () => {
