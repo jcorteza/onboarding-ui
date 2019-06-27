@@ -1,4 +1,4 @@
-import fetchFilteredHomeTimeline from "../js/fetchFilteredHomeTimeline.js";
+import fetchFilteredHomeTimeline from "../utils/fetchFilteredHomeTimeline.js";
 
 describe("fetchFilteredHomeTimeline", () => {
     it("returns a Promise that resolves with data", () => {

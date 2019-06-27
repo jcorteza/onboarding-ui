@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "../style/css/main.css";
-import MainContainer from "../components/MainContainer.jsx";
+import "./style/css/main.css";
+import MainContainer from "./components/MainContainer";
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("root");
