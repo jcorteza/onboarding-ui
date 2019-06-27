@@ -51,7 +51,7 @@ class HomeTimelineUIContainer extends Component {
             fetchComplete: false,
             errorOccurred: false
         });
-        this.fetchData(this.state.filtered);
+        this.fetchData();
     }
 
     fetchFilteredData(e) {
@@ -97,7 +97,7 @@ class HomeTimelineUIContainer extends Component {
     }
 
     componentDidMount() {
-        this.fetchData(this.state.filtered);
+        this.fetchData();
     }
 
     render() {
