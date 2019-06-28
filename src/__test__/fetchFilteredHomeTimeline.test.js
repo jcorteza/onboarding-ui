@@ -1,7 +1,7 @@
-import fetchHomeTimeline from "../service/fetchHomeTimeline.js";
+import fetchFilteredHomeTimeline from "../service/fetchFilteredHomeTimeline.js";
 
-describe("fetchHomeTimeline", () => {
-    test("returns a Promise that resolves with data", () => {
+describe("fetchFilteredHomeTimeline", () => {
+    it("returns a Promise that resolves with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
@@ -14,14 +14,14 @@ describe("fetchHomeTimeline", () => {
                 })
             });
         });
-        return fetchHomeTimeline()
+        return fetchFilteredHomeTimeline("keyword")
             .then((responseData) => {
                 expect(responseData).toBe(data);
             });
     
     });
     
-    test("fetchHomeTimeline returns undefined or \"\"", () => {
+    test("fetchFilteredHomeTimeline returns an empty array", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({
@@ -33,9 +33,10 @@ describe("fetchHomeTimeline", () => {
                 })
             });
         });
-        return fetchHomeTimeline()
+        return fetchFilteredHomeTimeline("keyword")
             .catch((error) => {
                 expect(error).toEqual(new Error("Something went wrong during the API call. Status: 500"));
             });
+    
     });
 });

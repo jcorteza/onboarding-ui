@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserTimelineUIContainer from "../components/UserTimelineUIContainer";
-import TimelineContainer from "../components/TimelineContainer";
-import fetchUserTimeline from "../js/fetchUserTimeline";
+import UserTimelineUIContainer from "../view/components/UserTimelineUIContainer";
+import TimelineContainer from "../view/components/TimelineContainer";
+import fetchUserTimeline from "../service/fetchUserTimeline";
 
-jest.mock("../js/fetchUserTimeline", () => jest.fn().mockImplementation(() => {
+jest.mock("../service/fetchUserTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
 

@@ -1,10 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
-import HomeTimelineUIContainer from "../components/HomeTimelineUIContainer";
-import TimelineContainer from "../components/TimelineContainer";
-import fetchHomeTimeline from "../js/fetchHomeTimeline";
+import HomeTimelineUIContainer from "../view/components/HomeTimelineUIContainer";
+import TimelineContainer from "../view/components/TimelineContainer";
+import fetchHomeTimeline from "../service/fetchHomeTimeline";
+import fetchFilteredHomeTimeline from "../service/fetchFilteredHomeTimeline";
 
-jest.mock("../js/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
+jest.mock("../service/fetchHomeTimeline", () => jest.fn().mockImplementation(() => {
+    return new Promise((resolve, reject) => reject(new Error("test error")));
+}));
+jest.mock("../service/fetchFilteredHomeTimeline", () => jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => reject(new Error("test error")));
 }));
 
@@ -14,7 +18,7 @@ describe("HomeTimelineUIContainer", () => {
     const loadingMessage = `<p class="infoText">${TimelineContainer.prototype.loadingMessage}</p>`;
 
     beforeEach(() => {
-        jest.resetModules();
+        // jest.resetModules();
     });
     
     afterEach(() => {
@@ -28,7 +32,26 @@ describe("HomeTimelineUIContainer", () => {
         expect(homeTimelineUIContainer.type()).toMatch("div");
         expect(homeTimelineUIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
         expect(homeTimelineUIContainer.childAt(1).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(2).type()).toEqual(TimelineContainer);
+        expect(homeTimelineUIContainer.childAt(2).type()).toMatch("div");
+        expect(homeTimelineUIContainer.childAt(2).childAt(0).type()).toMatch("input");
+        expect(homeTimelineUIContainer.childAt(2).childAt(1).type()).toMatch("button");
+        expect(homeTimelineUIContainer.childAt(3).type()).toEqual(TimelineContainer);
+    });
+    
+    it("simulates filter button click, triggers fetchFilteredHomeTimeline method call", () => {
+
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(errorMessage));
+
+        fetchFilteredHomeTimeline.mockImplementation(() => {
+            return new Promise((resolve, reject) => reject(new Error("test error")));
+        });
+        homeTimelineUIContainer
+            .find("#filterButton")
+            .simulate("click", { preventDefault: () => {} });
+
+        expect(fetchFilteredHomeTimeline).toHaveBeenCalled(); 
+        expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
+        
     });
     
     it("simulates button click, triggers requestHandler and renders errorMessage", () => {
@@ -39,8 +62,8 @@ describe("HomeTimelineUIContainer", () => {
             return new Promise((resolve, reject) => reject(new Error("test error")));
         });
         homeTimelineUIContainer
-            .find("button")
-            .simulate("click", {preventDefault: () => {}});
+            .find("button.uiButton")
+            .simulate("click", { preventDefault: () => {} });
 
         expect(fetchHomeTimeline).toHaveBeenCalled(); 
         expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
@@ -65,8 +88,9 @@ describe("HomeTimelineUIContainer", () => {
             return new Promise((resolve, reject) => resolve([testData]));
         });
         homeTimelineUIContainer
-            .find("button")
-            .simulate("click", {preventDefault: () => {}});
+            .find("button.uiButton")
+            .simulate("click", { preventDefault: () => {} });
+
 
         expect(homeTimelineUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
         expect(fetchHomeTimeline).toHaveBeenCalled();

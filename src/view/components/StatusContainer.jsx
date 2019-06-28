@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import getFormattedDate from "../js/getFormattedDate.js";
+import getFormattedDate from "../../utils/getFormattedDate.js";
 
 class StatusContainer extends Component {
     constructor(props) {

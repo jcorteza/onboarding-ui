@@ -1,4 +1,4 @@
-@import "./_mixin.scss";
+@import "./mixin";
 
 * {
     padding: 0;
@@ -30,6 +30,26 @@ body {
                 
                 .uiButton {
                     float: left;
+                }
+
+                #filterDiv {
+                    display: flex;
+                    align-items: flex-start;
+                    float: right;
+
+                    #filterInput {
+                        border-width: 1px;
+                        margin-right: 10px;
+                    }
+
+                    #filterButton {
+                        padding-left: 10px;
+                        padding-right: 10px;
+
+                        &[disabled] {
+                            opacity: 0.6;
+                        }
+                    }
                 }
             }
 
@@ -64,7 +84,7 @@ body {
                     margin-top: 20px;
                 }
                 
-                .uiButton {
+                .uiButton, #filterButton, #filterInput {
                     margin-bottom: 10px;
                     padding: 5px;
                 }

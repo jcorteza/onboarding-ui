@@ -1,7 +1,7 @@
-import fetchUserTimeline from "../js/fetchUserTimeline.js";
+import fetchUserTimeline from "../service/fetchUserTimeline.js";
 
 describe("fetchUserTimeline", () => {
-    test("returns a Promise that resolves with data", () => {
+    it("returns a Promise that resolves with data", () => {
         let data = ["test", "array", "data"];
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
@@ -21,7 +21,7 @@ describe("fetchUserTimeline", () => {
     
     });
     
-    test("returns a Promise that rejects with an Error", () => {
+    it("returns a Promise that rejects with an Error", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({

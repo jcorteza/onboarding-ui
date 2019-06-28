@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TimelineContainer from "../components/TimelineContainer";
-import HomeTimlineUIContainer from "../components/HomeTimelineUIContainer";
-import TweetContainer from "../components/TweetContainer";
+import TimelineContainer from "../view/components/TimelineContainer";
+import HomeTimlineUIContainer from "../view/components/HomeTimelineUIContainer";
+import TweetContainer from "../view/components/TweetContainer";
 
 describe("TimelineContainer", () => {
     const errorMessage = <p className="infoText">{TimelineContainer.prototype.errorMessage}</p>;

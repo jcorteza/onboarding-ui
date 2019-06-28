@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import HomeTimelineUIContainer from "../components/HomeTimelineUIContainer";
-import UserTimelineUIContainer from "../components/UserTimelineUIContainer";
+import HomeTimelineUIContainer from "./HomeTimelineUIContainer";
+import UserTimelineUIContainer from "./UserTimelineUIContainer";
 
 class MainContainer extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserContainer from "../components/UserContainer.jsx";
+import UserContainer from "../view/components/UserContainer.jsx";
 
 describe("<UserContainer />", () => {
     test("renders without props", () => {

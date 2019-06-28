@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TweetContainer from "../components/TweetContainer.jsx";
-import UserContainer from "../components/UserContainer.jsx";
-import StatusContainer from "../components/StatusContainer.jsx";
+import TweetContainer from "../view/components/TweetContainer.jsx";
+import UserContainer from "../view/components/UserContainer.jsx";
+import StatusContainer from "../view/components/StatusContainer.jsx";
 
 describe("<TweetContainer />", () => {
     
