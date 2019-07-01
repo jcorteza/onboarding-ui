@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import postTweetToTimeline from "../../service/postTweetToTimeline";
 
 class PostTweetUI extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            tweetText: ""
+            tweetText: "",
+            successfulPost: false
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -18,7 +20,19 @@ class PostTweetUI extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        // api call
+        postTweetToTimeline(this.state.tweetText)
+            .then((response) => {
+
+                if(response.success) {
+                    this.setState({ successfulPost: true });
+                } else {
+                    this.setState({ successfulPost: false });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                this.setState({ successfulPost: false});
+            });
     }
 
     render() {
@@ -34,7 +48,7 @@ class PostTweetUI extends Component {
                 >
                     <div id="charCountDiv">{this.state.tweetText.length}</div>
                 </textarea>
-                <p className="postTweetInfoMessage"></p>
+                <p className="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p>
                 <button id="postTweetButton" type="submit">Post Tweet</button>
             </div>
         );
