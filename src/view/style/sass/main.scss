@@ -9,21 +9,41 @@
 body {
     font-family: 'Trebuchet MS', Arial, sans-serif;
     padding: 30px 25px;
-
-    #header {
-        text-align: center;
-
-        #headerHeaderText {
-            @include styled-font($weight: bold, $size: 40pt);
-        }
-
-    }
     
     #root {
+        #header{
+            text-align: center;
+
+            #headerH1Text {
+                @include styled-font($weight: bold, $size: 40pt);
+            }
+            
+            #navbar {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                min-height: fit-content;
+                    
+                a {
+                    display: inline-block;
+                    width: 20%;
+                    padding: 20px 0;
+                    text-decoration: none;
+                    color: black;
+
+                    &:active {
+                        text-decoration: none;
+                    }
+
+                    &:visited {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
         #mainContainer {
-            display: flex;
-            flex-flow: row nowrap;
-                
             #homeTimelineUIContainer {                
                 .uiButton {
                     float: left;
