@@ -11,7 +11,7 @@ class HeaderUI extends Component {
             <header id="header">
                 <h1 id="headerHeaderText">Lab for Josephine</h1>
                 <nav>
-                    <NavLink to="/home-timeline">Home Timeline</NavLink>
+                    <NavLink exact to="/">Home Timeline</NavLink>
                     <NavLink to="/user-timeline">User Timeline</NavLink>
                     <NavLink to="/post-tweet">Post Tweet</NavLink>
                 </nav>

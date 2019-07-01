@@ -103,7 +103,6 @@ class HomeTimelineUIContainer extends Component {
     render() {
         return (
             <div className="uiContainer" id="homeTimelineUIContainer">
-                <h2 className="timelineHeaderText">Home Timeline</h2>
                 <button className="uiButton" type="button" onClick={this.handleClick}>View Twitter Timeline</button>
                 <div id="filterDiv">
                     <input id="filterInput" type="text" placeholder="filter text" value={this.state.keyword} onChange={this.handleTextChange} onKeyPress={this.handleKeyPress}></input>

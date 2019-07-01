@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { HashRouter as Router, Route } from "react-router-dom";
 import HomeTimelineUIContainer from "./HomeTimelineUIContainer";
 import UserTimelineUIContainer from "./UserTimelineUIContainer";
 
@@ -10,8 +11,8 @@ class MainContainer extends Component {
     render() {
         return(
             <div id="mainContainer">
-                <HomeTimelineUIContainer />
-                <UserTimelineUIContainer />
+                <Route exact path="/" component={HomeTimelineUIContainer} />
+                <Route path="/user-timeline" component={UserTimelineUIContainer} />
             </div>
         );
     }

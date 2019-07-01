@@ -24,10 +24,7 @@ body {
             display: flex;
             flex-flow: row nowrap;
                 
-            #homeTimelineUIContainer {
-                width: 55%;
-                margin-right: 20px;
-                
+            #homeTimelineUIContainer {                
                 .uiButton {
                     float: left;
                 }
@@ -54,8 +51,6 @@ body {
             }
 
             #userTimelineUIContainer {
-                width: 45%;
-
                 .timelineContainer {
                     
                     > .tweetContainer {
