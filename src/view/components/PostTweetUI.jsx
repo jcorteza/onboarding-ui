@@ -24,21 +24,13 @@ class PostTweetUI extends Component {
         this.setState({ postAttemptComplete: false });
         postTweetToTimeline(this.state.tweetText)
             .then((response) => {
-                if(response.success) {
+                console.log(response);
 
-                    this.setState({
-                        successfulPost: true,
-                        postAttemptComplete: true
-                    });
+                this.setState({
+                    successfulPost: response.successful,
+                    postAttemptComplete: true
+                });
 
-                } else {
-
-                    this.setState({
-                        successfulPost: false,
-                        postAttemptComplete: true
-                    });
-
-                }
             })
             .catch((error) => {
                 console.log(error);

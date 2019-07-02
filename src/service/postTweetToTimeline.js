@@ -9,7 +9,7 @@ const postTweetToTimeline = (tweetText) => {
 
             if(fetchResponse.ok) {
 
-                resolve({successful: true})
+                resolve({successful: true});
 
             } else {
 
