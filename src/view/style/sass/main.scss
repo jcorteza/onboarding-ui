@@ -3,7 +3,7 @@
 * {
     padding: 0;
     margin: 0;
-    
+    box-sizing: border-box;
 }
 
 body {
@@ -19,7 +19,7 @@ body {
             }
             
             #navbar {
-                margin-top: 10px;
+                margin: 20px 0 20px;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -28,7 +28,7 @@ body {
                 a {
                     display: inline-block;
                     width: 20%;
-                    padding: 20px 0;
+                    padding: 15px 0;
                     text-decoration: none;
                     color: black;
 
@@ -44,6 +44,32 @@ body {
         }
 
         #mainContainer {
+            .uiButton, #filterInput {
+                margin-bottom: 10px;
+                padding: 5px;
+            }
+
+            #postTweetDiv {
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+
+                #postTweetTextArea {
+                    width: 100%;
+                    height: 100px;
+                    padding: 10px;
+                }
+
+                #postTweetButton {
+                    float: right;
+                    margin-left: 10px;
+
+                    &[disabled] {
+                        opacity: 0.6;
+                    }
+                }
+            }
+
             #homeTimelineUIContainer {                
                 .uiButton {
                     float: left;
@@ -99,15 +125,9 @@ body {
                     margin-top: 20px;
                 }
                 
-                .uiButton, #filterButton, #filterInput {
-                    margin-bottom: 10px;
-                    padding: 5px;
-                }
-                
                 .timelineContainer {
                     clear: both;
                     border: 2px solid black;
-                    box-sizing: border-box;
                     @include styled-font();
             
                     > .infoText {

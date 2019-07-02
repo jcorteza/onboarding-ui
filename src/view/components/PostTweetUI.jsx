@@ -62,15 +62,16 @@ class PostTweetUI extends Component {
                 >
                     <div id="charCountDiv">{this.state.tweetText.length}</div>
                 </textarea>
+                <button 
+                    id="postTweetButton" 
+                    className="uiButton"
+                    type="submit" 
+                    disabled={(this.state.tweetText.length > 0)? false : true}
+                >Post Tweet</button>
                 {(this.state.postAttemptComplete)?
                     <p className="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
                     null
                 }
-                <button 
-                    id="postTweetButton" 
-                    type="submit" 
-                    disabled={(this.state.tweetText.length > 0)? false : true}
-                >Post Tweet</button>
             </div>
         );
     }
