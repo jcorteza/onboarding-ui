@@ -7,7 +7,7 @@ const postTweetToTimeline = (tweetText) => {
             body: JSON.stringify(data)
         }).then((fetchResponse) => {
 
-            if(fetchResponse.status === 200) {
+            if(fetchResponse.ok) {
 
                 resolve({successful: true})
 
