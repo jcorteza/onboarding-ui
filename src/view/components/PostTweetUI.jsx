@@ -22,11 +22,14 @@ class PostTweetUI extends Component {
         e.preventDefault();
         postTweetToTimeline(this.state.tweetText)
             .then((response) => {
-
                 if(response.success) {
+
                     this.setState({ successfulPost: true });
+
                 } else {
+
                     this.setState({ successfulPost: false });
+
                 }
             })
             .catch((error) => {
@@ -49,7 +52,7 @@ class PostTweetUI extends Component {
                     <div id="charCountDiv">{this.state.tweetText.length}</div>
                 </textarea>
                 <p className="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p>
-                <button id="postTweetButton" type="submit">Post Tweet</button>
+                <button id="postTweetButton" type="submit" disabled={(this.state.tweetText.length > 0)? false : true}>Post Tweet</button>
             </div>
         );
     }
