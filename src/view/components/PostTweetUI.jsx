@@ -21,24 +21,42 @@ class PostTweetUI extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        this.setState({ postAttemptComplete: false });
-        postTweetToTimeline(this.state.tweetText)
-            .then((response) => {
-                console.log(response);
+        this.refs.postTweetButton.setAttribute("disabled", true);
+        this.setState({ postAttemptComplete: false }, () => {
 
-                this.setState({
-                    successfulPost: response.successful,
-                    postAttemptComplete: true
+            postTweetToTimeline(this.state.tweetText)
+                .then((response) => {
+    
+                    if(response.successful) {
+    
+                        this.setState({ tweetText : "" });
+    
+                    }
+    
+                    this.setState({
+                        successfulPost: response.successful,
+                    });
+    
+                })
+                .catch((error) => {
+
+                    console.log(error);
+                    this.setState({ successfulPost: false });
+
+                })
+                .finally(() => {
+
+                    this.setState({ postAttemptComplete: true }, () => {
+
+                        setTimeout(() => {
+                            this.setState({ postAttemptComplete: false });
+                        }, 3000);
+                        this.refs.postTweetButton.setAttribute("disabled", false);
+                        
+                    });
                 });
 
-            })
-            .catch((error) => {
-                console.log(error);
-                this.setState({
-                    successfulPost: false,
-                    postAttemptComplete: true
-                });
-            });
+        });
     }
 
     render() {
@@ -57,6 +75,7 @@ class PostTweetUI extends Component {
                 <button 
                     id="postTweetButton" 
                     className="uiButton"
+                    ref="postTweetButton"
                     type="submit" 
                     onClick={this.handleClick}
                     disabled={(this.state.tweetText.length > 0)? false : true}
