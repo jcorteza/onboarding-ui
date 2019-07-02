@@ -58,6 +58,7 @@ class PostTweetUI extends Component {
                     id="postTweetButton" 
                     className="uiButton"
                     type="submit" 
+                    onClick={this.handleClick}
                     disabled={(this.state.tweetText.length > 0)? false : true}
                 >Post Tweet</button>
                 {(this.state.postAttemptComplete)?
