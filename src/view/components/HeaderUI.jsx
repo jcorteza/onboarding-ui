@@ -11,9 +11,9 @@ class HeaderUI extends Component {
             <header id="header">
                 <h1 id="headerH1Text">Lab for Josephine</h1>
                 <nav id="navbar">
-                        <NavLink exact to="/" activeStyle={{backgroundColor: "#e8f5fd", textDecoration: "underline"}}>Home Timeline</NavLink>
-                        <NavLink to="/user-timeline" activeStyle={{backgroundColor: "#e8f5fd", textDecoration: "underline"}}>User Timeline</NavLink>
-                        <NavLink to="/post-tweet" activeStyle={{backgroundColor: "#e8f5fd", textDecoration: "underline"}}>Post Tweet</NavLink>
+                        <NavLink exact to="/" activeStyle={{backgroundColor: "#1DA1F2", textDecoration: "underline"}}>Home Timeline</NavLink>
+                        <NavLink to="/user-timeline" activeStyle={{backgroundColor: "#1DA1F2", textDecoration: "underline"}}>User Timeline</NavLink>
+                        <NavLink to="/post-tweet" activeStyle={{backgroundColor: "#1DA1F2", textDecoration: "underline"}}>Post Tweet</NavLink>
                 </nav>
             </header>
         );

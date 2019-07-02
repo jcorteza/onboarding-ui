@@ -24,6 +24,7 @@ body {
                 flex-direction: row;
                 justify-content: center;
                 min-height: fit-content;
+                background-color: #e8f5fd;
                     
                 a {
                     display: inline-block;
@@ -31,13 +32,13 @@ body {
                     padding: 15px 0;
                     text-decoration: none;
                     color: black;
-
-                    &:active {
-                        text-decoration: none;
+                    
+                    &:hover {
+                        background-color: #F1BF98;
                     }
-
-                    &:visited {
-                        text-decoration: none;
+                    
+                    &:active {
+                        background-color: #1DA1F2;
                     }
                 }
             }
