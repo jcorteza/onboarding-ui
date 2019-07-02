@@ -62,7 +62,7 @@ class PostTweetUI extends Component {
                     disabled={(this.state.tweetText.length > 0)? false : true}
                 >Post Tweet</button>
                 {(this.state.postAttemptComplete)?
-                    <p className="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
+                    <p id="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
                     null
                 }
             </div>
