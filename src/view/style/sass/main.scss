@@ -27,7 +27,7 @@ body {
                     
                 a {
                     display: inline-block;
-                    width: 20%;
+                    width: 30%;
                     padding: 15px 0;
                     text-decoration: none;
                     color: black;
@@ -63,10 +63,19 @@ body {
                 #postTweetButton {
                     float: right;
                     margin-left: 10px;
+                    margin-top: 10px;
 
                     &[disabled] {
                         opacity: 0.6;
                     }
+                }
+
+                #postTweetInfoMessage {
+                    margin-top: 10px;
+                    text-align: right;
+                    font-size: 8pt;
+                    font-weight: bold;
+                    padding: 6px 0;
                 }
             }
 
