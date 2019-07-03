@@ -70,7 +70,7 @@ class PostTweetUI extends Component {
                     onChange={this.handleChange}
                     required
                 >
-                    <div id="charCountDiv">{this.state.tweetText.length}</div>
+                    <span id="charCountDiv">{this.state.tweetText.length}</span>
                 </textarea>
                 <button 
                     id="postTweetButton" 
