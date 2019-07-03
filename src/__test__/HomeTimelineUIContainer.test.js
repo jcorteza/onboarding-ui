@@ -30,12 +30,11 @@ describe("HomeTimelineUIContainer", () => {
         expect(fetchHomeTimeline).toHaveBeenCalled();
         expect(homeTimelineUIContainer.hasClass("uiContainer")).toBeTruthy();
         expect(homeTimelineUIContainer.type()).toMatch("div");
-        expect(homeTimelineUIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
-        expect(homeTimelineUIContainer.childAt(1).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(2).type()).toMatch("div");
-        expect(homeTimelineUIContainer.childAt(2).childAt(0).type()).toMatch("input");
-        expect(homeTimelineUIContainer.childAt(2).childAt(1).type()).toMatch("button");
-        expect(homeTimelineUIContainer.childAt(3).type()).toEqual(TimelineContainer);
+        expect(homeTimelineUIContainer.childAt(0).type()).toMatch("button");
+        expect(homeTimelineUIContainer.childAt(1).type()).toMatch("div");
+        expect(homeTimelineUIContainer.childAt(1).childAt(0).type()).toMatch("input");
+        expect(homeTimelineUIContainer.childAt(1).childAt(1).type()).toMatch("button");
+        expect(homeTimelineUIContainer.childAt(2).type()).toEqual(TimelineContainer);
     });
     
     it("simulates filter button click, triggers fetchFilteredHomeTimeline method call", () => {
@@ -63,6 +62,7 @@ describe("HomeTimelineUIContainer", () => {
         });
         homeTimelineUIContainer
             .find("button.uiButton")
+            .first()
             .simulate("click", { preventDefault: () => {} });
 
         expect(fetchHomeTimeline).toHaveBeenCalled(); 
@@ -89,6 +89,7 @@ describe("HomeTimelineUIContainer", () => {
         });
         homeTimelineUIContainer
             .find("button.uiButton")
+            .first()
             .simulate("click", { preventDefault: () => {} });
 
 
@@ -99,7 +100,6 @@ describe("HomeTimelineUIContainer", () => {
             .then((response) => {
                 homeTimelineUIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
                 homeTimelineUIContainer.update();
-                expect(homeTimelineUIContainer.containsMatchingElement(<h2>Home Timeline</h2>)).toBeTruthy();
                 expect(homeTimelineUIContainer.containsMatchingElement(<button className="uiButton" type="button">View Twitter Timeline</button>)).toBeTruthy();
                 expect(homeTimelineUIContainer.contains(expectedTimeline)).toBeTruthy();
             });

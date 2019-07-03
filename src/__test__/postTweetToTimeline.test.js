@@ -2,6 +2,7 @@ import postTweetToTimeline from "../service/postTweetToTimeline";
 
 describe("postTweetToTimeline method", () => {
     test("returns response object with key successful, value true", () => {
+        global.Headers = jest.fn(() => ({append: () => null}));
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve) => {
                 resolve({
@@ -21,6 +22,7 @@ describe("postTweetToTimeline method", () => {
 
     test("returns response object with key successful, value false", () => {
         let response = { successful: false };
+        global.Headers = jest.fn(() => ({append: () => null}));
         global.fetch = jest.fn().mockImplementationOnce(() => {
 
             return new Promise((resolve) => {
