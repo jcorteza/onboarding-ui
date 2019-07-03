@@ -24,14 +24,14 @@ body {
                 flex-direction: row;
                 justify-content: center;
                 min-height: fit-content;
-                background-color: #e8f5fd;
-                    
+                
                 a {
                     display: inline-block;
                     width: 30%;
                     padding: 15px 0;
                     text-decoration: none;
                     color: black;
+                    background-color: #e8f5fd;
                     
                     &:hover {
                         background-color: #F1BF98;
