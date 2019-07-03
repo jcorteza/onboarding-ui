@@ -74,7 +74,8 @@ class PostTweetUI extends Component {
                 <textarea 
                     id="postTweetTextArea" 
                     ref={this.textareaElement}
-                    autofocus maxLength="280" 
+                    autoFocus 
+                    maxLength="280" 
                     placeholder="Hello Followers" 
                     value={this.state.tweetText}
                     onChange={this.handleChange}
