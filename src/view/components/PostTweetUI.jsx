@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import postTweetToTimeline from "../../service/postTweetToTimeline";
 
 class PostTweetUI extends Component {
@@ -13,15 +14,19 @@ class PostTweetUI extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.postTweetButton = React.createRef();
+        this.textareaElement = React.createRef();
     }
-
+    
     handleChange(e) {
-        this.setState({ tweetText: e.target.value });
+        let textValue = e.target.value;
+        this.setState({ tweetText: textValue });
     }
 
     handleClick(e) {
         e.preventDefault();
-        this.refs.postTweetButton.setAttribute("disabled", true);
+        this.postTweetButton.current.disabled = true;
+        this.textareaElement.current.disabled = true;
         this.setState({ postAttemptComplete: false }, () => {
 
             postTweetToTimeline(this.state.tweetText)
@@ -51,8 +56,8 @@ class PostTweetUI extends Component {
                         setTimeout(() => {
                             this.setState({ postAttemptComplete: false });
                         }, 3000);
-                        this.refs.postTweetButton.setAttribute("disabled", false);
-                        
+                        this.postTweetButton.current.removeAttribute("disabled");
+                        this.textareaElement.current.removeAttribute("disabled");
                     });
                 });
 
@@ -60,30 +65,36 @@ class PostTweetUI extends Component {
     }
 
     render() {
+        const charCountSpan = document.createElement("span");
+        charCountSpan.setAttribute("id", "charCountSpan");
+        charCountSpan.innerText = 280 - this.state.tweetText.length;
+
         return(
             <div id="postTweetDiv">
                 <textarea 
                     id="postTweetTextArea" 
+                    ref={this.textareaElement}
                     autofocus maxLength="280" 
                     placeholder="Hello Followers" 
                     value={this.state.tweetText}
                     onChange={this.handleChange}
                     required
-                >
-                    <span id="charCountDiv">{this.state.tweetText.length}</span>
-                </textarea>
-                <button 
-                    id="postTweetButton" 
-                    className="uiButton"
-                    ref="postTweetButton"
-                    type="submit" 
-                    onClick={this.handleClick}
-                    disabled={(this.state.tweetText.length > 0)? false : true}
-                >Post Tweet</button>
-                {(this.state.postAttemptComplete)?
-                    <p id="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
-                    null
-                }
+                ></textarea>
+                <span id="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
+                <div id="buttonContainer">
+                    {(this.state.postAttemptComplete)?
+                        <p id="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
+                        null
+                    }
+                    <button 
+                        id="postTweetButton" 
+                        className="uiButton"
+                        ref={this.postTweetButton}
+                        type="submit" 
+                        onClick={this.handleClick}
+                        disabled={!this.state.tweetText.length > 0}
+                    >Post Tweet</button>
+                </div>
             </div>
         );
     }
