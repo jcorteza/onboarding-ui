@@ -84,7 +84,11 @@ class PostTweetUI extends Component {
                 <span id="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
                 <div id="buttonContainer">
                     {(this.state.postAttemptComplete)?
-                        <p id="postTweetInfoMessage">{(this.state.successfulPost)? this.successMessage : this.errorMessage}</p> :
+                        <p 
+                            id="postTweetInfoMessage" 
+                            className={(this.state.successfulPost)? "successMessage" : "errorMessage"}>
+                                {(this.state.successfulPost)? this.successMessage : this.errorMessage}
+                        </p> :
                         null
                     }
                     <button 
@@ -93,8 +97,9 @@ class PostTweetUI extends Component {
                         ref={this.postTweetButton}
                         type="submit" 
                         onClick={this.handleClick}
-                        disabled={!this.state.tweetText.length > 0}
-                    >Post Tweet</button>
+                        disabled={!this.state.tweetText.length > 0}>
+                        Post Tweet
+                    </button>
                 </div>
             </div>
         );
