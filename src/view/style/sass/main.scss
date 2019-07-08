@@ -25,13 +25,17 @@ body {
                 justify-content: center;
                 min-height: fit-content;
                 
-                a {
+                .navlink {
                     display: inline-block;
                     width: 30%;
                     padding: 15px 0;
                     text-decoration: none;
                     color: black;
                     background-color: #e8f5fd;
+
+                    .active {
+                        background-color: #1DA1F2;
+                    }
                     
                     &:hover {
                         background-color: #F1BF98;
