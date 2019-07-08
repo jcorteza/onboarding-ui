@@ -26,9 +26,8 @@ describe("UserTimelineUIContainer", () => {
         expect(fetchUserTimeline).toHaveBeenCalled();
         expect(userUIContainer.hasClass("uiContainer")).toBeTruthy();
         expect(userUIContainer.type()).toMatch("div");
-        expect(userUIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
-        expect(userUIContainer.childAt(1).type()).toMatch("button");
-        expect(userUIContainer.childAt(2).type()).toEqual(TimelineContainer);
+        expect(userUIContainer.childAt(0).type()).toMatch("button");
+        expect(userUIContainer.childAt(1).type()).toEqual(TimelineContainer);
         
     });
 
@@ -41,6 +40,7 @@ describe("UserTimelineUIContainer", () => {
         });
         userUIContainer
             .find("button")
+            .first()
             .simulate("click", {preventDefault: () => {}});
 
         expect(fetchUserTimeline).toHaveBeenCalled(); 
@@ -67,6 +67,7 @@ describe("UserTimelineUIContainer", () => {
         });
         userUIContainer
             .find("button")
+            .first()
             .simulate("click", {preventDefault: () => {}});
 
         expect(userUIContainer.html()).toEqual(expect.stringContaining(loadingMessage));
@@ -76,7 +77,6 @@ describe("UserTimelineUIContainer", () => {
             .then((response) => {
                 userUIContainer.setState({data: response, fetchComplete: true, errorOccurred: false});
                 userUIContainer.update();
-                expect(userUIContainer.containsMatchingElement(<h2>User Timeline</h2>)).toBeTruthy();
                 expect(userUIContainer.containsMatchingElement(<button className="uiButton" type="button">View User Timeline</button>)).toBeTruthy();
                 expect(userUIContainer.contains(expectedTimeline)).toBeTruthy();
             });
