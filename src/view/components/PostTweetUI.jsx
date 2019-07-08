@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import postTweetToTimeline from "../../service/postTweetToTimeline";
 
 class PostTweetUI extends Component {
