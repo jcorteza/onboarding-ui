@@ -80,7 +80,7 @@ class PostTweetUI extends Component {
                     id="postTweetTextArea" 
                     autoFocus 
                     maxLength="280" 
-                    placeholder="Hello Followers" 
+                    placeholder="Hello followers..." 
                     value={this.state.tweetText}
                     onChange={this.handleChange}
                     disabled={this.state.textareaDisabled}
@@ -101,7 +101,7 @@ class PostTweetUI extends Component {
                         className="uiButton"
                         type="submit" 
                         onClick={this.handleClick}
-                        disabled={!this.state.tweetText.length > 0 && this.state.buttonDisabled}>
+                        disabled={!this.state.tweetText.length > 0 || this.state.buttonDisabled}>
                         Post Tweet
                     </button>
                 </div>
