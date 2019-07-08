@@ -9,13 +9,13 @@ class PostTweetUI extends Component {
         this.state = {
             tweetText: "",
             successfulPost: false,
-            postAttemptComplete: false
+            postAttemptComplete: false,
+            buttonDisabled: false,
+            textareaDisabled: false
         }
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.postTweetButton = React.createRef();
-        this.textareaElement = React.createRef();
     }
     
     handleChange(e) {
@@ -25,9 +25,11 @@ class PostTweetUI extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        this.postTweetButton.current.disabled = true;
-        this.textareaElement.current.disabled = true;
-        this.setState({ postAttemptComplete: false }, () => {
+        this.setState({
+            buttonDisabled: true,
+            textareaDisabled: true,
+            postAttemptComplete: false
+        }, () => {
 
             postTweetToTimeline(this.state.tweetText)
                 .then((response) => {
@@ -44,21 +46,25 @@ class PostTweetUI extends Component {
     
                 })
                 .catch((error) => {
-
+    
                     console.log(error);
                     this.setState({ successfulPost: false });
-
+    
                 })
                 .finally(() => {
-
-                    this.setState({ postAttemptComplete: true }, () => {
-
+    
+                    this.setState({ 
+                        postAttemptComplete: true,
+                        buttonDisabled: false,
+                        textareaDisabled: false
+                    }, () => {
+    
                         setTimeout(() => {
                             this.setState({ postAttemptComplete: false });
                         }, 3000);
-                        this.postTweetButton.current.removeAttribute("disabled");
-                        this.textareaElement.current.removeAttribute("disabled");
+
                     });
+
                 });
 
         });
@@ -73,12 +79,12 @@ class PostTweetUI extends Component {
             <div id="postTweetDiv">
                 <textarea 
                     id="postTweetTextArea" 
-                    ref={this.textareaElement}
                     autoFocus 
                     maxLength="280" 
                     placeholder="Hello Followers" 
                     value={this.state.tweetText}
                     onChange={this.handleChange}
+                    disabled={this.state.textareaDisabled}
                     required
                 ></textarea>
                 <span id="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
@@ -94,10 +100,9 @@ class PostTweetUI extends Component {
                     <button 
                         id="postTweetButton" 
                         className="uiButton"
-                        ref={this.postTweetButton}
                         type="submit" 
                         onClick={this.handleClick}
-                        disabled={!this.state.tweetText.length > 0}>
+                        disabled={!this.state.tweetText.length > 0 && this.state.buttonDisabled}>
                         Post Tweet
                     </button>
                 </div>
