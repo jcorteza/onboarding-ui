@@ -8,6 +8,7 @@ class ReplyToTweetModuleUI extends Component {
         this.state = {
             replyText: "",
             replyInProgress: false,
+            replyComplete: false,
             replySuccessful: false,
         }
 
@@ -42,7 +43,16 @@ class ReplyToTweetModuleUI extends Component {
                 })
                 .finally(() => {
  
-                    this.setState({ replyInProgress: false});
+                    this.setState({ 
+                        replyInProgress: false,
+                        replyComplete: true
+                    }, () => {
+
+                        setTimeout(() => {
+                            this.setState({ replyComplete: false });
+                        }, 3000);
+
+                    });
 
                 });
 
@@ -59,14 +69,22 @@ class ReplyToTweetModuleUI extends Component {
                 value="" 
                 onChange={this.handleTextChange}
                 disabled={this.state.replyInProgress}></textarea>
-            <button id="cancelReplyButton" type="button">Cancel</button>
-            <button 
-                id="submitReplyButton"
-                type="submit"
-                onClick={this.handleSubmitReply}
-                disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>To Implement</button>
+            <div class="structuralDiv">
+                {(this.state.replyComplete)?
+                    <p class="infoMessage">{(this.state.replySuccessful)? this.successMessage : this.errorMessage}</p> :
+                    null
+                }
+                <button 
+                    id="submitReplyButton"
+                    type="submit"
+                    onClick={this.handleSubmitReply}
+                    disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>To Implement</button>
+            </div>
         </div>
     }
 }
+
+ReplyToTweetModuleUI.prototype.errorMessage = "Something went wrong...Please try again.";
+ReplyToTweetModuleUI.prototype.successMessage = "Your reply was successfully posted!";
 
 export default ReplyToTweetModuleUI;
