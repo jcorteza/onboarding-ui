@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import postReplyToTweet from "../../service/postReplyToTweet";
 
 class ReplyToTweetModuleUI extends Component {
     constructor(props) {
@@ -6,7 +7,8 @@ class ReplyToTweetModuleUI extends Component {
 
         this.state = {
             replyText: "",
-            replyInProgress: false
+            replyInProgress: false,
+            replySuccessful: false,
         }
 
         this.handleTextChange = this.handleTextChange.bind(this);
@@ -21,7 +23,28 @@ class ReplyToTweetModuleUI extends Component {
         e.preventDefault();
         this.setState({ replyInProgress: true }, () => {
             
-            // call replyToTweet Service
+            postReplyToTweet(this.state.replyText, this.props.replyToID)
+                .then((response) => {
+
+                    if(response.successful) {
+
+                        this.setState({ replyText: "" });
+                    }
+
+                    this.setState({ replySuccessful: response.successful });
+
+                })
+                .catch((err) => {
+
+                    console.log(err);
+                    this.setState({ replySuccessful: false });
+
+                })
+                .finally(() => {
+ 
+                    this.setState({ replyInProgress: false});
+
+                });
 
         });
     }
