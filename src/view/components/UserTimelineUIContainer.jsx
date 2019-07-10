@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
+import ReplyToTweetModuleUI from "./ReplyToTweetModuleUI";
 import fetchUserTimeline from "../../service/fetchUserTimeline.js";
 
 class UserTimelineUIContainer extends Component {
@@ -9,7 +10,8 @@ class UserTimelineUIContainer extends Component {
         this.state = {
             data: [],
             fetchComplete: false,
-            errorOccurred: false
+            errorOccurred: false,
+            replyBtnClicked: false
         }
 
         this.fetchData = () => {
@@ -53,6 +55,11 @@ class UserTimelineUIContainer extends Component {
             });
             this.fetchData();
         }
+
+        this.handleReplyClick = () => {
+            let currentState = this.state.replyBtnClicked;
+            this.setState({ replyBtnClicked: !currentState });
+        }
     }
 
     componentDidMount() {
@@ -62,8 +69,22 @@ class UserTimelineUIContainer extends Component {
     render() {
         return (
             <div className="uiContainer" id="userTimelineUIContainer">
-                <button className="uiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
-                <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
+                {(this.state.replyBtnClicked)?
+                    <ReplyToTweetModuleUI /> :
+                    null
+                }
+                <button 
+                    className="uiButton" 
+                    type="button" 
+                    onClick={this.handleClick}>
+                        View User Timeline
+                </button>
+                <TimelineContainer 
+                    data={this.state.data}
+                    fetchComplete={this.state.fetchComplete}
+                    errorOccurred={this.state.errorOccurred}
+                    fillerMessage={this.fillerMessage}
+                    replyBtnClicked={this.handleReplyClick}/>
             </div>
         );
     }

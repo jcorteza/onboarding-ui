@@ -22,7 +22,13 @@ class TimelineContainer extends Component {
             content = (this.props.data.length === 0)?
                 <p className="infoText">{this.props.fillerMessage}</p> :
                 this.props.data.map(status => 
-                    <TweetContainer key={status.statusID} user={status.user} postUrl={status.postUrl} message={status.message} createdAt={status.createdAt}/>
+                    <TweetContainer 
+                        key={status.statusID}
+                        user={status.user}
+                        postUrl={status.postUrl}
+                        message={status.message}
+                        createdAt={status.createdAt}
+                        replyBtnClicked={this.props.replyBtnClicked}/>
                 );
 
         }
