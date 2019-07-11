@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
-import ReplyToTweetModuleUI from "./ReplyToTweetModuleUI";
+import ReplyToTweetModalUI from "./ReplyToTweetModalUI";
 import fetchUserTimeline from "../../service/fetchUserTimeline.js";
 
 class UserTimelineUIContainer extends Component {
@@ -11,7 +11,7 @@ class UserTimelineUIContainer extends Component {
             data: [],
             fetchComplete: false,
             errorOccurred: false,
-            replyBtnClicked: false
+            modalDisplayed: false
         }
 
         this.fetchData = () => {
@@ -56,9 +56,9 @@ class UserTimelineUIContainer extends Component {
             this.fetchData();
         }
 
-        this.handleReplyClick = () => {
-            let currentState = this.state.replyBtnClicked;
-            this.setState({ replyBtnClicked: !currentState });
+        this.changeModalDisplay = () => {
+            let currentState = this.state.modalDisplayed;
+            this.setState({ modalDisplayed: !currentState });
         }
     }
 
@@ -69,8 +69,8 @@ class UserTimelineUIContainer extends Component {
     render() {
         return (
             <div className="uiContainer" id="userTimelineUIContainer">
-                {(this.state.replyBtnClicked)?
-                    <ReplyToTweetModuleUI /> :
+                {(this.state.modalDisplayed)?
+                    <ReplyToTweetModalUI changeModalDisplay={changeModalDisplay}/> :
                     null
                 }
                 <button 
@@ -84,7 +84,7 @@ class UserTimelineUIContainer extends Component {
                     fetchComplete={this.state.fetchComplete}
                     errorOccurred={this.state.errorOccurred}
                     fillerMessage={this.fillerMessage}
-                    replyBtnClicked={this.handleReplyClick}/>
+                    replyBtnClicked={this.changeModalDisplay}/>
             </div>
         );
     }

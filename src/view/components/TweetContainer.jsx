@@ -17,6 +17,9 @@ class TweetContainer extends Component {
             <div className="tweetContainer">
                 {userDiv}
                 <StatusContainer postUrl={this.props.postUrl} message={this.props.message} date={new Date(this.props.createdAt)}/>
+                <div id="btnContainer">
+                    <button className="replyBtn" type="button" onClick={this.props.replyBtnClicked}>Reply</button>
+                </div>
             </div>
         );
     }
