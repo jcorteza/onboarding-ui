@@ -53,68 +53,77 @@ body {
         }
 
         #mainContainer {
+            .uiButton {
+                &[disabled] {
+                    opacity: 0.6;
+                }
+            }
+
             .uiButton, #filterInput {
                 margin-bottom: 10px;
                 padding: 5px;
             }
 
-            #postTweetDiv {
+            .charCountSpan {
+                display: block;
+                position: absolute;
+                width: 100%;
+                bottom: 15px;
+                right: 15px;
+                font-size: 8pt;
+                font-weight: 100;
+                color: #777777;
+                text-align: right;
+            }
+
+            .infoMessage {
+                padding: 10px;
+            }
+
+            .statusUpdateTextarea {
+                width: 100%;
+                height: 100px;
+                padding: 10px;
+                resize: none;
+            }
+            
+            .buttonContainer {
+                // position: relative;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-end;
+                align-items: center;
+
+                // #postTweetButton {
+                //     // margin-top: 10px;
+                //     // position: absolute;
+                //     // right: 0;
+                // }
+
+                .infoMessage {
+                    // margin-top: 10px;
+                    // position: absolute;
+                    // right: 75px;
+                    font-size: 8pt;
+                    font-weight: bold;
+                    // padding: 6px 0;
+
+                }
+
+                .successMessage {
+                    color: #24a62a;
+                }
+
+                .errorMessage {
+                    color: #ff3636;
+                }
+            }
+
+            #postTweetUI {
                 width: 500px;
                 margin-left: auto;
                 margin-right: auto;
                 position: relative;
-
-                #postTweetTextArea {
-                    width: 100%;
-                    height: 100px;
-                    padding: 10px;
-                    resize: none;
-                }
-
-                #charCountSpan {
-                    display: block;
-                    position: absolute;
-                    width: 100%;
-                    bottom: 15px;
-                    right: 15px;
-                    font-size: 8pt;
-                    font-weight: 100;
-                    color: #777777;
-                    text-align: right;
-                }
-
-                #buttonContainer {
-                    position: relative;
-
-                    #postTweetButton {
-                        margin-top: 10px;
-                        position: absolute;
-                        right: 0;
-    
-                        &[disabled] {
-                            opacity: 0.6;
-                        }
-                    }
-    
-                    #postTweetInfoMessage {
-                        margin-top: 10px;
-                        position: absolute;
-                        right: 75px;
-                        font-size: 8pt;
-                        font-weight: bold;
-                        padding: 6px 0;
-
-                    }
-
-                    .successMessage {
-                        color: #24a62a;
-                    }
-
-                    .errorMessage {
-                        color: #ff3636;
-                    }
-                }
-
             }
 
             #homeTimelineUIContainer {                
@@ -196,10 +205,6 @@ body {
                     clear: both;
                     border: 2px solid black;
                     @include styled-font();
-            
-                    > .infoText {
-                        padding: 10px;
-                    }
             
                     > .tweetContainer {
             
