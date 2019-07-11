@@ -25,6 +25,7 @@ class TimelineContainer extends Component {
                     <TweetContainer 
                         key={status.statusID}
                         user={status.user}
+                        statusID={status.statusID}
                         postUrl={status.postUrl}
                         message={status.message}
                         createdAt={status.createdAt}

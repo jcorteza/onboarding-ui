@@ -11,7 +11,8 @@ class UserTimelineUIContainer extends Component {
             data: [],
             fetchComplete: false,
             errorOccurred: false,
-            modalDisplayed: false
+            modalDisplayed: false,
+            modalData: {}
         }
 
         this.fetchData = () => {
@@ -56,9 +57,21 @@ class UserTimelineUIContainer extends Component {
             this.fetchData();
         }
 
-        this.changeModalDisplay = () => {
+        this.changeModalDisplay = (tweetData) => {
             let currentState = this.state.modalDisplayed;
-            this.setState({ modalDisplayed: !currentState });
+
+            if(!currentState == true) {
+                
+                this.setState({ 
+                    modalDisplayed: !currentState,
+                    modalData: tweetData
+                });
+
+            } else {
+
+                this.setState({ modalDisplayed: !currentState });
+
+            }
         }
     }
 
@@ -70,7 +83,9 @@ class UserTimelineUIContainer extends Component {
         return (
             <div className="uiContainer" id="userTimelineUIContainer">
                 {(this.state.modalDisplayed)?
-                    <ReplyToTweetModalUI changeModalDisplay={changeModalDisplay}/> :
+                    <ReplyToTweetModalUI 
+                        changeModalDisplay={changeModalDisplay}
+                        tweetData={this.state.tweetData}/> :
                     null
                 }
                 <button 
