@@ -177,14 +177,19 @@ body {
                     height: 100%;
                     background-color: rgba(0,0,0,0.4);
 
-                    #replyToTweetModal {
+                    #replyToTweetModalUI {
                         position: relative;
                         right: 0;
                         top: 0;
                         height: 100%;
-                        width: 30%;
+                        width: 600px;
                         background-color: #ffffff;
                         border: 1px solid black;
+
+                        #replyToTweetModalContent {
+                            width: 90%;
+                            margin: auto;
+                        }
                     }
                 }
                 
