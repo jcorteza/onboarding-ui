@@ -37,14 +37,17 @@ class TweetContainer extends Component {
                     postUrl={this.props.postUrl} 
                     message={this.props.message} 
                     date={new Date(this.props.createdAt)}/>
-                <div id="btnContainer">
-                    <button 
-                        className="replyBtn" 
-                        type="button" 
-                        onClick={this.handleClick}>
-                        Reply
-                    </button>
-                </div>
+                {(this.props.replyBtnClicked !== null)?
+                    <div id="btnContainer">
+                        <button 
+                            className="replyBtn" 
+                            type="button" 
+                            onClick={this.handleClick}>
+                            Reply
+                        </button>
+                    </div> :
+                    null
+                }
             </div>
         );
     }

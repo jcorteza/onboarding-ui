@@ -59,19 +59,12 @@ class UserTimelineUIContainer extends Component {
 
         this.changeModalDisplay = (tweetData) => {
             let currentState = this.state.modalDisplayed;
-
-            if(!currentState == true) {
                 
-                this.setState({ 
-                    modalDisplayed: !currentState,
-                    modalData: tweetData
-                });
+            this.setState({ 
+                modalDisplayed: !currentState,
+                modalData: tweetData
+            });
 
-            } else {
-
-                this.setState({ modalDisplayed: !currentState });
-
-            }
         }
     }
 
