@@ -75,23 +75,21 @@ class PostTweetUI extends Component {
         charCountSpan.innerText = 280 - this.state.tweetText.length;
 
         return(
-            <div id="postTweetDiv">
+            <div id="postTweetUI">
                 <textarea 
-                    id="postTweetTextArea" 
+                    className="statusUpdateTextarea" 
                     autoFocus 
                     maxLength="280" 
                     placeholder="Hello followers..." 
                     value={this.state.tweetText}
                     onChange={this.handleChange}
                     disabled={this.state.textareaDisabled}
-                    required
-                ></textarea>
-                <span id="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
-                <div id="buttonContainer">
+                    required></textarea>
+                <span className="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
+                <div className="buttonContainer">
                     {(this.state.postAttemptComplete)?
                         <p 
-                            id="postTweetInfoMessage" 
-                            className={(this.state.successfulPost)? "successMessage" : "errorMessage"}>
+                            className={`infoMessage ${(this.state.successfulPost)? "successMessage" : "errorMessage"}`}>
                                 {(this.state.successfulPost)? this.successMessage : this.errorMessage}
                         </p> :
                         null
