@@ -86,6 +86,12 @@ body {
                 padding: 10px;
                 resize: none;
             }
+
+            .tweetContainerInnerStructuralDiv {
+                flex-grow: 1;
+                justify-content: space-between;
+                align-items: center;
+            }
             
             .buttonContainer {
                 // position: relative;

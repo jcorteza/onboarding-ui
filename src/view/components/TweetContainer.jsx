@@ -22,7 +22,6 @@ class TweetContainer extends Component {
     }
 
     render() {
-
         let userDiv = (this.props.hasOwnProperty("user"))? 
             <UserContainer 
                 userName={this.props.user.name} 
@@ -33,21 +32,21 @@ class TweetContainer extends Component {
         return( 
             <div className="tweetContainer">
                 {userDiv}
-                <StatusContainer 
-                    postUrl={this.props.postUrl} 
-                    message={this.props.message} 
-                    date={new Date(this.props.createdAt)}/>
-                {(this.props.replyBtnClicked !== null)?
-                    <div id="btnContainer">
+                <div className="tweetContainerInnerStructuralDiv">
+                    <StatusContainer 
+                        postUrl={this.props.postUrl} 
+                        message={this.props.message} 
+                        date={new Date(this.props.createdAt)}/>
+                    {(this.props.replyBtnClicked !== undefined)?
                         <button 
-                            className="replyBtn" 
+                            className="replyBtn uiButton" 
                             type="button" 
                             onClick={this.handleClick}>
                             Reply
-                        </button>
-                    </div> :
-                    null
-                }
+                        </button> :
+                        null
+                    }
+                </div>
             </div>
         );
     }
