@@ -12,7 +12,7 @@ class TweetContainer extends Component {
     handleClick() {
         let tweetData = {
             message: this.props.message,
-            date: this.props.createdAt,
+            createdAt: this.props.createdAt,
             statusID: this.props.statusID,
             postUrl: this.props.postUrl,
             user: this.props.user
@@ -22,33 +22,23 @@ class TweetContainer extends Component {
     }
 
     render() {
+        let dateObject = new Date(this.props.createdAt);
         let userDiv = (this.props.hasOwnProperty("user"))? 
             <UserContainer 
                 userName={this.props.user.name} 
                 userHandle={this.props.user.twHandle} 
-                profileImgUrl={this.props.user.profileImageUrl}/> :
+                profileImgUrl={this.props.user.profileImageUrl} /> :
             <UserContainer />;
 
         return( 
             <div className="tweetContainer">
                 {userDiv}
-                <div className="tweetContainerInnerStructuralDiv">
-                    <StatusContainer 
-                        postUrl={this.props.postUrl} 
-                        message={this.props.message} 
-                        date={new Date(this.props.createdAt)}/>
-                    {(this.props.replyBtnClicked !== undefined)?
-                        <div className="buttonContainer">
-                            <button 
-                                className="replyBtn uiButton" 
-                                type="button" 
-                                onClick={this.handleClick}>
-                                Reply
-                            </button>
-                        </div> :
-                        null
-                    }
-                </div>
+                <StatusContainer 
+                    postUrl={this.props.postUrl} 
+                    message={this.props.message} 
+                    date={dateObject}
+                    replyBtnClicked={this.props.replyBtnClicked}
+                    handleClick={this.handleClick} />
             </div>
         );
     }

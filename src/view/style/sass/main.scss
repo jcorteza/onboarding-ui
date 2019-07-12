@@ -191,6 +191,7 @@ body {
                 .tweetContainer {
                     padding: 10px 30px;
                     display: flex;
+                    align-items: center;
         
                     .userDiv {
                         min-width: 140px;
@@ -220,28 +221,28 @@ body {
                         }
                     }
 
-                    .tweetContainerInnerStructuralDiv {
+                    .textDiv {
                         flex-grow: 1;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-
-                        .textDiv {
-                            .dateSpan {
-                                display: block;
-                                margin-bottom: 5px;
-                                @include styled-font($style: italic, $size: 8pt)
-                            }
-                
-                            .tweetLink, .tweetLink:visited {
-                                color: black;
-                                text-decoration: none;
-                            }
+                        .dateSpan {
+                            display: block;
+                            margin-bottom: 5px;
+                            @include styled-font($style: italic, $size: 8pt)
+                        }
+            
+                        .tweetLink, .tweetLink:visited {
+                            color: black;
+                            text-decoration: none;
                         }
 
-                        .buttonContainer {
-                            min-width: fit-content;
-                            margin-left: 20px;
+                        .replyIconContainer {
+                            text-align: right;
+
+                            .replyIcon {
+                                &:hover {
+                                    color: #F1BF98;
+                                    cursor: pointer;
+                                }
+                            }
                         }
                     }
                 }
@@ -271,7 +272,7 @@ body {
                     justify-content: flex-end;
                     align-items: center;
     
-                    #postTweetButton {
+                    #postTweetButton, #submitReplyButton {
                         margin-left: 10px;
                     }
     

@@ -18,19 +18,9 @@ class UserTimelineUIContainer extends Component {
         this.fetchData = () => {
             fetchUserTimeline()
                 .then((responseData) => {
-                    let updatedData = responseData.map(status => ({
-                        message: status.message,
-                        user: {
-                            name: status.user.name,
-                            profileImageUrl: status.user.profileImageUrl
-                        },
-                        createdAt: status.createdAt,
-                        postUrl: status.postUrl
-                    }));
-
 
                     this.setState({
-                        data: updatedData,
+                        data: responseData,
                         fetchComplete: true,
                         errorOccurred: false
                     });

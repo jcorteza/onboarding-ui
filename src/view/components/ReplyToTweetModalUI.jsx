@@ -30,7 +30,7 @@ class ReplyToTweetModalUI extends Component {
         e.preventDefault();
         this.setState({ replyInProgress: true }, () => {
             
-            postReplyToTweet(this.state.replyText, this.props.statusID)
+            postReplyToTweet(this.state.replyText, this.props.tweetData.statusID)
                 .then((response) => {
 
                     if(response.successful) {
@@ -66,7 +66,6 @@ class ReplyToTweetModalUI extends Component {
     }
 
     render() {
-        console.log(this.props.tweetData.createdAt);
         return(
             <div className="uiContainer modal" onClick={this.props.changeModalDisplay}>
                 <div id="replyToTweetModalUI" onClick={this.handleModalContentClick}>

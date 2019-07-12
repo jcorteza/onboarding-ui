@@ -21,8 +21,8 @@ class TimelineContainer extends Component {
 
             content = (this.props.data.length === 0)?
                 <p className="infoMessage">{this.props.fillerMessage}</p> :
-                this.props.data.map(status => 
-                    <TweetContainer 
+                this.props.data.map(status => {
+                    return <TweetContainer 
                         key={status.statusID}
                         user={status.user}
                         statusID={status.statusID}
@@ -30,7 +30,7 @@ class TimelineContainer extends Component {
                         message={status.message}
                         createdAt={status.createdAt}
                         replyBtnClicked={this.props.replyBtnClicked}/>
-                );
+                });
 
         }
 
