@@ -38,12 +38,14 @@ class TweetContainer extends Component {
                         message={this.props.message} 
                         date={new Date(this.props.createdAt)}/>
                     {(this.props.replyBtnClicked !== undefined)?
-                        <button 
-                            className="replyBtn uiButton" 
-                            type="button" 
-                            onClick={this.handleClick}>
-                            Reply
-                        </button> :
+                        <div className="buttonContainer">
+                            <button 
+                                className="replyBtn uiButton" 
+                                type="button" 
+                                onClick={this.handleClick}>
+                                Reply
+                            </button>
+                        </div> :
                         null
                     }
                 </div>
