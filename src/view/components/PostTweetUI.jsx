@@ -75,7 +75,7 @@ class PostTweetUI extends Component {
         charCountSpan.innerText = 280 - this.state.tweetText.length;
 
         return(
-            <div id="postTweetUI">
+            <div id="postTweetUI" className="uiContainer">
                 <textarea 
                     className="statusUpdateTextarea" 
                     autoFocus 

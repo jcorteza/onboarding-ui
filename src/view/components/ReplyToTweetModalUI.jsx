@@ -13,8 +13,13 @@ class ReplyToTweetModalUI extends Component {
             replySuccessful: false,
         }
 
+        this.handleModalContentClick = this.handleModalContentClick.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleSubmitReply = this.handleSubmitReply.bind(this);
+    }
+
+    handleModalContentClick(e) {
+        e.stopPropagation();
     }
 
     handleTextChange(e) {
@@ -61,11 +66,13 @@ class ReplyToTweetModalUI extends Component {
     }
 
     render() {
+        console.log(this.props.tweetData.createdAt);
         return(
-            <div className="modal" onClick={this.props.changeModalDisplay}>
-                <div id="replyToTweetModalUI">
-                    <span id="closeModuleIcon" onClick={this.props.changeModalDisplay}>X</span>
+            <div className="uiContainer modal" onClick={this.props.changeModalDisplay}>
+                <div id="replyToTweetModalUI" onClick={this.handleModalContentClick}>
+                    <div id="closeModuleIcon" onClick={this.props.changeModalDisplay}>X</div>
                     <div id="replyToTweetModalContent">
+                        <h2 id="modalHeader">Reply to Tweet</h2>
                         <TweetContainer 
                             user={this.props.tweetData.user}
                             postUrl={this.props.tweetData.postUrl}
@@ -75,13 +82,19 @@ class ReplyToTweetModalUI extends Component {
                             className="statusUpdateTextarea"
                             placeholder="Your reply..."
                             maxLength="280"
-                            value="" 
+                            value={this.state.replyText} 
                             onChange={this.handleTextChange}
                             disabled={this.state.replyInProgress}></textarea>
-                        <span className="charCountSpan">Characters: {280 - this.state.replyText.length}</span>
+                        <span 
+                            className="charCountSpan">
+                            Characters: {280 - this.state.replyText.length}
+                        </span>
                         <div class="statusUpdateInfoNButtonContainer">
                             {(this.state.replyComplete)?
-                                <p class="infoMessage">{(this.state.replySuccessful)? this.successMessage : this.errorMessage}</p> :
+                                <p 
+                                    className={`infoMessage ${(this.state.replySuccessful)? "successMessage" : "errorMessage"}`}>
+                                    {(this.state.replySuccessful)? this.successMessage : this.errorMessage}
+                                </p> :
                                 null
                             }
                             <button 
@@ -89,7 +102,7 @@ class ReplyToTweetModalUI extends Component {
                                 className="uiButton"
                                 type="submit"
                                 onClick={this.handleSubmitReply}
-                                disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>To Implement</button>
+                                disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>Submit Reply</button>
                         </div>
                     </div>
                 </div>

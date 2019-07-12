@@ -111,8 +111,24 @@ body {
                     height: 100%;
                     background-color: rgba(0,0,0,0.4);
 
+                    #closeModuleIcon {
+                        text-align: right;
+                        margin-top: 10px;
+                        margin-right: 20px;
+                        opacity: 0.4;
+                        cursor: pointer;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+
+                        &:active {
+                            opacity: 1;
+                        }
+                    }
+                    
                     #replyToTweetModalUI {
-                        position: relative;
+                        position: absolute;
                         right: 0;
                         top: 0;
                         height: 100%;
@@ -120,10 +136,21 @@ body {
                         background-color: #ffffff;
                         border: 1px solid black;
 
+                        #modalHeader {
+                            margin: 30px 0;
+                            text-align: center;
+                        }
+
                         #replyToTweetModalContent {
                             width: 90%;
                             margin: auto;
                         }
+                    }
+
+                    .tweetContainer {
+                        border: 1px solid black;
+                        margin-bottom: 20px;
+                        background-color: #1DA1F2;
                     }
                 }
             }
@@ -136,6 +163,8 @@ body {
             }
             
             .uiContainer {
+                @include styled-font();
+
                 .timelineButton {
                     margin-bottom: 10px;
                 }
@@ -143,7 +172,6 @@ body {
                 .timelineContainer {
                     clear: both;
                     border: 2px solid black;
-                    @include styled-font();
 
                     .tweetContainer {
                         &:nth-of-type(odd) {
@@ -161,15 +189,16 @@ body {
                 }
 
                 .tweetContainer {
-                    padding: 10px 20px;
+                    padding: 10px 30px;
                     display: flex;
         
                     .userDiv {
-                        text-align: center;
-                        min-width: 175px;
-                        max-width: 175px;
+                        min-width: 140px;
+                        max-width: 140px;
                         height: 100%;
-                        margin-right: 20px;
+                        margin-right: 30px;
+                        text-align: center;
+                        overflow-wrap: break-word;
             
                         .userImg {
                             max-width: 85px;
@@ -226,9 +255,9 @@ body {
     
                 .charCountSpan {
                     display: block;
-                    position: absolute;
+                    position: relative;
                     width: 100%;
-                    bottom: 45px;
+                    bottom: 25px;
                     right: 10px;
                     font-size: 8pt;
                     font-weight: 100;
@@ -241,7 +270,6 @@ body {
                     flex-wrap: nowrap;
                     justify-content: flex-end;
                     align-items: center;
-                    margin-top: 5px;
     
                     #postTweetButton {
                         margin-left: 10px;
