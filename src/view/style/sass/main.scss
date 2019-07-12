@@ -53,65 +53,12 @@ body {
         }
 
         #mainContainer {
-            .uiButton, #filterInput {
-                padding: 5px;
-            }
-
             .uiButton {
+                padding: 5px;
+
                 &[disabled] {
                     opacity: 0.6;
                 }
-            }
-
-            .statusUpdateTextarea {
-                width: 100%;
-                height: 100px;
-                padding: 10px;
-                resize: none;
-            }
-
-            .charCountSpan {
-                display: block;
-                position: absolute;
-                width: 100%;
-                bottom: 45px;
-                right: 10px;
-                font-size: 8pt;
-                font-weight: 100;
-                color: #777777;
-                text-align: right;
-            }
-            
-            .statusUpdateInfoNButtonContainer {
-                display: flex;
-                flex-wrap: nowrap;
-                justify-content: flex-end;
-                align-items: center;
-                margin-top: 5px;
-
-                #postTweetButton {
-                    margin-left: 10px;
-                }
-
-                .infoMessage {
-                    font-size: 8pt;
-                    font-weight: bold;
-                }
-
-                .successMessage {
-                    color: #24a62a;
-                }
-
-                .errorMessage {
-                    color: #ff3636;
-                }
-            }
-
-            #postTweetUI {
-                width: 500px;
-                margin-left: auto;
-                margin-right: auto;
-                position: relative;
             }
 
             #homeTimelineUIContainer {                
@@ -125,36 +72,32 @@ body {
                     float: right;
 
                     #filterInput {
+                        padding: 5px;
                         border-width: 1px;
+                        margin-bottom: 10px;
                         margin-right: 10px;
                     }
 
                     #filterButton {
                         padding-left: 10px;
                         padding-right: 10px;
-
-                        &[disabled] {
-                            opacity: 0.6;
-                        }
                     }
                 }
             }
 
             #userTimelineUIContainer {
+                .uiButton {
+                    float: right;
+                }
+
                 .timelineContainer {
-                    
-                    > .tweetContainer {
-                        
+                    .tweetContainer {
                         &:nth-of-type(odd) {
                             background-color: #f5f8fa;
                         }
                         
                         &:nth-of-type(even) {
                             background-color: #1da1f2;
-                        }
-
-                        .uiButton {
-                            float: right;
                         }
                     }
                 }
@@ -183,53 +126,26 @@ body {
                         }
                     }
                 }
-                
-                .uiButton {
-                    float: right;
-                }
-                
+            }
+
+            #postTweetUI {
+                width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
             }
             
             .uiContainer {
-                .timelineButton, #filterInput {
+                .timelineButton {
                     margin-bottom: 10px;
-                }
-                
-                .timelineHeaderText {
-                    text-align: center;
-                    margin-top: 20px;
                 }
                 
                 .timelineContainer {
                     clear: both;
                     border: 2px solid black;
                     @include styled-font();
-            
-                    // > .tweetContainer {
-            
-                    //     &:nth-of-type(odd) {
-                    //         background-color: #e8f5fd;
-                    //     }
-            
-                    //     &:nth-of-type(even) {
-                    //         background-color: #e9e9e9;
-                    //     }
-            
-                    //     &:not(:last-of-type) {
-                    //         border-bottom: 1px solid #d1d2d2;
-                    //     }
 
-                    //     .tweetContainerInnerStructuralDiv {
-                    //         flex-grow: 1;
-                    //         justify-content: space-between;
-                    //         align-items: center;
-                    //     }
-                    // }
-            
                     .tweetContainer {
-                        padding: 10px 20px;
-                        display: flex;
-
                         &:nth-of-type(odd) {
                             background-color: #e8f5fd;
                         }
@@ -241,58 +157,107 @@ body {
                         &:not(:last-of-type) {
                             border-bottom: 1px solid #d1d2d2;
                         }
+                    }
+                }
+
+                .tweetContainer {
+                    padding: 10px 20px;
+                    display: flex;
+        
+                    .userDiv {
+                        text-align: center;
+                        min-width: 175px;
+                        max-width: 175px;
+                        height: 100%;
+                        margin-right: 20px;
             
-                        .userDiv {
-                            text-align: center;
-                            min-width: 175px;
-                            max-width: 175px;
-                            height: 100%;
-                            margin-right: 20px;
-                
-                            .userImg {
-                                max-width: 85px;
-                                height: auto;
-                                margin: 10px 0 5px;
-                                border-radius: 40px;
+                        .userImg {
+                            max-width: 85px;
+                            height: auto;
+                            margin: 10px 0 5px;
+                            border-radius: 40px;
+                        }
+            
+                        .name, .handle {
+                            margin-bottom: 3px;
+                        }
+            
+                        .name {
+                            @include styled-font($weight: bold);
+                        }
+            
+                        .handle {
+                            @include styled-font($size: 8pt);
+                        }
+                    }
+
+                    .tweetContainerInnerStructuralDiv {
+                        flex-grow: 1;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .textDiv {
+                            .dateSpan {
+                                display: block;
+                                margin-bottom: 5px;
+                                @include styled-font($style: italic, $size: 8pt)
                             }
                 
-                            .name, .handle {
-                                margin-bottom: 3px;
-                            }
-                
-                            .name {
-                                @include styled-font($weight: bold);
-                            }
-                
-                            .handle {
-                                @include styled-font($size: 8pt);
+                            .tweetLink, .tweetLink:visited {
+                                color: black;
+                                text-decoration: none;
                             }
                         }
 
-                        .tweetContainerInnerStructuralDiv {
-                            flex-grow: 1;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-
-                            .textDiv {
-                                .dateSpan {
-                                    display: block;
-                                    margin-bottom: 5px;
-                                    @include styled-font($style: italic, $size: 8pt)
-                                }
-                    
-                                .tweetLink, .tweetLink:visited {
-                                    color: black;
-                                    text-decoration: none;
-                                }
-                            }
-
-                            .buttonContainer {
-                                min-width: fit-content;
-                                margin-left: 20px;
-                            }
+                        .buttonContainer {
+                            min-width: fit-content;
+                            margin-left: 20px;
                         }
+                    }
+                }
+
+                .statusUpdateTextarea {
+                    width: 100%;
+                    height: 100px;
+                    padding: 10px;
+                    resize: none;
+                }
+    
+                .charCountSpan {
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    bottom: 45px;
+                    right: 10px;
+                    font-size: 8pt;
+                    font-weight: 100;
+                    color: #777777;
+                    text-align: right;
+                }
+                
+                .statusUpdateInfoNButtonContainer {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-top: 5px;
+    
+                    #postTweetButton {
+                        margin-left: 10px;
+                    }
+    
+                    .infoMessage {
+                        font-size: 8pt;
+                        font-weight: bold;
+                    }
+    
+                    .successMessage {
+                        color: #24a62a;
+                    }
+    
+                    .errorMessage {
+                        color: #ff3636;
                     }
                 }
             }
