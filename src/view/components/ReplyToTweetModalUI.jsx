@@ -61,38 +61,40 @@ class ReplyToTweetModalUI extends Component {
     }
 
     render() {
-        <div className="modal" onClick={this.props.changeModalDisplay}>
-            <div id="replyToTweetModalUI">
-                <span id="closeModuleIcon" onClick={this.props.changeModalDisplay}>X</span>
-                <div id="replyToTweetModalContent">
-                    <TweetContainer 
-                        user={this.props.tweetData.user}
-                        postUrl={this.props.tweetData.postUrl}
-                        message={this.props.tweetData.message}
-                        createdAt={this.props.tweetData.createdAt} />
-                    <textarea 
-                        className="statusUpdateTextarea"
-                        placeholder="Your reply..."
-                        maxLength="280"
-                        value="" 
-                        onChange={this.handleTextChange}
-                        disabled={this.state.replyInProgress}></textarea>
-                    <span className="charCountSpan">Characters: {280 - this.state.replyText.length}</span>
-                    <div class="statusUpdateInfoNButtonContainer">
-                        {(this.state.replyComplete)?
-                            <p class="infoMessage">{(this.state.replySuccessful)? this.successMessage : this.errorMessage}</p> :
-                            null
-                        }
-                        <button 
-                            id="submitReplyButton"
-                            className="uiButton"
-                            type="submit"
-                            onClick={this.handleSubmitReply}
-                            disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>To Implement</button>
+        return(
+            <div className="modal" onClick={this.props.changeModalDisplay}>
+                <div id="replyToTweetModalUI">
+                    <span id="closeModuleIcon" onClick={this.props.changeModalDisplay}>X</span>
+                    <div id="replyToTweetModalContent">
+                        <TweetContainer 
+                            user={this.props.tweetData.user}
+                            postUrl={this.props.tweetData.postUrl}
+                            message={this.props.tweetData.message}
+                            createdAt={this.props.tweetData.createdAt} />
+                        <textarea 
+                            className="statusUpdateTextarea"
+                            placeholder="Your reply..."
+                            maxLength="280"
+                            value="" 
+                            onChange={this.handleTextChange}
+                            disabled={this.state.replyInProgress}></textarea>
+                        <span className="charCountSpan">Characters: {280 - this.state.replyText.length}</span>
+                        <div class="statusUpdateInfoNButtonContainer">
+                            {(this.state.replyComplete)?
+                                <p class="infoMessage">{(this.state.replySuccessful)? this.successMessage : this.errorMessage}</p> :
+                                null
+                            }
+                            <button 
+                                id="submitReplyButton"
+                                className="uiButton"
+                                type="submit"
+                                onClick={this.handleSubmitReply}
+                                disabled={(this.state.replyInProgress || this.state.replyText.length <= 0)}>To Implement</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        );
     }
 }
 

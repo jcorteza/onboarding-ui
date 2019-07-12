@@ -77,8 +77,8 @@ class UserTimelineUIContainer extends Component {
             <div className="uiContainer" id="userTimelineUIContainer">
                 {(this.state.modalDisplayed)?
                     <ReplyToTweetModalUI 
-                        changeModalDisplay={changeModalDisplay}
-                        tweetData={this.state.tweetData}/> :
+                        changeModalDisplay={this.changeModalDisplay}
+                        tweetData={this.state.modalData}/> :
                     null
                 }
                 <button 
