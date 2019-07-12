@@ -82,7 +82,7 @@ class UserTimelineUIContainer extends Component {
                     null
                 }
                 <button 
-                    className="uiButton" 
+                    className="uiButton timelineButton" 
                     type="button" 
                     onClick={this.handleClick}>
                         View User Timeline
