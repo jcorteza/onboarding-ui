@@ -86,7 +86,7 @@ class PostTweetUI extends Component {
                     disabled={this.state.textareaDisabled}
                     required></textarea>
                 <span className="charCountSpan">Characters: {280 - this.state.tweetText.length}</span>
-                <div className="buttonContainer">
+                <div className="statusUpdateInfoNButtonContainer">
                     {(this.state.postAttemptComplete)?
                         <p 
                             className={`infoMessage ${(this.state.successfulPost)? "successMessage" : "errorMessage"}`}>

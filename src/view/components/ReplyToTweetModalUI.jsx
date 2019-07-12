@@ -78,7 +78,7 @@ class ReplyToTweetModalUI extends Component {
                         onChange={this.handleTextChange}
                         disabled={this.state.replyInProgress}></textarea>
                     <span className="charCountSpan">Characters: {280 - this.state.replyText.length}</span>
-                    <div class="buttonContainer">
+                    <div class="statusUpdateInfoNButtonContainer">
                         {(this.state.replyComplete)?
                             <p class="infoMessage">{(this.state.replySuccessful)? this.successMessage : this.errorMessage}</p> :
                             null
