@@ -53,26 +53,14 @@ body {
         }
 
         #mainContainer {
+            .uiButton, #filterInput {
+                padding: 5px;
+            }
+
             .uiButton {
                 &[disabled] {
                     opacity: 0.6;
                 }
-            }
-
-            .charCountSpan {
-                display: block;
-                position: absolute;
-                width: 100%;
-                bottom: 15px;
-                right: 15px;
-                font-size: 8pt;
-                font-weight: 100;
-                color: #777777;
-                text-align: right;
-            }
-
-            .infoMessage {
-                padding: 10px;
             }
 
             .statusUpdateTextarea {
@@ -81,28 +69,33 @@ body {
                 padding: 10px;
                 resize: none;
             }
+
+            .charCountSpan {
+                display: block;
+                position: absolute;
+                width: 100%;
+                bottom: 45px;
+                right: 10px;
+                font-size: 8pt;
+                font-weight: 100;
+                color: #777777;
+                text-align: right;
+            }
             
             .statusUpdateInfoNButtonContainer {
-                // position: relative;
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: flex-end;
                 align-items: center;
+                margin-top: 5px;
 
-                // #postTweetButton {
-                //     // margin-top: 10px;
-                //     // position: absolute;
-                //     // right: 0;
-                // }
+                #postTweetButton {
+                    margin-left: 10px;
+                }
 
                 .infoMessage {
-                    // margin-top: 10px;
-                    // position: absolute;
-                    // right: 75px;
                     font-size: 8pt;
                     font-weight: bold;
-                    // padding: 6px 0;
-
                 }
 
                 .successMessage {
@@ -198,10 +191,6 @@ body {
             }
             
             .uiContainer {
-                .uiButton, #filterInput {
-                    padding: 5px;
-                }
-
                 .timelineButton, #filterInput {
                     margin-bottom: 10px;
                 }
