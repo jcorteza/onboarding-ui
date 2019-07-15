@@ -245,46 +245,50 @@ body {
                     }
                 }
 
-                .statusUpdateTextarea {
+                .statusUpdateUI {
                     width: 100%;
-                    height: 100px;
-                    padding: 10px;
-                    resize: none;
-                }
-    
-                .charCountSpan {
-                    display: block;
-                    position: relative;
-                    width: 100%;
-                    bottom: 25px;
-                    right: 10px;
-                    font-size: 8pt;
-                    font-weight: 100;
-                    color: #777777;
-                    text-align: right;
-                }
-                
-                .statusUpdateInfoNButtonContainer {
-                    display: flex;
-                    flex-wrap: nowrap;
-                    justify-content: flex-end;
-                    align-items: center;
-    
-                    #postTweetButton, #submitReplyButton {
-                        margin-left: 10px;
+                    
+                    .statusUpdateTextarea {
+                        width: 100%;
+                        height: 100px;
+                        padding: 10px;
+                        resize: none;
                     }
-    
-                    .infoMessage {
+        
+                    .charCountSpan {
+                        display: block;
+                        position: relative;
+                        width: 100%;
+                        bottom: 25px;
+                        right: 10px;
                         font-size: 8pt;
-                        font-weight: bold;
+                        font-weight: 100;
+                        color: #777777;
+                        text-align: right;
                     }
-    
-                    .successMessage {
-                        color: #24a62a;
-                    }
-    
-                    .errorMessage {
-                        color: #ff3636;
+                    
+                    .statusUpdateInfoNButtonContainer {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        justify-content: flex-end;
+                        align-items: center;
+        
+                        .submitStatusUpdateButton {
+                            margin-left: 10px;
+                        }
+        
+                        .infoMessage {
+                            font-size: 8pt;
+                            font-weight: bold;
+                        }
+        
+                        .successMessage {
+                            color: #24a62a;
+                        }
+        
+                        .errorMessage {
+                            color: #ff3636;
+                        }
                     }
                 }
             }
