@@ -42,6 +42,7 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
     "enzyme": "^3.10.0",
@@ -55,9 +56,6 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
-    "@fortawesome/react-fontawesome": "^0.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1"

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faReply } from '@fortawesome/free-solid-svg-icons'
 import getFormattedDate from "../../utils/getFormattedDate.js";
+import "../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 class StatusContainer extends Component {
     constructor(props) {
@@ -17,10 +16,9 @@ class StatusContainer extends Component {
                 </a>
                 {(this.props.replyBtnClicked !== undefined)?
                     <div className="replyIconContainer">
-                        <FontAwesomeIcon 
-                            icon={faReply} 
-                            className="replyIcon"
-                            onClick={this.props.handleClick} />
+                        <i 
+                            className="fas fa-reply replyIcon"
+                            onClick={this.props.handleClick}></i>
                     </div> :
                     null
                 }
