@@ -7,15 +7,13 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
                 use: [
                     "style-loader",
                     "css-loader"
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                exclude: /node_modules/,
+                test: /\.(png|svg|jpg|gif|ttf|wof|eot|woff2|woff)$/,
                 use: [
                     "file-loader"
                 ]

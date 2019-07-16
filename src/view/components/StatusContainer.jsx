@@ -13,6 +13,14 @@ class StatusContainer extends Component {
                 <a className="tweetLink" href={this.props.postUrl} target="_blank">
                     <p className="tweetText">{this.props.message}</p>
                 </a>
+                {(this.props.replyBtnClicked !== undefined)?
+                    <div className="replyIconContainer">
+                        <i 
+                            className="fas fa-reply replyIcon"
+                            onClick={this.props.handleClick}></i>
+                    </div> :
+                    null
+                }
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TimelineContainer from "./TimelineContainer.jsx";
+import ReplyToTweetModalUI from "./ReplyToTweetModalUI";
 import fetchUserTimeline from "../../service/fetchUserTimeline.js";
 
 class UserTimelineUIContainer extends Component {
@@ -9,25 +10,17 @@ class UserTimelineUIContainer extends Component {
         this.state = {
             data: [],
             fetchComplete: false,
-            errorOccurred: false
+            errorOccurred: false,
+            modalDisplayed: false,
+            modalData: {}
         }
 
         this.fetchData = () => {
             fetchUserTimeline()
                 .then((responseData) => {
-                    let updatedData = responseData.map(status => ({
-                        message: status.message,
-                        user: {
-                            name: status.user.name,
-                            profileImageUrl: status.user.profileImageUrl
-                        },
-                        createdAt: status.createdAt,
-                        postUrl: status.postUrl
-                    }));
-
 
                     this.setState({
-                        data: updatedData,
+                        data: responseData,
                         fetchComplete: true,
                         errorOccurred: false
                     });
@@ -53,6 +46,16 @@ class UserTimelineUIContainer extends Component {
             });
             this.fetchData();
         }
+
+        this.changeModalDisplay = (tweetData) => {
+            let currentState = this.state.modalDisplayed;
+                
+            this.setState({ 
+                modalDisplayed: !currentState,
+                modalData: tweetData
+            });
+
+        }
     }
 
     componentDidMount() {
@@ -62,8 +65,24 @@ class UserTimelineUIContainer extends Component {
     render() {
         return (
             <div className="uiContainer" id="userTimelineUIContainer">
-                <button className="uiButton" type="button" onClick={this.handleClick}>View User Timeline</button>
-                <TimelineContainer data={this.state.data} fetchComplete={this.state.fetchComplete} errorOccurred={this.state.errorOccurred} fillerMessage={this.fillerMessage}/>
+                {(this.state.modalDisplayed)?
+                    <ReplyToTweetModalUI 
+                        changeModalDisplay={this.changeModalDisplay}
+                        tweetData={this.state.modalData}/> :
+                    null
+                }
+                <button 
+                    className="uiButton timelineButton" 
+                    type="button" 
+                    onClick={this.handleClick}>
+                        View User Timeline
+                </button>
+                <TimelineContainer 
+                    data={this.state.data}
+                    fetchComplete={this.state.fetchComplete}
+                    errorOccurred={this.state.errorOccurred}
+                    fillerMessage={this.fillerMessage}
+                    replyBtnClicked={this.changeModalDisplay}/>
             </div>
         );
     }
