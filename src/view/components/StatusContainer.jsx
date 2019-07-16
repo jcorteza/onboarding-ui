@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import getFormattedDate from "../../utils/getFormattedDate.js";
-import "../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 class StatusContainer extends Component {
     constructor(props) {
